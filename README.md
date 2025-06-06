@@ -27,6 +27,20 @@
 
 ---
 
+## 🌟 **Sponsored by [Owera Software](https://owera.ai)**
+
+<div align="center">
+
+**🚀 AI-Powered Development Solutions**
+
+Built with ❤️ by [Rodrigo Recio](mailto:info@owera.ai) • [Contact us](mailto:info@owera.ai) for custom development
+
+[Visit Owera.ai →](https://owera.ai)
+
+</div>
+
+---
+
 ## 🚀 **Get Started Right Now**
 
 <div align="center">
@@ -567,7 +581,7 @@ flhot debug
 
 ### 🤖 **AI-Assisted Development**
 
-```bash
+   ```bash
 # Code review with AI
 git add .
 ai_review .
@@ -590,17 +604,17 @@ ai_debug "AttributeError: 'NoneType' object has no attribute 'get'"
 <summary><strong>🔧 Installation Issues</strong></summary>
 
 **Q: Installation fails with permission errors**
-```bash
+   ```bash
 # Fix: Make sure you have admin privileges
 sudo -v
 # Then retry the installation
-```
+   ```
 
 **Q: "command not found" after installation**
-```bash
+   ```bash
 # Fix: Restart your terminal or reload config
-source ~/.zshrc
-```
+   source ~/.zshrc
+   ```
 
 **Q: Prompt looks broken or has strange characters**
 - Install a [Nerd Font](https://www.nerdfonts.com/) (recommended: MesloLGS NF)
@@ -696,5 +710,15 @@ curl -fsSL https://raw.githubusercontent.com/rrecio/crazy-dev-zsh/main/install.s
 
 [![Made with ❤️](https://img.shields.io/badge/Made%20with-❤️-red.svg?style=for-the-badge)](https://github.com/rrecio/crazy-dev-zsh)
 [![Follow](https://img.shields.io/github/followers/rrecio?style=for-the-badge&logo=github)](https://github.com/rrecio)
+
+---
+
+### 🌟 **About**
+
+**Created by:** [Rodrigo Recio](mailto:info@owera.ai)  
+**Sponsored by:** [Owera Software - AI-Powered Development Solutions](https://owera.ai)  
+**Contact:** [info@owera.ai](mailto:info@owera.ai)  
+
+*Transforming development workflows with intelligent automation and beautiful tooling.*
 
 </div> 

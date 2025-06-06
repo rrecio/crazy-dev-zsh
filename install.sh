@@ -1237,6 +1237,8 @@ main() {
 EOF
     echo -e "${PURPLE}                      🚀 Supercharge Your Terminal • Lightning Fast • Developer Focused 🚀${NC}"
     echo -e "${GREEN}                                        v2.0 - The Ultimate Dev Environment${NC}"
+    echo -e "${YELLOW}                                  Proudly sponsored by Owera Software (owera.ai)${NC}"
+    echo -e "${CYAN}                                     Built with ❤️  by Rodrigo Recio${NC}"
     echo
     
     # Check if running on supported OS
