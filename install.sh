@@ -876,13 +876,13 @@ print_summary() {
     fi
     
     echo -e "\n${PURPLE}Next steps:${NC}"
-    echo -e "1. Restart your terminal"
+    echo -e "1. Restart your terminal or run 'exec zsh' to activate all features"
     echo -e "2. Run 'switch_theme' to change prompt themes"
     echo -e "3. Run 'dotfiles_perf' to check performance"
     echo -e "4. Customize ${DOTFILES_DIR}/zsh/custom.zsh"
     
-    echo -e "\n${CYAN}🛠️  Core Commands:${NC}"
-    echo -e "• reload       - Reload shell configuration"
+    echo -e "\n${CYAN}🛠️  Core Commands (available after restart):${NC}"
+    echo -e "• reload       - Reload shell configuration (or use 'source ~/.zshrc')"
     echo -e "• switch_theme - Change prompt theme"
     echo -e "• list_themes  - Show available prompt themes"
     echo -e "• gstatus      - Enhanced git status"

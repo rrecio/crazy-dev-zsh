@@ -55,27 +55,37 @@ dev_directory() {
     fi
   fi
   
-  # Special project type icons
+  # Premium project type icons with enhanced styling
   local icon=""
+  local path_color="81"  # Cyan
+  
   if [[ -f "package.json" ]]; then
     icon="󰜫 "
+    path_color="46"  # Green for Node.js
   elif [[ -f "Cargo.toml" ]]; then
     icon="󱘗 "
+    path_color="208"  # Orange for Rust
   elif [[ -f "go.mod" ]]; then
     icon="󰟓 "
+    path_color="39"   # Blue for Go
   elif [[ -f "requirements.txt" || -f "pyproject.toml" ]]; then
     icon=" "
+    path_color="220"  # Yellow for Python
   elif [[ -f "Package.swift" ]]; then
     icon="󰛥 "
+    path_color="196"  # Red for Swift
   elif [[ -f "pubspec.yaml" ]]; then
     icon="󰜘 "
+    path_color="81"   # Cyan for Flutter
   elif git rev-parse --git-dir &> /dev/null; then
     icon=" "
+    path_color="135"  # Purple for Git repos
   else
     icon=" "
+    path_color="246"  # Gray for regular folders
   fi
   
-  echo "%F{cyan}$icon$path%f"
+  echo "%F{$path_color}$icon$path%f"
 }
 
 # Development language and tools context
@@ -187,14 +197,20 @@ dev_rprompt() {
 
 # Command execution timing
 dev_preexec() {
-  DOTFILES_CMD_START_TIME=$(date +%s%3N)
+  # Only run if developer theme is active
+  [[ "$(get_saved_theme)" != "developer" ]] && return
+  
+  DOTFILES_CMD_START_TIME=$(date +%s 2>/dev/null || echo 0)
   DEV_PROMPT_CACHE_TIME=0  # Clear cache
 }
 
 dev_precmd() {
+  # Only run if developer theme is active
+  [[ "$(get_saved_theme)" != "developer" ]] && return
+  
   # Calculate execution time
   if [[ -n "$DOTFILES_CMD_START_TIME" ]]; then
-    local end_time=$(date +%s%3N)
+    local end_time=$(date +%s 2>/dev/null || echo 0)
     local elapsed=$((end_time - DOTFILES_CMD_START_TIME))
     
     if [[ $elapsed -gt 500 ]]; then

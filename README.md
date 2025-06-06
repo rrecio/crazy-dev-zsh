@@ -132,6 +132,108 @@ curl -fsSL https://raw.githubusercontent.com/rrecio/crazy-dev-zsh/main/install.s
 
 ---
 
+## 🎨 **Prompt Themes - Enhanced 10x Visual Experience**
+
+**Three meticulously crafted themes, each optimized for different development workflows with premium aesthetics and lightning performance:**
+
+### 🚀 **Powerline Theme** *(Default - Full Featured)*
+The most comprehensive and visually stunning prompt with premium gradient backgrounds:
+
+```bash
+ 󰀵 rod   ~/src/crazy-dev-zsh   main ●8 ?2  󰁹 100%
+❯                                                               󰥔 14:23:45
+```
+
+**Visual Features:**
+- 🎨 **Premium gradient backgrounds** with perfect color transitions
+- 🖥️  **Context-aware OS icons** (Apple Silicon/Intel/Linux) with SSH detection
+- 👤 **Smart user styling** (SSH=golden yellow, root=red, user=charcoal)
+- 📁 **Intelligent directory display** with project type icons and smart truncation
+- 🌟 **Beautiful git status** with color-coded indicators (staged=green, modified=yellow, untracked=red)
+- 🔧 **Language detection** (Node.js, Python, Go, Rust, Swift) with package manager icons
+- 🐳 **Docker containers** and system monitoring
+- 🔋 **Battery visualization** with gradient health indicators (red<20%, yellow<60%, green>60%)
+- ⏱️ **Command execution timing** with color-coded performance feedback
+- ✨ **Perfect powerline separators** with proper spacing and alignment
+
+### ⚡ **Minimal Theme** *(Lightning Fast & Beautiful)*
+Clean, fast, and distraction-free with intelligent context awareness:
+
+```bash
+ ~/src/crazy-dev-zsh on  main ●
+❯                                                                     14:23
+```
+
+**Visual Features:**
+- 🎯 **Context-aware icons** for different project types (home, git, languages)
+- ⚡ **Ultra-fast rendering** with smart caching (<50ms)
+- 🎨 **Perfect color scheme** optimized for maximum readability
+- 📁 **Smart path truncation** with visual ellipsis
+- 🌿 **Beautiful git integration** with branch icons and status indicators
+- 🔧 **Minimal language detection** (js, py, go, rs, swift, dart) when relevant
+- ✨ **Clean typography** with optimal spacing and contrast
+- ⏱️ **Execution timing** for commands >2 seconds only
+
+### 👨‍💻 **Developer Theme** *(Enhanced Coding Context)*
+Perfect for intense development with comprehensive project awareness:
+
+```bash
+ ~/src/crazy-dev-zsh main [~8|?2]
+▶                                                                 14:23
+```
+
+**Visual Features:**
+- 💼 **Language-specific color coding** for instant project recognition
+- 🎨 **Premium project type icons** with perfect spacing
+- 📊 **Enhanced git status** with comprehensive change indicators
+- 🎯 **Smart project root detection** and relative path display
+- 🔧 **Development context awareness** (Node.js versions, Python environments, Docker, K8s)
+- 📦 **Package manager detection** (npm/yarn/pnpm/bun) with TypeScript awareness
+- 🐍 **Python virtual environment** details with conda support
+- ⚡ **Performance monitoring** with intelligent caching
+- 🎨 **Developer-optimized color scheme** for extended coding sessions
+
+### 🎮 **Theme Commands**
+
+```bash
+# Switch themes instantly
+switch_theme powerline      # Full-featured with premium gradients (default)
+switch_theme minimal        # Lightning-fast with beautiful simplicity  
+switch_theme developer      # Enhanced coding context with smart awareness
+
+# List all available themes with previews
+list_themes
+
+# Get theme help and switching instructions
+switch_theme --help
+```
+
+### 🎯 **Which Theme Should You Choose?**
+
+| **Use Case** | **Recommended Theme** | **Why?** |
+|-------------|----------------------|----------|
+| 🚀 **Full Development** | **Powerline** | Complete information, beautiful gradients, system monitoring |
+| ⚡ **Performance Focus** | **Minimal** | Ultra-fast rendering, clean design, essential info only |
+| 👨‍💻 **Active Coding** | **Developer** | Project context, language detection, git-heavy workflows |
+| 🖥️ **Terminal Multiplexing** | **Minimal** | Compact design, optimal for tmux/screen sessions |
+| 🎨 **Visual Appeal** | **Powerline** | Premium aesthetics, perfect for demos and showcases |
+
+### ⚙️ **Theme Features**
+
+**All themes include:**
+- 🎨 **Intelligent color coding** - Status-aware colors that change with context
+- ⚡ **Smart caching** - Lightning-fast performance with 2-5 second cache TTL
+- 🔧 **Context awareness** - Adapts to your current project and tools
+- 🎯 **Error handling** - Graceful fallbacks and no broken prompts
+- 🌟 **Git integration** - Beautiful status, branch, and sync indicators
+- 📱 **Responsive design** - Adapts to terminal width and content
+- 🔋 **System monitoring** - Battery, load, containers, and performance
+- ⏱️ **Command timing** - Track slow commands with beautiful indicators
+
+**Choose your theme during installation or switch anytime with `switch_theme <name>`!**
+
+---
+
 ## 🚀 **Quick Start**
 
 > **⚠️ Important:** This is designed for **macOS only**. Make sure you have [Homebrew](https://brew.sh/) or it will be installed automatically.
@@ -168,10 +270,24 @@ curl -fsSL https://raw.githubusercontent.com/rrecio/crazy-dev-zsh/main/install.s
 
 ### 🔄 **After Installation**
 
-1. **Restart your terminal** or run `source ~/.zshrc`
-2. **You'll see the new prompt** with beautiful segments
-3. **Try some commands** like `gst` (git status) or `ll` (better ls)
-4. **Need help?** Run `dotfiles_help` for a quick guide
+1. **Restart your terminal** (recommended) or run `exec zsh`
+   ```bash
+   # Open a new terminal window/tab
+   # OR run this command:
+   exec zsh
+   ```
+
+2. **All commands are now available!** You'll see the new prompt with beautiful segments
+
+3. **Try some commands:**
+   ```bash
+   reload          # Reload shell configuration 
+   switch_theme    # Change prompt themes
+   gst             # Enhanced git status
+   ll              # Better ls with colors
+   ```
+
+4. **Need help?** Run any command without arguments to see usage info
 
 ---
 
@@ -714,7 +830,7 @@ gsync                     # Sync with main branch
 
 ### 🎨 **Prompt Customization**
 
-```bash
+   ```bash
 # Change themes based on work context
 switch_theme minimal      # Minimal theme for focus
 switch_theme ai-powered   # AI theme for ML work
@@ -736,7 +852,7 @@ CRAZY_DEV_ZSH_DEBUG=true # Enable debug mode
 
 | Command | Description | Example |
 |---------|-------------|---------|
-| `reload` | Reload shell configuration | `reload` |
+| `reload` | Reload shell configuration (after terminal restart) | `reload` |
 | `switch_theme` | Change prompt theme | `switch_theme minimal` |
 | `list_themes` | Show available themes | `list_themes` |
 | `mcd <dir>` | Make directory and cd into it | `mcd project/src` |
@@ -860,10 +976,16 @@ sudo -v
 # Then retry the installation
    ```
 
-**Q: "command not found" after installation**
+**Q: "command not found" after installation (including `reload` command)**
    ```bash
-# Fix: Restart your terminal or reload config
+# Fix: Restart your terminal to load all aliases and functions
+exec zsh
+
+# OR manually source the config (but restart is recommended)
    source ~/.zshrc
+
+# After restart, you can use the 'reload' command for future config reloads
+reload
    ```
 
 **Q: Prompt looks broken or has strange characters**

@@ -196,13 +196,19 @@ corp_rprompt() {
 
 # Corporate command timing
 corp_preexec() {
-  DOTFILES_CMD_START_TIME=$(date +%s%3N)
+  # Only run if corporate theme is active
+  [[ "$(get_saved_theme)" != "corporate" ]] && return
+  
+  DOTFILES_CMD_START_TIME=$(date +%s 2>/dev/null || echo 0)
 }
 
 corp_precmd() {
+  # Only run if corporate theme is active
+  [[ "$(get_saved_theme)" != "corporate" ]] && return
+  
   # Calculate execution time
   if [[ -n "$DOTFILES_CMD_START_TIME" ]]; then
-    local end_time=$(date +%s%3N)
+    local end_time=$(date +%s 2>/dev/null || echo 0)
     local elapsed=$((end_time - DOTFILES_CMD_START_TIME))
     
     if [[ $elapsed -gt 2000 ]]; then  # Only track longer commands
