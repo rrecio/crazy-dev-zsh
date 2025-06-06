@@ -12,9 +12,49 @@
 
 *Supercharge your productivity with AI-powered development tools, beautiful powerline prompts, and intelligent automation for every tech stack imaginable.*
 
-![Banner Image - Terminal with Crazy Dev ZSH](https://via.placeholder.com/800x200/1e1e2e/cdd6f4?text=🚀+Crazy+Dev+ZSH+🚀)
+```
+ ██████╗██████╗  █████╗ ███████╗██╗   ██╗    ██████╗ ███████╗██╗   ██╗    ███████╗███████╗██╗  ██╗
+██╔════╝██╔══██╗██╔══██╗╚══███╔╝╚██╗ ██╔╝    ██╔══██╗██╔════╝██║   ██║    ╚══███╔╝██╔════╝██║  ██║
+██║     ██████╔╝███████║  ███╔╝  ╚████╔╝     ██║  ██║█████╗  ██║   ██║      ███╔╝ ███████╗███████║
+██║     ██╔══██╗██╔══██║ ███╔╝    ╚██╔╝      ██║  ██║██╔══╝  ╚██╗ ██╔╝     ███╔╝  ╚════██║██╔══██║
+╚██████╗██║  ██║██║  ██║███████╗   ██║       ██████╔╝███████╗ ╚████╔╝     ███████╗███████║██║  ██║
+ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝   ╚═╝       ╚═════╝ ╚══════╝  ╚═══╝      ╚══════╝╚══════╝╚═╝  ╚═╝
+```
 
 </div>
+
+**⏱️ 2-minute setup • 🎯 Choose your tech stacks • 🚀 Boost productivity instantly**
+
+---
+
+## 🚀 **Get Started Right Now**
+
+<div align="center">
+
+**👇 Copy, paste, and run this command:**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/rrecio/crazy-dev-zsh/main/install.sh | bash
+```
+
+*Interactive installer • Choose your tools • Works in 2 minutes*
+
+</div>
+
+---
+
+## 📖 **Table of Contents**
+
+- [✨ What Makes This Special?](#-what-makes-this-special)
+- [🚀 Quick Start](#-quick-start)
+- [🎭 Prompt Preview](#-prompt-preview)
+- [🏗️ Tech Stack Support](#️-tech-stack-support)
+- [🤖 AI-Powered Development](#-ai-powered-development)
+- [⚙️ Advanced Features](#️-advanced-features)
+- [🎮 Key Bindings](#-key-bindings)
+- [🎛️ Customization](#️-customization)
+- [📋 Requirements](#-requirements)
+- [🎓 Usage Examples](#-usage-examples)
 
 ---
 
@@ -80,49 +120,75 @@
 
 ## 🚀 **Quick Start**
 
-### 🎯 **One-Line Install** *(Recommended)*
+> **⚠️ Important:** This is designed for **macOS only**. Make sure you have [Homebrew](https://brew.sh/) or it will be installed automatically.
+
+### 🎯 **Interactive Install** *(Recommended for first-time users)*
 
 ```bash
-# Interactive installation - choose your tech stacks
 curl -fsSL https://raw.githubusercontent.com/rrecio/crazy-dev-zsh/main/install.sh | bash
 ```
 
-### ⚡ **Install Everything**
+**What happens?** The installer will:
+1. 🎨 Show a beautiful welcome screen
+2. 📝 Let you **choose which tech stacks** you want (iOS, Flutter, Go, etc.)
+3. 🍺 Install Homebrew if needed
+4. 📦 Install only the tools you selected
+5. ⚙️ Configure your shell with the new prompt
+6. 🎉 Ready to use in seconds!
+
+### ⚡ **Install Everything** *(For power users)*
 
 ```bash
-# Skip choices, install all the things!
 curl -fsSL https://raw.githubusercontent.com/rrecio/crazy-dev-zsh/main/install.sh | DOTFILES_INSTALL_ALL=1 bash
 ```
 
-### 🎛️ **Custom Installation**
+### 🎛️ **Custom Installation** *(Automated/CI-friendly)*
 
 ```bash
-# Install only what you need
+# Example: Install only JavaScript, Docker, and Python/AI tools
 curl -fsSL https://raw.githubusercontent.com/rrecio/crazy-dev-zsh/main/install.sh | \
   DOTFILES_INSTALL_JAVASCRIPT=1 \
   DOTFILES_INSTALL_DOCKER=1 \
   DOTFILES_INSTALL_PYTHON_AI=1 bash
 ```
 
+### 🔄 **After Installation**
+
+1. **Restart your terminal** or run `source ~/.zshrc`
+2. **You'll see the new prompt** with beautiful segments
+3. **Try some commands** like `gst` (git status) or `ll` (better ls)
+4. **Need help?** Run `dotfiles_help` for a quick guide
+
 ---
 
 ## 🏗️ **Tech Stack Support**
 
+> **💡 Tip:** Each tech stack is optional! Install only what you need during setup.
+
+### 📊 **Quick Overview**
+
+| Tech Stack | Install Variable | Key Tools | Cool Commands |
+|------------|-----------------|-----------|---------------|
+| 📱 **iOS/Swift** | `DOTFILES_INSTALL_IOS=1` | SwiftLint, Xcode tools | `smart_xcodebuild`, `ios_sim boot` |
+| 🦋 **Flutter** | `DOTFILES_INSTALL_FLUTTER=1` | Flutter SDK, Android Studio | `flutter_hot run`, `device list` |
+| 🐹 **Go** | `DOTFILES_INSTALL_GO=1` | Go, Air hot reload | `go_new MyAPI`, `air` |
+| 🟨 **JavaScript** | `DOTFILES_INSTALL_JAVASCRIPT=1` | Node, yarn, pnpm, bun | `js_new MyApp react`, `jsrun build` |
+| 🐍 **Python/AI** | `DOTFILES_INSTALL_PYTHON_AI=1` | Python, Ollama, Jupyter | `ai_explain`, `conda activate ai-dev` |
+| 🐳 **Docker** | `DOTFILES_INSTALL_DOCKER=1` | Docker, kubectl, K9s | `dock clean`, `k get all` |
+| ☁️ **Cloud** | `DOTFILES_INSTALL_CLOUD=1` | AWS CLI, Terraform | `smart_deploy`, `awswhoami` |
+
 <details>
-<summary>📱 <strong>iOS & Swift Development</strong></summary>
+<summary>📱 <strong>iOS & Swift Development - Full Details</strong></summary>
 
+**What You Get:**
+- SwiftLint & SwiftFormat for code quality
+- Xcode build tools (xcbeautify) for beautiful output
+- Swift Package Manager (mint) for tool management
+- iOS Simulator management
+- Smart Xcode project detection
+
+**Key Commands:**
 ```bash
-# Environment Variables
-DOTFILES_INSTALL_IOS=1
-
-# What You Get
-✅ SwiftLint & SwiftFormat
-✅ Xcode build tools (xcbeautify)
-✅ Swift Package Manager (mint)
-✅ iOS Simulator management
-✅ Smart Xcode project detection
-
-# Cool Commands
 smart_xcodebuild          # Intelligent builds
 ios_sim boot "iPhone 15"  # Boot simulators
 swift_new MyApp          # Create Swift packages
@@ -415,26 +481,48 @@ The prompt automatically adapts colors based on context:
 - 🔵 **Blue** - Information, languages, tools
 - 🟣 **Purple** - Special states, execution time
 
-### ⚙️ **Environment Variables**
+### ⚙️ **Environment Variables Reference**
+
+<details>
+<summary><strong>📦 Installation Variables</strong></summary>
 
 ```bash
-# Installation control
-DOTFILES_INSTALL_ALL=1              # Install everything
-DOTFILES_INSTALL_IOS=1              # iOS tools
-DOTFILES_INSTALL_FLUTTER=1          # Flutter tools
+# Install everything at once
+DOTFILES_INSTALL_ALL=1
+
+# Individual tech stacks
+DOTFILES_INSTALL_IOS=1              # iOS/Swift tools
+DOTFILES_INSTALL_FLUTTER=1          # Flutter/Dart tools
 DOTFILES_INSTALL_GO=1               # Go tools
-DOTFILES_INSTALL_JAVASCRIPT=1       # JS/TS tools
+DOTFILES_INSTALL_JAVASCRIPT=1       # JavaScript/TypeScript tools
 DOTFILES_INSTALL_PYTHON_AI=1        # Python/AI tools
-DOTFILES_INSTALL_DOCKER=1           # Docker/K8s tools
-DOTFILES_INSTALL_CLOUD=1            # Cloud tools
-
-# Uninstallation control
-DOTFILES_UNINSTALL_ALL=1            # Uninstall everything
-DOTFILES_UNINSTALL_CORE=1           # Uninstall core tools
-
-# Debug and performance
-CRAZY_DEV_ZSH_DEBUG=true           # Debug mode
+DOTFILES_INSTALL_DOCKER=1           # Docker/Kubernetes tools
+DOTFILES_INSTALL_CLOUD=1            # Cloud deployment tools
 ```
+
+</details>
+
+<details>
+<summary><strong>🗑️ Uninstallation Variables</strong></summary>
+
+```bash
+DOTFILES_UNINSTALL_ALL=1            # Remove everything
+DOTFILES_UNINSTALL_CORE=1           # Remove core tools only
+DOTFILES_UNINSTALL_IOS=1            # Remove iOS tools only
+# ... (same pattern for other stacks)
+```
+
+</details>
+
+<details>
+<summary><strong>🔧 Debug & Performance</strong></summary>
+
+```bash
+CRAZY_DEV_ZSH_DEBUG=true           # Enable debug mode
+# Shows prompt render times and performance info
+```
+
+</details>
 
 ---
 
@@ -493,6 +581,78 @@ ai_commit
 ai_debug "AttributeError: 'NoneType' object has no attribute 'get'"
 # AI suggests solutions and explains the error
 ```
+
+---
+
+## ❓ **FAQ & Troubleshooting**
+
+<details>
+<summary><strong>🔧 Installation Issues</strong></summary>
+
+**Q: Installation fails with permission errors**
+```bash
+# Fix: Make sure you have admin privileges
+sudo -v
+# Then retry the installation
+```
+
+**Q: "command not found" after installation**
+```bash
+# Fix: Restart your terminal or reload config
+source ~/.zshrc
+```
+
+**Q: Prompt looks broken or has strange characters**
+- Install a [Nerd Font](https://www.nerdfonts.com/) (recommended: MesloLGS NF)
+- Set it as your terminal font
+
+</details>
+
+<details>
+<summary><strong>🗑️ Uninstalling</strong></summary>
+
+```bash
+# Uninstall everything
+./install.sh uninstall
+
+# Uninstall specific tech stacks
+./install.sh uninstall
+# Then choose what to remove during the interactive process
+
+# Automated uninstall
+DOTFILES_UNINSTALL_ALL=1 ./install.sh uninstall
+```
+
+</details>
+
+<details>
+<summary><strong>🎨 Customization</strong></summary>
+
+**Q: How do I customize the prompt?**
+- Edit `~/.dotfiles/zsh/custom.zsh` for personal tweaks
+- Use `CRAZY_DEV_ZSH_DEBUG=true` to see prompt performance
+
+**Q: How do I disable certain segments?**
+- Set environment variables in your `custom.zsh`
+- Example: `PROMPT_SHOW_BATTERY=false`
+
+</details>
+
+<details>
+<summary><strong>🚀 Performance</strong></summary>
+
+**Q: Prompt feels slow**
+```bash
+# Check render time
+CRAZY_DEV_ZSH_DEBUG=true
+prompt_bench
+```
+
+**Q: Terminal startup is slow**
+- The prompt uses smart caching - first load might be slower
+- Subsequent loads should be much faster
+
+</details>
 
 ---
 
