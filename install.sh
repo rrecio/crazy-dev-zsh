@@ -766,8 +766,390 @@ error_exit() {
     exit 1
 }
 
+# Select packages to uninstall
+select_uninstall_stacks() {
+    log_step "Package Uninstallation Selection"
+    
+    # Initialize selection arrays
+    UNINSTALL_CORE=false
+    UNINSTALL_IOS=false
+    UNINSTALL_FLUTTER=false
+    UNINSTALL_GO=false
+    UNINSTALL_JAVASCRIPT=false
+    UNINSTALL_PYTHON_AI=false
+    UNINSTALL_DOCKER=false
+    UNINSTALL_CLOUD=false
+    
+    # Check for environment variables for non-interactive uninstallation
+    if [[ -n "${DOTFILES_UNINSTALL_ALL:-}" ]]; then
+        UNINSTALL_CORE=true
+        UNINSTALL_IOS=true
+        UNINSTALL_FLUTTER=true
+        UNINSTALL_GO=true
+        UNINSTALL_JAVASCRIPT=true
+        UNINSTALL_PYTHON_AI=true
+        UNINSTALL_DOCKER=true
+        UNINSTALL_CLOUD=true
+        log_info "Uninstalling all tech stacks (DOTFILES_UNINSTALL_ALL=true)"
+        return 0
+    fi
+    
+    # Check individual environment variables
+    [[ -n "${DOTFILES_UNINSTALL_CORE:-}" ]] && UNINSTALL_CORE=true
+    [[ -n "${DOTFILES_UNINSTALL_IOS:-}" ]] && UNINSTALL_IOS=true
+    [[ -n "${DOTFILES_UNINSTALL_FLUTTER:-}" ]] && UNINSTALL_FLUTTER=true
+    [[ -n "${DOTFILES_UNINSTALL_GO:-}" ]] && UNINSTALL_GO=true
+    [[ -n "${DOTFILES_UNINSTALL_JAVASCRIPT:-}" ]] && UNINSTALL_JAVASCRIPT=true
+    [[ -n "${DOTFILES_UNINSTALL_PYTHON_AI:-}" ]] && UNINSTALL_PYTHON_AI=true
+    [[ -n "${DOTFILES_UNINSTALL_DOCKER:-}" ]] && UNINSTALL_DOCKER=true
+    [[ -n "${DOTFILES_UNINSTALL_CLOUD:-}" ]] && UNINSTALL_CLOUD=true
+    
+    # If any environment variables are set, skip interactive selection
+    if [[ -n "${DOTFILES_UNINSTALL_CORE:-}" || -n "${DOTFILES_UNINSTALL_IOS:-}" || -n "${DOTFILES_UNINSTALL_GO:-}" || 
+          -n "${DOTFILES_UNINSTALL_JAVASCRIPT:-}" || -n "${DOTFILES_UNINSTALL_PYTHON_AI:-}" || 
+          -n "${DOTFILES_UNINSTALL_DOCKER:-}" || -n "${DOTFILES_UNINSTALL_CLOUD:-}" ]]; then
+        log_info "Using environment variables for tech stack uninstallation"
+        return 0
+    fi
+    
+    echo "Choose which development environments you'd like to uninstall:"
+    echo "(You can select multiple options)"
+    echo ""
+    
+    # Core tools
+    read -p "🗑️  Uninstall Core Tools? (git, zsh, better alternatives) [y/N]: " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        UNINSTALL_CORE=true
+        log_info "❌ Core Tools selected for uninstallation"
+    fi
+    
+    # iOS/Swift Development
+    read -p "🗑️  Uninstall iOS/Swift development tools? [y/N]: " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        UNINSTALL_IOS=true
+        log_info "❌ iOS/Swift development selected for uninstallation"
+    fi
+    
+    # Flutter Development
+    read -p "🗑️  Uninstall Flutter development tools? [y/N]: " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        UNINSTALL_FLUTTER=true
+        log_info "❌ Flutter development selected for uninstallation"
+    fi
+    
+    # Go Development
+    read -p "🗑️  Uninstall Go development tools? [y/N]: " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        UNINSTALL_GO=true
+        log_info "❌ Go development selected for uninstallation"
+    fi
+    
+    # JavaScript/TypeScript Development
+    read -p "🗑️  Uninstall JavaScript/TypeScript tools? [y/N]: " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        UNINSTALL_JAVASCRIPT=true
+        log_info "❌ JavaScript/TypeScript development selected for uninstallation"
+    fi
+    
+    # Python/AI Development
+    read -p "🗑️  Uninstall Python/AI development tools? [y/N]: " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        UNINSTALL_PYTHON_AI=true
+        log_info "❌ Python/AI development selected for uninstallation"
+    fi
+    
+    # Docker & Kubernetes
+    read -p "🗑️  Uninstall Docker & Kubernetes tools? [y/N]: " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        UNINSTALL_DOCKER=true
+        log_info "❌ Docker & Kubernetes selected for uninstallation"
+    fi
+    
+    # Cloud & Deployment
+    read -p "🗑️  Uninstall cloud deployment tools? [y/N]: " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        UNINSTALL_CLOUD=true
+        log_info "❌ Cloud deployment tools selected for uninstallation"
+    fi
+    
+    echo ""
+    read -p "🗑️  Uninstall everything above? [y/N]: " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        UNINSTALL_CORE=true
+        UNINSTALL_IOS=true
+        UNINSTALL_FLUTTER=true
+        UNINSTALL_GO=true
+        UNINSTALL_JAVASCRIPT=true
+        UNINSTALL_PYTHON_AI=true
+        UNINSTALL_DOCKER=true
+        UNINSTALL_CLOUD=true
+        log_info "❌ All tech stacks selected for uninstallation"
+    fi
+    
+    echo ""
+    log_info "Selected for uninstallation:"
+    [[ "$UNINSTALL_CORE" == true ]] && echo "  ❌ Core Tools"
+    [[ "$UNINSTALL_IOS" == true ]] && echo "  ❌ iOS/Swift Development"
+    [[ "$UNINSTALL_FLUTTER" == true ]] && echo "  ❌ Flutter Development"
+    [[ "$UNINSTALL_GO" == true ]] && echo "  ❌ Go Development"
+    [[ "$UNINSTALL_JAVASCRIPT" == true ]] && echo "  ❌ JavaScript/TypeScript Development"
+    [[ "$UNINSTALL_PYTHON_AI" == true ]] && echo "  ❌ Python/AI Development"
+    [[ "$UNINSTALL_DOCKER" == true ]] && echo "  ❌ Docker & Kubernetes"
+    [[ "$UNINSTALL_CLOUD" == true ]] && echo "  ❌ Cloud Deployment Tools"
+    
+    echo ""
+    read -p "⚠️  Are you sure you want to proceed with uninstallation? [y/N]: " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Nn]$ ]] || [[ -z "$REPLY" ]]; then
+        log_info "Uninstallation cancelled by user"
+        exit 0
+    fi
+}
+
+# Uninstall homebrew packages
+uninstall_homebrew_packages() {
+    if ! command_exists brew; then
+        log_warning "Homebrew not found, skipping package uninstallation"
+        return 0
+    fi
+    
+    log_step "Uninstalling selected packages via Homebrew"
+    
+    local packages=()
+    
+    # Core utilities
+    if [[ "$UNINSTALL_CORE" == true ]]; then
+        packages+=(
+            # Core utilities (be careful with these)
+            "bat" "eza" "fd" "ripgrep" "fzf" "jq" "htop" "tree" "dust" "procs"
+            "git-delta" "gh" "zsh-autosuggestions" "zsh-syntax-highlighting" "starship"
+            "--cask cursor"
+        )
+    fi
+    
+    # iOS/Swift Development
+    if [[ "$UNINSTALL_IOS" == true ]]; then
+        packages+=(
+            "swiftlint" "swiftformat" "xcbeautify" "mint"
+        )
+    fi
+    
+    # Flutter/Dart Development
+    if [[ "$UNINSTALL_FLUTTER" == true ]]; then
+        packages+=(
+            "dart" "cocoapods"
+            "--cask android-studio" "--cask android-platform-tools"
+        )
+    fi
+    
+    # Go Development
+    if [[ "$UNINSTALL_GO" == true ]]; then
+        packages+=(
+            "go" "golangci-lint" "air"
+        )
+    fi
+    
+    # JavaScript/TypeScript Development
+    if [[ "$UNINSTALL_JAVASCRIPT" == true ]]; then
+        packages+=(
+            "node" "yarn" "pnpm" "bun" "deno"
+        )
+    fi
+    
+    # Python/AI Development
+    if [[ "$UNINSTALL_PYTHON_AI" == true ]]; then
+        packages+=(
+            "python@3.11" "miniconda" "ollama"
+        )
+    fi
+    
+    # Docker & Kubernetes
+    if [[ "$UNINSTALL_DOCKER" == true ]]; then
+        packages+=(
+            "--cask docker" "kubernetes-cli" "kubectx" "helm" "k9s"
+        )
+    fi
+    
+    # Cloud & Deployment
+    if [[ "$UNINSTALL_CLOUD" == true ]]; then
+        packages+=(
+            "awscli" "heroku/brew/heroku" "serverless" "terraform"
+        )
+    fi
+    
+    for package in "${packages[@]}"; do
+        if [[ "$package" == "--cask"* ]]; then
+            # Handle cask packages
+            local cask_name="${package#--cask }"
+            if brew list --cask "$cask_name" &>/dev/null; then
+                log_info "Uninstalling cask $cask_name..."
+                brew uninstall --cask "$cask_name" || log_warning "Failed to uninstall $cask_name"
+            else
+                log_info "$cask_name not installed via Homebrew"
+            fi
+        else
+            # Handle regular packages
+            if brew list "$package" &>/dev/null; then
+                log_info "Uninstalling $package..."
+                brew uninstall "$package" || log_warning "Failed to uninstall $package"
+            else
+                log_info "$package not installed via Homebrew"
+            fi
+        fi
+    done
+    
+    log_info "Running brew cleanup to remove unused dependencies..."
+    brew cleanup
+    
+    log_success "Homebrew packages uninstallation completed"
+}
+
+# Remove additional tools and configurations
+remove_additional_tools() {
+    log_step "Removing additional tools and configurations"
+    
+    # Remove Flutter SDK
+    if [[ "$UNINSTALL_FLUTTER" == true ]] && [[ -d "${HOME}/flutter" ]]; then
+        read -p "Remove Flutter SDK directory? [y/N]: " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            rm -rf "${HOME}/flutter"
+            log_success "Flutter SDK directory removed"
+        fi
+    fi
+    
+    # Remove Oh My Zsh
+    if [[ "$UNINSTALL_CORE" == true ]] && [[ -d "${HOME}/.oh-my-zsh" ]]; then
+        read -p "Remove Oh My Zsh? [y/N]: " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            rm -rf "${HOME}/.oh-my-zsh"
+            log_success "Oh My Zsh removed"
+        fi
+    fi
+    
+    # Remove conda environments
+    if [[ "$UNINSTALL_PYTHON_AI" == true ]] && command_exists conda; then
+        read -p "Remove ai-dev conda environment? [y/N]: " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            conda env remove -n ai-dev -y 2>/dev/null || true
+            log_success "ai-dev conda environment removed"
+        fi
+    fi
+    
+    # Remove Ollama data
+    if [[ "$UNINSTALL_PYTHON_AI" == true ]] && [[ -d "${HOME}/.ollama" ]]; then
+        read -p "Remove Ollama data and models? [y/N]: " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            rm -rf "${HOME}/.ollama"
+            rm -rf "${HOME}/.cache/ai-dev"
+            log_success "Ollama data removed"
+        fi
+    fi
+}
+
+# Remove symlinks and restore backups
+remove_symlinks() {
+    log_step "Removing symlinks and configurations"
+    
+    # Remove .zshrc symlink
+    if [[ -L "${HOME}/.zshrc" ]]; then
+        rm "${HOME}/.zshrc"
+        log_info "Removed .zshrc symlink"
+    fi
+    
+    # Remove starship config
+    if [[ -L "${HOME}/.config/starship.toml" ]]; then
+        rm "${HOME}/.config/starship.toml"
+        log_info "Removed starship config symlink"
+    fi
+    
+    # Remove git config symlink if it exists
+    if [[ -L "${HOME}/.gitconfig" ]]; then
+        rm "${HOME}/.gitconfig"
+        log_info "Removed .gitconfig symlink"
+    fi
+    
+    # Remove FZF config
+    if [[ -f "${HOME}/.fzf.zsh" ]]; then
+        rm "${HOME}/.fzf.zsh"
+        log_info "Removed FZF configuration"
+    fi
+    
+    # Remove dotfiles directory
+    read -p "Remove entire dotfiles directory? [y/N]: " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]] && [[ -d "$DOTFILES_DIR" ]]; then
+        rm -rf "$DOTFILES_DIR"
+        log_success "Dotfiles directory removed"
+    fi
+    
+    # Restore original shell if needed
+    if [[ "$SHELL" == */zsh ]] && [[ "$UNINSTALL_CORE" == true ]]; then
+        read -p "Restore bash as default shell? [y/N]: " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            chsh -s /bin/bash
+            log_success "Default shell restored to bash"
+        fi
+    fi
+}
+
+# Uninstall main function
+uninstall_main() {
+    echo -e "${RED}"
+    cat << 'EOF'
+╭─────────────────────────────────────╮
+│     Dotfiles Uninstallation        │
+│                                     │
+│     ⚠️  Proceed with Caution ⚠️     │
+╰─────────────────────────────────────╯
+EOF
+    echo -e "${NC}"
+    
+    log_warning "This will remove packages and configurations installed by this dotfiles setup"
+    log_warning "Some packages might be used by other applications"
+    
+    # Run uninstallation steps
+    select_uninstall_stacks
+    uninstall_homebrew_packages
+    remove_additional_tools
+    remove_symlinks
+    
+    echo -e "\n${GREEN}Uninstallation completed!${NC}"
+    echo -e "${YELLOW}You may want to restart your terminal.${NC}"
+}
+
 # Main installation function
 main() {
+    # Handle command line arguments
+    case "${1:-}" in
+        "uninstall"|"remove"|"--uninstall")
+            uninstall_main
+            exit 0
+            ;;
+        "--help"|"-h")
+            echo "Usage: $0 [command]"
+            echo ""
+            echo "Commands:"
+            echo "  (no args)     Install dotfiles and packages"
+            echo "  uninstall     Uninstall packages and remove configurations"
+            echo "  --help        Show this help message"
+            exit 0
+            ;;
+    esac
+    
     echo -e "${CYAN}"
     cat << 'EOF'
 ╭─────────────────────────────────────╮
