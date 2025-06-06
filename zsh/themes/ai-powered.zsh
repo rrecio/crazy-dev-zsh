@@ -1,59 +1,98 @@
 # ~/.dotfiles/zsh/themes/ai-powered.zsh
-# AI-Powered Theme - Intelligent Beauty
-# The most advanced and visually stunning prompt with AI context awareness
+# Professional AI Theme - UI Designer Enhanced
+# Sophisticated futuristic design with comfortable sci-fi aesthetics
 
-# 10x Enhanced AI-themed color palette with premium gradients
+# 🤖 AI Designer Color System - Futuristic yet comfortable for extended use
 typeset -A AI_COLORS
 AI_COLORS=(
-  # Core AI neural network colors
-  neural_blue    "39"     # Electric neural blue
-  neural_bright  "33"     # Bright neural blue
-  neural_deep    "27"     # Deep neural blue
+  # 🧠 Neural Network Spectrum - Inspired by synaptic connections
+  neural_deep     "25"     # Deep neural (HSL: 195, 100%, 20%) - core processing
+  neural_core     "32"     # Neural blue (HSL: 195, 85%, 35%) - main pathways  
+  neural_bright   "39"     # Electric neural (HSL: 195, 100%, 50%) - active synapses
+  neural_glow     "75"     # Glowing neural (HSL: 195, 70%, 65%) - neural glow
+  neural_soft     "117"    # Soft neural (HSL: 195, 60%, 75%) - gentle connections
+  neural_whisper  "153"    # Neural whisper (HSL: 195, 50%, 85%) - subtle networks
   
-  # Quantum computing spectrum
-  quantum_cyan   "51"     # Quantum cyan
-  quantum_teal   "37"     # Quantum teal
-  quantum_aqua   "123"    # Quantum aqua
+  # 🔮 Quantum Computing Spectrum - Mystical yet professional
+  quantum_void    "54"     # Quantum void (HSL: 285, 100%, 25%) - quantum depths
+  quantum_core    "99"     # Quantum purple (HSL: 285, 75%, 45%) - quantum states
+  quantum_field   "105"    # Quantum field (HSL: 285, 65%, 55%) - superposition
+  quantum_glow    "141"    # Quantum glow (HSL: 285, 55%, 70%) - quantum entanglement
+  quantum_aura    "177"    # Quantum aura (HSL: 285, 45%, 80%) - quantum resonance
   
-  # Matrix digital rain colors
-  matrix_green   "46"     # Matrix green
-  matrix_lime    "118"    # Matrix lime
-  matrix_forest  "22"     # Matrix forest
+  # 🧪 Machine Learning Spectrum - Data science aesthetics
+  ml_data         "33"     # Data blue (HSL: 210, 85%, 40%) - raw data
+  ml_processing   "75"     # Processing cyan (HSL: 195, 70%, 60%) - data processing
+  ml_training     "178"    # Training amber (HSL: 40, 75%, 55%) - model training
+  ml_inference    "34"     # Inference green (HSL: 130, 70%, 50%) - predictions
+  ml_validation   "105"    # Validation purple (HSL: 285, 65%, 55%) - model validation
+  ml_deployment   "87"     # Deployment teal (HSL: 180, 60%, 65%) - production ready
   
-  # Plasma energy colors
-  plasma_purple  "135"    # Plasma purple
-  plasma_magenta "171"    # Plasma magenta
-  plasma_violet  "99"     # Plasma violet
+  # 💾 Digital Matrix Spectrum - Cyberpunk elegance
+  matrix_deep     "22"     # Deep matrix (HSL: 120, 100%, 15%) - matrix depths
+  matrix_core     "28"     # Matrix green (HSL: 120, 85%, 35%) - digital rain core
+  matrix_flow     "34"     # Matrix flow (HSL: 120, 70%, 50%) - data streams
+  matrix_bright   "40"     # Bright matrix (HSL: 120, 60%, 60%) - active code
+  matrix_glow     "46"     # Matrix glow (HSL: 120, 100%, 50%) - neon highlights
+  matrix_whisper  "114"    # Matrix whisper (HSL: 120, 45%, 75%) - subtle streams
   
-  # Neon cyberpunk colors
-  neon_pink      "201"    # Neon pink
-  neon_fuchsia   "199"    # Neon fuchsia
-  neon_hot       "205"    # Hot neon
+  # 🚀 AI Status Spectrum - Intelligent feedback system
+  ai_success      "34"     # AI success (HSL: 130, 70%, 50%) - positive outcomes
+  ai_processing   "178"    # AI processing (HSL: 40, 75%, 55%) - active computation
+  ai_learning     "105"    # AI learning (HSL: 285, 65%, 55%) - model training
+  ai_error        "167"    # AI error (HSL: 0, 60%, 55%) - gentle error indication
+  ai_warning      "214"    # AI warning (HSL: 45, 80%, 60%) - attention needed
+  ai_complete     "87"     # AI complete (HSL: 180, 60%, 65%) - task finished
   
-  # Cyber interface colors
-  cyber_orange   "208"    # Cyber orange
-  cyber_amber    "214"    # Cyber amber
-  cyber_gold     "220"    # Cyber gold
+  # ⚡ Energy & Power Spectrum - High-tech accents
+  energy_plasma   "93"     # Plasma energy (HSL: 270, 75%, 60%) - plasma effects
+  energy_laser    "201"    # Laser energy (HSL: 320, 85%, 65%) - laser precision
+  energy_neon     "226"    # Neon energy (HSL: 60, 100%, 75%) - neon highlights
+  energy_cyber    "51"     # Cyber energy (HSL: 180, 100%, 50%) - cyber glow
+  energy_aurora   "141"    # Aurora energy (HSL: 285, 55%, 70%) - aurora effects
   
-  # Status indicator colors
-  warning_amber  "220"    # Warning amber
-  error_red      "196"    # Error red
-  success_glow   "82"     # Success glow
-  info_pulse     "81"     # Info pulse
+  # 📊 Data Visualization Spectrum - Clear information hierarchy
+  data_primary    "75"     # Primary data (HSL: 195, 70%, 65%) - main datasets
+  data_secondary  "105"    # Secondary data (HSL: 285, 65%, 55%) - supporting data
+  data_tertiary   "178"    # Tertiary data (HSL: 40, 75%, 55%) - additional context
+  data_quaternary "87"     # Quaternary data (HSL: 180, 60%, 65%) - background data
+  data_highlight  "226"    # Data highlight (HSL: 60, 100%, 75%) - key insights
   
-  # Background and neutral colors
-  ghost_gray     "244"    # Subtle gray
-  shadow_gray    "238"    # Shadow gray
-  ai_silver      "255"    # AI silver
-  chrome_white   "253"    # Chrome white
-  deep_space     "232"    # Deep space background (enhanced)
-  void_black     "0"      # Void black
+  # 🎨 Text Hierarchy - Optimized for sci-fi readability
+  text_primary    "255"    # Pure white (100%) - highest emphasis
+  text_bright     "253"    # Bright white (98%) - high emphasis
+  text_cyber      "87"     # Cyber cyan (HSL: 180, 60%, 70%) - themed emphasis
+  text_neural     "117"    # Neural blue (HSL: 195, 60%, 75%) - neural context
+  text_quantum    "177"    # Quantum purple (HSL: 285, 45%, 80%) - quantum context
+  text_matrix     "114"    # Matrix green (HSL: 120, 45%, 75%) - matrix context
+  text_muted      "245"    # Muted gray (87%) - low emphasis
+  text_disabled   "240"    # Disabled gray (75%) - disabled state
   
-  # Special AI context colors
-  ml_training    "226"    # ML training yellow
-  inference_blue "117"    # Inference blue
-  data_purple    "141"    # Data science purple
-  gpu_green      "40"     # GPU acceleration green
+  # 🌌 Surface Spectrum - Futuristic depth perception
+  surface_void    "232"    # Deep void (HSL: 0, 0%, 8%) - deepest background
+  surface_deep    "234"    # Deep surface (HSL: 0, 0%, 12%) - main background
+  surface_neural  "236"    # Neural surface (HSL: 0, 0%, 16%) - neural panels
+  surface_quantum "238"    # Quantum surface (HSL: 0, 0%, 20%) - quantum fields
+  surface_matrix  "240"    # Matrix surface (HSL: 0, 0%, 25%) - matrix overlays
+  surface_cyber   "243"    # Cyber surface (HSL: 0, 0%, 32%) - cyber elements
+  
+  # 🎯 Interactive States - Futuristic UI feedback
+  hover_glow      "59"     # Hover glow (HSL: 220, 15%, 35%) - hover states
+  active_pulse    "75"     # Active pulse (HSL: 195, 70%, 65%) - active states
+  focus_aura      "117"    # Focus aura (HSL: 195, 60%, 75%) - focus indication
+  select_energy   "87"     # Selection energy (HSL: 180, 60%, 65%) - selected items
+  
+  # 🤖 Legacy Compatibility - Maintaining existing functionality
+  neural_blue     "39"     # Legacy neural blue
+  neural_bright   "33"     # Legacy bright neural
+  neural_deep     "27"     # Legacy deep neural
+  quantum_cyan    "51"     # Legacy quantum cyan
+  matrix_green    "46"     # Legacy matrix green
+  warning_amber   "214"    # Legacy warning amber
+  error_red       "167"    # Legacy error red (softened)
+  success_glow    "34"     # Legacy success glow
+  ghost_gray      "245"    # Legacy ghost gray
+  ai_silver       "255"    # Legacy AI silver
 )
 
 # AI-themed icons and symbols

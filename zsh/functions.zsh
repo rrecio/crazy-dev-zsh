@@ -100,8 +100,8 @@ backup() {
   echo "Backup created: $backup_name"
 }
 
-# Quick HTTP server with custom port
-serve() {
+# Quick HTTP server with custom port (renamed to avoid alias conflict)
+http_serve() {
   local port="${1:-8000}"
   local directory="${2:-.}"
   
@@ -125,8 +125,8 @@ weather() {
   fi
 }
 
-# System information summary
-sysinfo() {
+# System information summary (renamed to avoid alias conflict)
+system_info() {
   echo "System Information:"
   echo "==================="
   echo "OS: $(uname -s) $(uname -r)"

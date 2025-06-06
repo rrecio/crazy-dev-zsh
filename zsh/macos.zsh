@@ -63,8 +63,7 @@ alias unmute='osascript -e "set volume output muted false"'
 alias ql='qlmanage -p'
 
 # Clipboard operations
-alias pbcopy='pbcopy'
-alias pbpaste='pbpaste'
+# Removed self-referential aliases: pbcopy, pbpaste work directly
 alias copy='pbcopy'
 alias paste='pbpaste'
 

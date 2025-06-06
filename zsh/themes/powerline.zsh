@@ -1,233 +1,375 @@
 # ~/.dotfiles/zsh/themes/powerline.zsh
-# Modern Powerline Theme - 10x Enhanced Visual Excellence
-# Premium color palette with perfect contrast ratios and visual hierarchy
+# Professional Powerline Theme - UI Designer Enhanced
+# Modern color theory with comfortable viewing and sleek aesthetics
+
+# 🎨 UI Designer Color System - Based on HSL color theory and accessibility standards
 typeset -A POWERLINE_COLORS
 POWERLINE_COLORS=(
-  # Core background colors with enhanced contrast
-  bg_deepest   "232"   # Ultra-deep black for maximum contrast
-  bg_dark      "235"   # Deep charcoal background
-  bg_medium    "240"   # Medium gray
-  bg_light     "250"   # Light gray (enhanced from 245)
+  # 🌑 Background Hierarchy - Carefully crafted depth perception
+  surface_base     "234"   # Base surface (HSL: 0, 0%, 12%) - comfortable dark
+  surface_raised   "237"   # Raised elements (HSL: 0, 0%, 18%) - subtle elevation  
+  surface_overlay  "240"   # Overlay content (HSL: 0, 0%, 25%) - clear separation
+  surface_high     "243"   # High emphasis (HSL: 0, 0%, 32%) - important content
   
-  # Premium accent colors - 10x more vibrant
-  accent       "39"    # Electric blue
-  accent_alt   "45"    # Brighter cyan alternative
-  success      "46"    # Bright green
-  success_alt  "82"    # Forest green alternative
-  warning      "220"   # Golden yellow
-  warning_alt  "214"   # Orange yellow
-  error        "196"   # Bright red
-  error_alt    "160"   # Deep red alternative
-  info         "81"    # Cyan
-  info_alt     "117"   # Light blue
+  # 🎯 Primary Brand Colors - Professional blue spectrum
+  primary_50       "153"   # Lightest tint (HSL: 220, 100%, 95%)
+  primary_100      "117"   # Light tint (HSL: 220, 90%, 85%)  
+  primary_200      "81"    # Medium light (HSL: 220, 80%, 75%)
+  primary_400      "75"    # Medium (HSL: 220, 70%, 65%)
+  primary_600      "39"    # Brand primary (HSL: 220, 100%, 55%)
+  primary_700      "33"    # Dark (HSL: 220, 100%, 45%)
+  primary_900      "27"    # Darkest (HSL: 220, 100%, 25%)
   
-  # Enhanced neutral colors
-  muted        "244"   # Subtle gray
-  muted_dark   "238"   # Darker muted
-  white        "255"   # Pure white
-  silver       "252"   # Silver alternative
+  # 🟢 Success Semantic Colors - Harmonious green spectrum
+  success_50       "158"   # Light success background
+  success_100      "121"   # Success container
+  success_400      "83"    # Success emphasis  
+  success_600      "47"    # Primary success (HSL: 134, 61%, 41%)
+  success_700      "41"    # Dark success
+  success_900      "22"    # Deep success
   
-  # Premium accent colors
-  purple       "135"   # Royal purple
-  purple_alt   "171"   # Magenta purple
-  orange       "208"   # Vibrant orange
-  orange_alt   "202"   # Red orange
-  pink         "205"   # Hot pink
-  lime         "154"   # Lime green
+  # 🟡 Warning Semantic Colors - Warm, accessible yellows
+  warning_50       "229"   # Light warning background
+  warning_100      "228"   # Warning container
+  warning_400      "221"   # Warning emphasis
+  warning_600      "214"   # Primary warning (HSL: 45, 93%, 58%)
+  warning_700      "208"   # Dark warning
+  warning_900      "136"   # Deep warning
   
-  # Special status colors
-  ssh_warning  "226"   # Bright yellow for SSH
-  root_danger  "196"   # Bright red for root
-  battery_critical "124" # Dark red for critical battery
+  # 🔴 Error Semantic Colors - Clear but not aggressive reds
+  error_50         "224"   # Light error background  
+  error_100        "210"   # Error container
+  error_400        "204"   # Error emphasis
+  error_600        "167"   # Primary error (HSL: 0, 84%, 60%)
+  error_700        "161"   # Dark error
+  error_900        "124"   # Deep error
+  
+  # 💜 Accent Colors - Sophisticated purple spectrum for variety
+  accent_purple    "141"   # Soft purple (HSL: 300, 47%, 67%)
+  accent_magenta   "177"   # Vibrant magenta
+  accent_violet    "99"    # Deep violet
+  accent_pink      "212"   # Soft pink
+  
+  # 🧑‍💻 Code Syntax Colors - Optimized for readability
+  syntax_keyword   "68"    # Keywords (HSL: 195, 100%, 50%)
+  syntax_string    "107"   # Strings (HSL: 95, 38%, 62%)
+  syntax_number    "173"   # Numbers (HSL: 25, 85%, 55%)
+  syntax_comment   "102"   # Comments (HSL: 60, 5%, 55%)
+  
+  # ⚪ Neutral Text Colors - Perfect for long reading sessions
+  text_primary     "255"   # High emphasis text (100% white)
+  text_secondary   "250"   # Medium emphasis (HSL: 0, 0%, 93%)
+  text_tertiary    "245"   # Low emphasis (HSL: 0, 0%, 87%)
+  text_disabled    "240"   # Disabled text (HSL: 0, 0%, 75%)
+  text_inverse     "236"   # Dark text for light backgrounds
+  
+  # 🎨 Status Indicator Colors - Context-aware and accessible
+  online_status    "46"    # Online/active status
+  away_status      "214"   # Away/busy status  
+  offline_status   "243"   # Offline/inactive status
+  
+  # 🛡️ Security Context Colors - Clear hierarchy for trust levels
+  secure_context   "42"    # Secure/trusted (deep green)
+  warning_context  "226"   # Caution required (bright yellow)
+  danger_context   "196"   # High risk (bright red)
+  
+  # 🌈 Interactive Element Colors - Modern UI feedback
+  hover_overlay    "59"    # Hover state overlay
+  focus_ring       "75"    # Focus indicator ring
+  selection_bg     "60"    # Text selection background
+  
+  # 📊 Data Visualization Colors - Distinguishable and accessible
+  data_blue        "75"    # Primary data color
+  data_green       "83"    # Secondary data color  
+  data_orange      "214"   # Tertiary data color
+  data_purple      "141"   # Quaternary data color
+  data_red         "167"   # Alert data color
 )
 
-# Enhanced powerline separators with better visual weight
-POWERLINE_LEFT_SEP=""
-POWERLINE_RIGHT_SEP=""
-POWERLINE_LEFT_THIN=""
-POWERLINE_RIGHT_THIN=""
+# 🎨 Modern Powerline Separators - Refined visual weight
+POWERLINE_LEFT_SEP=""       # Primary separator
+POWERLINE_RIGHT_SEP=""      # Reverse separator  
+POWERLINE_LEFT_THIN=""      # Subtle separator
+POWERLINE_RIGHT_THIN=""     # Reverse subtle
+POWERLINE_LEFT_ROUND=""     # Rounded separator (modern alternative)
+POWERLINE_RIGHT_ROUND=""    # Reverse rounded
 
-# Advanced performance caching with shorter TTL for responsiveness
-POWERLINE_CACHE_TTL=1
+# ⚡ Performance Optimization - Intelligent caching
+POWERLINE_CACHE_TTL=2       # Slightly longer for stability
 POWERLINE_CACHE_TIME=0
 POWERLINE_CACHE_CONTENT=""
 
-# Enhanced OS detection with more comprehensive icons
+# 🖥️ Enhanced OS Detection with Modern Icons
 powerline_os_icon() {
   case "$(uname)" in
-    "Darwin") echo "󰀵" ;;      # Apple logo - premium
+    "Darwin") 
+      # macOS version detection for refined icons
+      local macos_version=$(sw_vers -productVersion 2>/dev/null | cut -d'.' -f1)
+      if [[ "$macos_version" -ge 13 ]]; then
+        echo "󰀵"  # Modern macOS (Ventura+)
+      else
+        echo "󰀵"  # Classic macOS
+      fi
+      ;;
     "Linux") 
+      # Sophisticated Linux distribution detection
       if [[ -f /etc/arch-release ]]; then
         echo "󰣇"  # Arch Linux
-      elif [[ -f /etc/ubuntu-release ]] || grep -q "Ubuntu" /etc/os-release 2>/dev/null; then
-        echo "󰕈"  # Ubuntu
+      elif [[ -f /etc/debian_version ]]; then
+        if grep -q "Ubuntu" /etc/os-release 2>/dev/null; then
+          echo "󰕈"  # Ubuntu
+        else
+          echo "󰣚"  # Debian
+        fi
       elif [[ -f /etc/fedora-release ]]; then
         echo "󰣛"  # Fedora
+      elif [[ -f /etc/redhat-release ]]; then
+        echo "󱄛"  # Red Hat/CentOS
+      elif [[ -f /etc/SUSE-brand ]] || [[ -f /etc/SuSE-release ]]; then
+        echo "󰠳"  # SUSE
+      elif [[ -f /etc/gentoo-release ]]; then
+        echo "󰣨"  # Gentoo
       else
         echo "󰌽"  # Generic Linux
       fi
       ;;
-    "Windows"*|"CYGWIN"*|"MSYS"*|"MINGW"*) echo "󰍲" ;;    # Windows logo
-    "FreeBSD") echo "󰣚" ;;     # FreeBSD daemon
+    "Windows"*|"CYGWIN"*|"MSYS"*|"MINGW"*) echo "󰍲" ;;    # Windows
+    "FreeBSD") echo "󰣚" ;;     # FreeBSD
+    "OpenBSD") echo "󰈿" ;;     # OpenBSD  
+    "NetBSD") echo "󰈿" ;;      # NetBSD
     *) echo "󰟀" ;;             # Generic computer
   esac
 }
 
-# Premium user context with enhanced visual hierarchy
+# 🎭 Premium User Context - Modern status indication
 powerline_user_segment() {
-  local bg_color="${POWERLINE_COLORS[bg_dark]}"
-  local fg_color="${POWERLINE_COLORS[white]}"
+  local bg_color="${POWERLINE_COLORS[surface_raised]}"
+  local fg_color="${POWERLINE_COLORS[text_primary]}"
   local icon="$(powerline_os_icon)"
   local username="%n"
+  local status_indicator=""
   
-  # Enhanced context-aware styling
+  # 🔐 Enhanced Security Context Styling
   if [[ $EUID -eq 0 ]]; then
-    bg_color="${POWERLINE_COLORS[root_danger]}"
-    fg_color="${POWERLINE_COLORS[white]}"
-    icon="󰀇"  # Crown for root - danger indicator
+    bg_color="${POWERLINE_COLORS[danger_context]}"
+    fg_color="${POWERLINE_COLORS[text_primary]}"
+    icon="󰀇"  # Crown for root
     username="ROOT"
+    status_indicator="⚠"  # Warning indicator
   elif [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" ]]; then
-    bg_color="${POWERLINE_COLORS[ssh_warning]}"
-    fg_color="${POWERLINE_COLORS[bg_deepest]}"  # Dark text on bright background
+    bg_color="${POWERLINE_COLORS[warning_context]}"
+    fg_color="${POWERLINE_COLORS[text_inverse]}"  # Dark text on bright background
     icon="󰢹"  # SSH icon
+    status_indicator="🔗"  # Connection indicator
   elif [[ -n "$TMUX" ]]; then
-    bg_color="${POWERLINE_COLORS[info]}"
-    fg_color="${POWERLINE_COLORS[white]}"
-    icon="󰙀"  # TMUX multiplexer icon
+    bg_color="${POWERLINE_COLORS[primary_600]}"
+    fg_color="${POWERLINE_COLORS[text_primary]}"
+    icon="󰙀"  # TMUX icon
+    status_indicator="📺"  # Multiplexer indicator
+  elif [[ -n "$VSCODE_INJECTION" ]]; then
+    bg_color="${POWERLINE_COLORS[accent_purple]}"
+    fg_color="${POWERLINE_COLORS[text_primary]}"
+    icon="󰨞"  # VS Code icon
+    status_indicator="💻"  # Editor indicator
   fi
   
-  local segment="%K{$bg_color}%F{$fg_color} $icon $username %k%f"
-  segment="${segment}%K{${POWERLINE_COLORS[bg_medium]}}%F{$bg_color}${POWERLINE_LEFT_SEP}%k%f"
+  # 🎨 Beautiful segment composition with modern spacing
+  local segment="%K{$bg_color}%F{$fg_color} $icon $username"
+  [[ -n "$status_indicator" ]] && segment="$segment $status_indicator"
+  segment="$segment %k%f"
+  segment="${segment}%K{${POWERLINE_COLORS[surface_overlay]}}%F{$bg_color}${POWERLINE_LEFT_SEP}%k%f"
   
   echo "$segment"
 }
 
-# Intelligent directory display with enhanced project context
+# 📁 Intelligent Directory Display - Modern project awareness
 powerline_directory_segment() {
-  local bg_color="${POWERLINE_COLORS[bg_medium]}"
-  local fg_color="${POWERLINE_COLORS[white]}"
+  local bg_color="${POWERLINE_COLORS[surface_overlay]}"
+  local fg_color="${POWERLINE_COLORS[text_primary]}"
   local path="${PWD/#$HOME/~}"
   local icon=""
-  local project_indicator=""
+  local project_badge=""
+  local tech_indicator=""
   
-  # Enhanced smart icons with project type detection
+  # 🏠 Enhanced Context Detection with Modern Icons
   if [[ "$PWD" == "$HOME" ]]; then
     icon="󰋜"  # Home
-    project_indicator=""
+    bg_color="${POWERLINE_COLORS[primary_600]}"
   elif [[ -f "package.json" ]]; then
-    icon="󰜫"  # Node.js project
-    # Detect framework
-    if grep -q "next\|nuxt" package.json 2>/dev/null; then
-      project_indicator=" %F{${POWERLINE_COLORS[info_alt]}}▲%f"  # Next.js triangle
-    elif grep -q "react" package.json 2>/dev/null; then
-      project_indicator=" %F{${POWERLINE_COLORS[info]}}⚛%f"    # React atom
-    elif grep -q "vue" package.json 2>/dev/null; then
-      project_indicator=" %F{${POWERLINE_COLORS[success]}}﴾%f"  # Vue logo
-    elif grep -q "angular" package.json 2>/dev/null; then
-      project_indicator=" %F{${POWERLINE_COLORS[error]}}🅰%f"   # Angular A
+    icon="󰜫"  # Node.js
+    bg_color="${POWERLINE_COLORS[syntax_keyword]}"
+    
+    # 🚀 Modern Framework Detection with Refined Badges
+    if grep -q "\"next\":\|\"@next/\|\"next@\"" package.json 2>/dev/null; then
+      tech_indicator="%F{${POWERLINE_COLORS[text_primary]}}▲%f"  # Next.js
+    elif grep -q "\"react\":\|\"@types/react\"" package.json 2>/dev/null; then
+      tech_indicator="%F{${POWERLINE_COLORS[primary_100]}}⚛%f"  # React  
+    elif grep -q "\"vue\":\|\"@vue/\"" package.json 2>/dev/null; then
+      tech_indicator="%F{${POWERLINE_COLORS[success_400]}}﴾%f"  # Vue
+    elif grep -q "\"@angular/\"" package.json 2>/dev/null; then
+      tech_indicator="%F{${POWERLINE_COLORS[error_600]}}🅰%f"   # Angular
+    elif grep -q "\"svelte\":" package.json 2>/dev/null; then
+      tech_indicator="%F{${POWERLINE_COLORS[warning_600]}}🔥%f" # Svelte
+    elif grep -q "\"typescript\":" package.json 2>/dev/null; then
+      tech_indicator="%F{${POWERLINE_COLORS[primary_200]}}TS%f" # TypeScript
+    fi
+  elif [[ -f "requirements.txt" || -f "pyproject.toml" || -f "setup.py" ]]; then
+    icon=""  # Python
+    bg_color="${POWERLINE_COLORS[syntax_string]}"
+    
+    # 🐍 Python Framework Detection  
+    if [[ -f "manage.py" ]] || grep -q "django" requirements.txt pyproject.toml 2>/dev/null; then
+      tech_indicator="%F{${POWERLINE_COLORS[success_600]}}🎯%f"  # Django
+    elif grep -q "flask" requirements.txt pyproject.toml 2>/dev/null; then
+      tech_indicator="%F{${POWERLINE_COLORS[text_secondary]}}🌶%f"  # Flask
+    elif grep -q "fastapi" requirements.txt pyproject.toml 2>/dev/null; then
+      tech_indicator="%F{${POWERLINE_COLORS[success_400]}}⚡%f"   # FastAPI
+    elif grep -q "streamlit" requirements.txt pyproject.toml 2>/dev/null; then
+      tech_indicator="%F{${POWERLINE_COLORS[error_600]}}📊%f"    # Streamlit
+    else
+      tech_indicator="%F{${POWERLINE_COLORS[warning_600]}}🐍%f"  # Generic Python
     fi
   elif [[ -f "Cargo.toml" ]]; then
-    icon="󱘗"  # Rust project
-    project_indicator=" %F{${POWERLINE_COLORS[orange]}}🦀%f"
+    icon="󱘗"  # Rust
+    bg_color="${POWERLINE_COLORS[syntax_number]}"
+    tech_indicator="%F{${POWERLINE_COLORS[warning_700]}}🦀%f"
   elif [[ -f "go.mod" ]]; then
-    icon="󰟓"  # Go project
-    project_indicator=" %F{${POWERLINE_COLORS[info]}}🐹%f"
-  elif [[ -f "requirements.txt" || -f "pyproject.toml" || -f "setup.py" ]]; then
-    icon=""  # Python project - FIXED: was missing
-    # Detect Python framework
-    if [[ -f "manage.py" ]] || grep -q "django" requirements.txt pyproject.toml 2>/dev/null; then
-      project_indicator=" %F{${POWERLINE_COLORS[success]}}🎯%f"  # Django
-    elif grep -q "flask" requirements.txt pyproject.toml 2>/dev/null; then
-      project_indicator=" %F{${POWERLINE_COLORS[muted]}}🌶%f"   # Flask
-    elif grep -q "fastapi" requirements.txt pyproject.toml 2>/dev/null; then
-      project_indicator=" %F{${POWERLINE_COLORS[success]}}⚡%f"  # FastAPI
-    else
-      project_indicator=" %F{${POWERLINE_COLORS[lime]}}🐍%f"    # Generic Python
-    fi
+    icon="󰟓"  # Go
+    bg_color="${POWERLINE_COLORS[primary_200]}"
+    tech_indicator="%F{${POWERLINE_COLORS[primary_700]}}🐹%f"
   elif [[ -f "Package.swift" ]]; then
-    icon="󰛥"  # Swift project
-    project_indicator=" %F{${POWERLINE_COLORS[orange]}}🦉%f"
+    icon="󰛥"  # Swift
+    bg_color="${POWERLINE_COLORS[warning_600]}"
+    tech_indicator="%F{${POWERLINE_COLORS[text_primary]}}🦉%f"
   elif [[ -f "pubspec.yaml" ]]; then
-    icon="󰜘"  # Flutter project
-    project_indicator=" %F{${POWERLINE_COLORS[info]}}🦋%f"
+    icon="󰜘"  # Flutter
+    bg_color="${POWERLINE_COLORS[primary_400]}"
+    tech_indicator="%F{${POWERLINE_COLORS[text_primary]}}🦋%f"
   elif [[ -f "Dockerfile" ]]; then
-    icon="󰡨"  # Docker project
-    project_indicator=" %F{${POWERLINE_COLORS[info]}}🐳%f"
+    icon="󰡨"  # Docker
+    bg_color="${POWERLINE_COLORS[primary_600]}"
+    tech_indicator="%F{${POWERLINE_COLORS[text_primary]}}🐳%f"
   elif [[ -f "docker-compose.yml" || -f "docker-compose.yaml" ]]; then
-    icon="󰡨"  # Docker compose
-    project_indicator=" %F{${POWERLINE_COLORS[purple]}}🐙%f"
+    icon="󰡨"  # Docker Compose
+    bg_color="${POWERLINE_COLORS[accent_purple]}"
+    tech_indicator="%F{${POWERLINE_COLORS[text_primary]}}🐙%f"
   elif git rev-parse --git-dir &> /dev/null; then
     icon=""  # Git repository
-    project_indicator=" %F{${POWERLINE_COLORS[muted]}}📂%f"
+    bg_color="${POWERLINE_COLORS[surface_overlay]}"
+    tech_indicator="%F{${POWERLINE_COLORS[text_tertiary]}}📂%f"
   else
     icon=""  # Regular folder
+    bg_color="${POWERLINE_COLORS[text_disabled]}"
   fi
   
-  # Enhanced smart path truncation with visual hierarchy
+  # 🎨 Sophisticated Path Truncation with Visual Hierarchy
   local display_path="$path"
-  if [[ ${#path} -gt 35 ]]; then
-    # Show first and last parts with beautiful ellipsis
+  if [[ ${#path} -gt 40 ]]; then
     local parts=(${(s:/:)path})
     if [[ ${#parts[@]} -gt 3 ]]; then
-      display_path="${parts[1]}/%F{${POWERLINE_COLORS[muted]}}⋯%f%F{$fg_color}/${parts[-2]}/${parts[-1]}"
+      # Modern ellipsis with subtle color differentiation
+      display_path="${parts[1]}/%F{${POWERLINE_COLORS[text_tertiary]}}⋯%f%F{$fg_color}/${parts[-2]}/${parts[-1]}"
     fi
   fi
   
-  local segment="%K{$bg_color}%F{$fg_color} $icon $display_path$project_indicator %k%f"
-  segment="${segment}%K{${POWERLINE_COLORS[accent]}}%F{$bg_color}${POWERLINE_LEFT_SEP}%k%f"
+  # 🏗️ Modern segment composition
+  local segment="%K{$bg_color}%F{$fg_color} $icon $display_path"
+  [[ -n "$tech_indicator" ]] && segment="$segment $tech_indicator"
+  segment="$segment %k%f"
+  segment="${segment}%K{${POWERLINE_COLORS[primary_600]}}%F{$bg_color}${POWERLINE_LEFT_SEP}%k%f"
   
   echo "$segment"
 }
 
-# Beautiful git status with comprehensive information and enhanced visuals
+# 🌿 Beautiful Git Status - Modern version control visualization
 powerline_git_segment() {
   if ! git rev-parse --git-dir &> /dev/null 2>&1; then
     return 0
   fi
   
-  local bg_color="${POWERLINE_COLORS[accent]}"
-  local fg_color="${POWERLINE_COLORS[white]}"
+  local bg_color="${POWERLINE_COLORS[primary_600]}"
+  local fg_color="${POWERLINE_COLORS[text_primary]}"
   local branch=$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)
   
-  # Enhanced git status with beautiful icons and colors
+  # 📊 Comprehensive Git Status Analysis
   local staged=$(git diff --cached --numstat 2>/dev/null | wc -l | tr -d ' ')
   local modified=$(git diff --numstat 2>/dev/null | wc -l | tr -d ' ')
   local untracked=$(git ls-files --others --exclude-standard 2>/dev/null | wc -l | tr -d ' ')
   local ahead=$(git rev-list --count @{upstream}..HEAD 2>/dev/null || echo "0")
   local behind=$(git rev-list --count HEAD..@{upstream} 2>/dev/null || echo "0")
   local stashed=$(git stash list 2>/dev/null | wc -l | tr -d ' ')
+  local conflicts=$(git diff --name-only --diff-filter=U 2>/dev/null | wc -l | tr -d ' ')
   
-  # Enhanced status indicators with premium colors and icons
+  # 🎨 Modern Branch Status with Semantic Colors
+  local branch_icon="󰊢"
+  local status_color="${POWERLINE_COLORS[success_600]}"  # Clean state
+  
+  if [[ "$conflicts" -gt 0 ]]; then
+    branch_icon="󰋪"  # Merge conflict
+    bg_color="${POWERLINE_COLORS[error_600]}"
+    status_color="${POWERLINE_COLORS[text_primary]}"
+  elif [[ "$staged" -gt 0 ]]; then
+    branch_icon="󰐗"  # Staged changes
+    bg_color="${POWERLINE_COLORS[success_600]}"
+    status_color="${POWERLINE_COLORS[text_primary]}"
+  elif [[ "$modified" -gt 0 ]]; then
+    branch_icon="󰄬"  # Modified files
+    bg_color="${POWERLINE_COLORS[warning_600]}"
+    status_color="${POWERLINE_COLORS[text_inverse]}"
+  elif [[ "$untracked" -gt 0 ]]; then
+    branch_icon="󰐕"  # Untracked files
+    bg_color="${POWERLINE_COLORS[error_400]}"
+    status_color="${POWERLINE_COLORS[text_primary]}"
+  fi
+  
+  # 🏷️ Enhanced Status Indicators with Modern Icons
   local status_parts=()
-  [[ "$staged" -gt 0 ]] && status_parts+=("%F{${POWERLINE_COLORS[success]}}●$staged%f")     # Bright green staged
-  [[ "$modified" -gt 0 ]] && status_parts+=("%F{${POWERLINE_COLORS[warning]}}◆$modified%f") # Golden modified
-  [[ "$untracked" -gt 0 ]] && status_parts+=("%F{${POWERLINE_COLORS[error]}}◇$untracked%f") # Red untracked
-  [[ "$stashed" -gt 0 ]] && status_parts+=("%F{${POWERLINE_COLORS[purple]}}⚑$stashed%f")    # Purple stashed
   
-  # Enhanced remote sync status with beautiful arrows
+  # 🟢 Staged changes with checkmark
+  [[ "$staged" -gt 0 ]] && status_parts+=("%F{${POWERLINE_COLORS[success_600]}}✓$staged%f")
+  
+  # 🟡 Modified files with diamond
+  [[ "$modified" -gt 0 ]] && status_parts+=("%F{${POWERLINE_COLORS[warning_600]}}◆$modified%f")
+  
+  # 🔴 Untracked files with plus
+  [[ "$untracked" -gt 0 ]] && status_parts+=("%F{${POWERLINE_COLORS[error_600]}}+$untracked%f")
+  
+  # 💜 Stashed changes with bookmark
+  [[ "$stashed" -gt 0 ]] && status_parts+=("%F{${POWERLINE_COLORS[accent_purple]}}📑$stashed%f")
+  
+  # ⚠️ Merge conflicts with warning
+  [[ "$conflicts" -gt 0 ]] && status_parts+=("%F{${POWERLINE_COLORS[error_700]}}⚠$conflicts%f")
+  
+  # 🔄 Enhanced Remote Sync Status with Modern Arrows
   local sync_status=""
-  if [[ "$ahead" -gt 0 || "$behind" -gt 0 ]]; then
-    local sync_color="${POWERLINE_COLORS[orange]}"
-    [[ "$ahead" -gt 0 ]] && sync_status="↗$ahead"
-    [[ "$behind" -gt 0 ]] && sync_status="${sync_status}↙$behind"
-    sync_status=" %F{$sync_color}$sync_status%f"
+  if [[ "$ahead" -gt 0 && "$behind" -gt 0 ]]; then
+    # Diverged state
+    sync_status=" %F{${POWERLINE_COLORS[warning_700]}}⇅$ahead/$behind%f"
+  elif [[ "$ahead" -gt 0 ]]; then
+    # Ahead of remote
+    sync_status=" %F{${POWERLINE_COLORS[primary_200]}}↗$ahead%f"
+  elif [[ "$behind" -gt 0 ]]; then
+    # Behind remote  
+    sync_status=" %F{${POWERLINE_COLORS[error_400]}}↙$behind%f"
+  elif git rev-parse --verify @{upstream} &>/dev/null; then
+    # Up to date with remote
+    sync_status=" %F{${POWERLINE_COLORS[success_400]}}✓%f"
   fi
   
-  # Branch status with enhanced styling
-  local branch_icon=""
-  if git status --porcelain 2>/dev/null | grep -q .; then
-    branch_icon="󰊢"  # Dirty branch
-    bg_color="${POWERLINE_COLORS[warning_alt]}"  # Orange background for dirty
-  else
-    branch_icon="󰊢"  # Clean branch
-  fi
-  
+  # 🏗️ Beautiful Git Segment Composition
   local git_info=" $branch_icon $branch"
-  [[ ${#status_parts[@]} -gt 0 ]] && git_info="$git_info ${(j: :)status_parts}"
+  
+  # Add status indicators with spacing
+  if [[ ${#status_parts[@]} -gt 0 ]]; then
+    git_info="$git_info %F{${POWERLINE_COLORS[text_tertiary]}}[%f${(j: :)status_parts}%F{${POWERLINE_COLORS[text_tertiary]}}]%f"
+  fi
+  
+  # Add sync status
   git_info="$git_info$sync_status"
   
+  # 🎨 Final segment with next transition
   local segment="%K{$bg_color}%F{$fg_color}$git_info %k%f"
-  segment="${segment}%K{${POWERLINE_COLORS[purple]}}%F{$bg_color}${POWERLINE_LEFT_SEP}%k%f"
+  segment="${segment}%K{${POWERLINE_COLORS[accent_purple]}}%F{$bg_color}${POWERLINE_LEFT_SEP}%k%f"
   
   echo "$segment"
 }
@@ -300,7 +442,7 @@ powerline_language_segment() {
       framework_info="%F{${POWERLINE_COLORS[muted]}}🐍%f"
     fi
     
-    languages+=("�� $version$framework_info")
+    languages+=("$version$framework_info")
   fi
   
   # Rust with enhanced crate detection
@@ -315,7 +457,7 @@ powerline_language_segment() {
       framework_info="%F{${POWERLINE_COLORS[info]}}⚡%f"
     fi
     
-    languages+=("󱘗 $version$framework_info")
+    languages+=("$version$framework_info")
   fi
   
   if [[ ${#languages[@]} -gt 0 ]]; then

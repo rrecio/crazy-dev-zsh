@@ -76,7 +76,7 @@ alias gstl='git stash list'
 
 # Smart git aliases that adapt to context
 alias gpr='git pull --rebase'
-alias gsync='git fetch origin && git rebase origin/main'
+# Removed gsync alias - replaced by enhanced gsync function in git.zsh
 alias gclean='git branch --merged | grep -v "\*\|main\|master\|develop" | xargs -n 1 git branch -d'
 alias gwip='git add -A && git commit -m "WIP: work in progress"'
 alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
@@ -218,13 +218,10 @@ alias spmupdate='swift package update'
 alias spmresolve='swift package resolve'
 
 # Swift
-alias swift='swift'
-alias swiftc='swiftc'
-alias swiftformat='swiftformat'
-alias swiftlint='swiftlint'
+# Removed self-referential aliases: swift, swiftc, swiftformat, swiftlint work directly
 
 # Flutter Development
-alias flutter='flutter'
+# Removed self-referential alias: flutter works directly
 alias fl='flutter'
 alias fldoctor='flutter doctor'
 alias flcreate='flutter create'
@@ -239,7 +236,7 @@ alias flupgrade='flutter upgrade'
 alias flanalyze='flutter analyze'
 
 # Dart
-alias dart='dart'
+# Removed self-referential alias: dart works directly
 alias dartfmt='dart format'
 alias dartanalyze='dart analyze'
 alias dartrun='dart run'
@@ -247,13 +244,10 @@ alias darttest='dart test'
 alias dartpub='dart pub'
 
 # Android Development
-alias adb='adb'
-alias emulator='emulator'
-alias avdmanager='avdmanager'
-alias sdkmanager='sdkmanager'
+# Removed self-referential aliases: adb, emulator, avdmanager, sdkmanager work directly
 
 # Go Development
-alias go='go'
+# Removed self-referential alias: go works directly
 alias gob='go build'
 alias gor='go run'
 alias got='go test'
@@ -313,7 +307,7 @@ alias kctx='kubectx'
 alias kns='kubens'
 
 # AWS CLI
-alias aws='aws'
+# Removed self-referential alias: aws works directly
 alias awsls='aws s3 ls'
 alias awscp='aws s3 cp'
 alias awssync='aws s3 sync'
@@ -332,14 +326,9 @@ alias hdeploy='git push heroku main'
 
 # Node.js & JavaScript Development
 alias n='node'
-alias node='node'
-alias npm='npm'
-alias npx='npx'
-alias yarn='yarn'
-alias pnpm='pnpm'
+# Removed self-referential aliases to prevent parse conflicts
+# Commands: node, npm, yarn, pnpm, bun, deno work directly
 alias pn='pnpm'
-alias bun='bun'
-alias deno='deno'
 
 # NPM shortcuts
 alias ni='npm install'
@@ -395,9 +384,8 @@ alias pout='pnpm outdated'
 
 # TypeScript
 alias ts='typescript'
-alias tsc='tsc'
+# Removed self-referential aliases: tsc, tsx work directly
 alias tsnode='ts-node'
-alias tsx='tsx'
 
 # Common JavaScript frameworks and tools
 alias react='npx create-react-app'
@@ -438,17 +426,14 @@ alias tslint='npx tslint'
 alias py='python3'
 alias pip='pip3'
 alias jupyter='jupyter lab'
-alias ipython='ipython'
-alias conda='conda'
-alias mamba='mamba'
+# Removed self-referential aliases: ipython, conda, mamba work directly
 
 # AI Model Management
 alias hflogin='huggingface-hub login'
 alias hfdownload='huggingface-hub download'
-alias ollama='ollama'
+# Removed self-referential aliases: ollama, cursor work directly
 
 # Cursor IDE
-alias cursor='cursor'
 alias cudit='cursor'
 
 # Quick development shortcuts

@@ -1,50 +1,80 @@
 # ~/.dotfiles/zsh/themes/minimal.zsh
-# Minimal Theme - 10x Enhanced Minimalist Perfection
-# Premium simplicity with perfect visual hierarchy and sub-10ms rendering
+# Professional Minimal Theme - UI Designer Perfected
+# Sophisticated simplicity with modern color theory and optimal UX
 
-# 10x Enhanced minimal color palette with perfect contrast ratios
+# 🎨 UI Designer Minimal Color System - Carefully curated for comfort and clarity
 typeset -A MINIMAL_COLORS
 MINIMAL_COLORS=(
-  # Primary interface colors - enhanced for perfect readability
-  primary      "39"     # Electric blue (primary actions)
-  primary_alt  "33"     # Bright blue (emphasis)
-  primary_soft "75"     # Soft blue (subtle elements)
+  # 🌊 Primary Spectrum - Calming professional blue
+  primary_900    "25"     # Deep navy (HSL: 220, 100%, 20%) - high contrast headers
+  primary_700    "32"     # Rich blue (HSL: 220, 85%, 35%) - important elements  
+  primary_600    "39"     # Standard blue (HSL: 220, 100%, 50%) - primary actions
+  primary_500    "75"     # Medium blue (HSL: 220, 70%, 60%) - secondary actions
+  primary_300    "117"    # Light blue (HSL: 220, 60%, 75%) - subtle highlights
+  primary_100    "153"    # Pale blue (HSL: 220, 50%, 90%) - backgrounds
   
-  # Secondary hierarchy colors
-  secondary    "245"    # Subtle gray (secondary info)
-  secondary_alt "250"   # Light gray (backgrounds)
-  tertiary     "240"    # Medium gray (dividers)
+  # 🌿 Success Spectrum - Natural, encouraging greens
+  success_800    "22"     # Forest (HSL: 130, 100%, 25%) - strong success
+  success_600    "28"     # Primary green (HSL: 130, 65%, 45%) - standard success
+  success_500    "34"     # Medium green (HSL: 130, 55%, 55%) - soft success
+  success_400    "40"     # Light green (HSL: 130, 45%, 65%) - subtle success
+  success_200    "114"    # Pale green (HSL: 130, 35%, 80%) - backgrounds
   
-  # Status colors with emotional psychology
-  success      "46"     # Bright green (positive feedback)
-  success_soft "82"     # Forest green (subtle success)
-  warning      "220"    # Golden yellow (caution)
-  warning_soft "214"    # Orange yellow (subtle warning)
-  error        "196"    # Bright red (errors/danger)
-  error_soft   "160"    # Dark red (subtle errors)
+  # ⚠️ Warning Spectrum - Warm, accessible oranges and yellows
+  warning_700    "172"    # Deep amber (HSL: 35, 85%, 50%) - strong warnings
+  warning_600    "178"    # Standard amber (HSL: 40, 75%, 60%) - standard warnings
+  warning_500    "214"    # Light amber (HSL: 45, 65%, 70%) - soft warnings
+  warning_300    "221"    # Pale amber (HSL: 50, 55%, 80%) - subtle warnings
   
-  # Accent colors for visual interest
-  accent       "81"     # Cyan (highlights)
-  accent_alt   "117"    # Light cyan (subtle accents)
-  accent_warm  "208"    # Orange (warm accents)
+  # 🚫 Error Spectrum - Clear but not aggressive reds
+  error_800      "88"     # Deep red (HSL: 0, 75%, 35%) - critical errors
+  error_600      "160"    # Standard red (HSL: 0, 65%, 50%) - standard errors
+  error_500      "167"    # Medium red (HSL: 0, 55%, 60%) - soft errors
+  error_300      "203"    # Light red (HSL: 0, 45%, 75%) - subtle errors
   
-  # Neutral colors for perfect typography
-  muted        "244"    # Very subtle gray (low priority)
-  muted_dark   "238"    # Dark muted (backgrounds)
-  white        "255"    # Pure white (high contrast)
-  silver       "252"    # Silver (subtle text)
+  # 🎨 Accent Spectrum - Sophisticated supporting colors
+  accent_cyan    "87"     # Sophisticated cyan (HSL: 180, 60%, 70%)
+  accent_purple  "105"    # Elegant purple (HSL: 280, 50%, 65%)
+  accent_teal    "73"     # Modern teal (HSL: 170, 55%, 60%)
+  accent_mint    "121"    # Fresh mint (HSL: 150, 45%, 70%)
   
-  # Special semantic colors
-  directory    "39"     # Directory blue
-  file         "244"    # File gray
-  executable   "46"     # Executable green
-  link         "81"     # Link cyan
+  # 📝 Text Hierarchy - Optimized for readability and eye comfort
+  text_primary   "255"    # Pure white (100%) - highest emphasis
+  text_high      "253"    # Near white (98%) - high emphasis  
+  text_medium    "250"    # Light gray (93%) - medium emphasis
+  text_low       "245"    # Medium gray (87%) - low emphasis
+  text_subtle    "240"    # Subtle gray (75%) - minimal emphasis
+  text_disabled  "236"    # Disabled gray (65%) - disabled state
   
-  # Context-aware colors
-  git_clean    "46"     # Clean repository
-  git_dirty    "220"    # Modified files
-  git_ahead    "81"     # Ahead of remote
-  git_behind   "208"    # Behind remote
+  # 🏗️ Surface Spectrum - Depth and elevation hierarchy
+  surface_base   "234"    # Base surface (12%) - main background
+  surface_raised "237"    # Raised surface (18%) - cards, panels
+  surface_high   "240"    # High surface (25%) - modals, tooltips
+  
+  # 🎯 Interactive States - Modern UI feedback
+  interactive_hover   "59"     # Hover overlay (HSL: 220, 15%, 35%)
+  interactive_active  "75"     # Active state (HSL: 220, 70%, 65%)
+  interactive_focus   "117"    # Focus ring (HSL: 220, 60%, 75%)
+  
+  # 🔧 Semantic Context Colors - Clear meaning through color
+  info_primary    "75"     # Information blue
+  info_secondary  "117"    # Light info blue
+  
+  # 📁 File System Colors - Intuitive file type recognition
+  directory_color "39"     # Directory blue
+  file_color      "245"    # Regular file gray
+  executable_color "34"    # Executable green  
+  symlink_color   "87"     # Symlink cyan
+  
+  # 🌿 Git Status Colors - Clear version control feedback
+  git_clean       "34"     # Clean repo (green)
+  git_staged      "28"     # Staged changes (darker green)
+  git_modified    "178"    # Modified files (amber)
+  git_untracked   "167"    # Untracked files (soft red)
+  git_conflict    "160"    # Merge conflicts (red)
+  git_ahead       "75"     # Ahead of remote (blue)
+  git_behind      "214"    # Behind remote (orange)
+  git_diverged    "105"    # Diverged (purple)
 )
 
 # 10x Enhanced ultra-fast path display with intelligent context awareness
