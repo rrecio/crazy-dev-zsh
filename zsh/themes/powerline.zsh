@@ -168,7 +168,7 @@ git_segment() {
   fi
   
   local branch=""
-  local status=""
+  local git_status=""
   local bg_color=""
   local git_icon=""
   
@@ -192,7 +192,7 @@ git_segment() {
   
   # Join status parts
   if [[ ${#status_parts[@]} -gt 0 ]]; then
-    status=" ${(j: :)status_parts}"
+    git_status=" ${(j: :)status_parts}"
   fi
   
   # Determine segment color and icon
@@ -207,7 +207,7 @@ git_segment() {
     git_icon=""
   fi
   
-  echo "$bg_color|${PROMPT_COLORS[secondary_fg]}|$git_icon $branch$status"
+  echo "$bg_color|${PROMPT_COLORS[secondary_fg]}|$git_icon $branch$git_status"
 }
 
 # Language version segments
@@ -257,7 +257,7 @@ go_segment() {
 }
 
 swift_segment() {
-  if [[ -f "Package.swift" ]] || ls *.xcodeproj &>/dev/null || ls *.xcworkspace &>/dev/null; then
+  if [[ -f "Package.swift" ]] || [[ -n "$(find . -maxdepth 1 -name "*.xcodeproj" -o -name "*.xcworkspace" 2>/dev/null)" ]]; then
     if command -v swift &> /dev/null; then
       local version=$(swift --version 2>/dev/null | head -1 | grep -o '[0-9]\+\.[0-9]\+' | head -1)
       local bg_color="${PROMPT_COLORS[lang_bg]}"

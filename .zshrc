@@ -3,7 +3,9 @@
 # Optimized for macOS development
 
 # Performance monitoring - start timer
-DOTFILES_START_TIME=$(($(date +%s%3N)))
+if command -v date &> /dev/null; then
+  DOTFILES_START_TIME=$(date +%s 2>/dev/null || echo 0)
+fi
 
 # Define dotfiles directory
 export DOTFILES_DIR="${HOME}/.dotfiles"
@@ -65,11 +67,7 @@ elif [[ -f /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
   source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
-# Load custom prompt themes (replaces starship)
-source "${HOME}/.zsh/prompt.zsh"
-
-# Load plugins
-source "${HOME}/.zsh/plugins.zsh"
+# Note: Prompt is loaded via the module system in the config_files array above
 
 # Helpful dotfiles management aliases
 alias dotfiles='cd ~/.dotfiles'
@@ -77,8 +75,10 @@ alias dotfiles-update='cd ~/.dotfiles && git pull && source ~/.zshrc'
 alias dotfiles-edit='code ~/.dotfiles'
 
 # Calculate and display load time if verbose mode is enabled
-if [[ -n "$DOTFILES_VERBOSE" ]]; then
-  DOTFILES_END_TIME=$(($(date +%s%3N)))
-  DOTFILES_LOAD_TIME=$((DOTFILES_END_TIME - DOTFILES_START_TIME))
-  echo "Dotfiles loaded in ${DOTFILES_LOAD_TIME}ms"
+if [[ -n "$DOTFILES_VERBOSE" && -n "$DOTFILES_START_TIME" ]]; then
+  DOTFILES_END_TIME=$(date +%s 2>/dev/null || echo 0)
+  if [[ "$DOTFILES_END_TIME" -gt "$DOTFILES_START_TIME" ]]; then
+    DOTFILES_LOAD_TIME=$((DOTFILES_END_TIME - DOTFILES_START_TIME))
+    echo "Dotfiles loaded in ${DOTFILES_LOAD_TIME}s"
+  fi
 fi 

@@ -13,12 +13,12 @@ typeset -g DOTFILES_SLOW_COMMAND_THRESHOLD=${DOTFILES_SLOW_COMMAND_THRESHOLD:-50
 # Command timing
 if [[ "$DOTFILES_PERF_ENABLED" -eq 1 ]]; then
   preexec() {
-    DOTFILES_TIMER_START=$(date +%s%3N)
+    DOTFILES_TIMER_START=$(date +%s 2>/dev/null || echo 0)
   }
   
   precmd() {
     if [[ -n "$DOTFILES_TIMER_START" ]]; then
-      local timer_end=$(date +%s%3N)
+      local timer_end=$(date +%s 2>/dev/null || echo 0)
       local elapsed=$((timer_end - DOTFILES_TIMER_START))
       
       if [[ $elapsed -gt $DOTFILES_SLOW_COMMAND_THRESHOLD ]]; then
@@ -32,13 +32,13 @@ fi
 
 # Performance profiling functions
 profile_start() {
-  export DOTFILES_PROFILE_START=$(date +%s%3N)
+  export DOTFILES_PROFILE_START=$(date +%s 2>/dev/null || echo 0)
   echo "📊 Performance profiling started..."
 }
 
 profile_end() {
   if [[ -n "$DOTFILES_PROFILE_START" ]]; then
-    local end_time=$(date +%s%3N)
+    local end_time=$(date +%s 2>/dev/null || echo 0)
     local total_time=$((end_time - DOTFILES_PROFILE_START))
     echo "📊 Total time: ${total_time}ms"
     unset DOTFILES_PROFILE_START
@@ -55,9 +55,9 @@ benchmark_startup() {
   echo "🔄 Benchmarking shell startup ($iterations iterations)..."
   
   for i in {1..$iterations}; do
-    local start_time=$(date +%s%3N)
+    local start_time=$(date +%s 2>/dev/null || echo 0)
     zsh -i -c 'exit' 2>/dev/null
-    local end_time=$(date +%s%3N)
+    local end_time=$(date +%s 2>/dev/null || echo 0)
     local iteration_time=$((end_time - start_time))
     
     echo "Iteration $i: ${iteration_time}ms"
@@ -86,9 +86,9 @@ time_function() {
     return 1
   fi
   
-  local start_time=$(date +%s%3N)
+  local start_time=$(date +%s 2>/dev/null || echo 0)
   "$func_name" "$@"
-  local end_time=$(date +%s%3N)
+  local end_time=$(date +%s 2>/dev/null || echo 0)
   local elapsed=$((end_time - start_time))
   
   echo "⏱️  Function '$func_name' took ${elapsed}ms"

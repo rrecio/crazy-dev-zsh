@@ -1,0 +1,59 @@
+" ~/.vimrc - Basic Vim Configuration
+" Author: Rodrigo Recio
+" Simple, effective vim settings for developers
+
+" Basic Settings
+set number                  " Show line numbers
+set relativenumber         " Show relative line numbers
+set tabstop=4              " Tab width
+set shiftwidth=4           " Indent width
+set expandtab              " Use spaces instead of tabs
+set autoindent             " Auto-indent new lines
+set smartindent            " Smart indentation
+set hlsearch               " Highlight search results
+set incsearch              " Incremental search
+set ignorecase             " Case insensitive search
+set smartcase              " Case sensitive if uppercase present
+set wrap                   " Wrap long lines
+set linebreak              " Break lines at word boundaries
+set scrolloff=8            " Keep 8 lines visible above/below cursor
+set sidescrolloff=8        " Keep 8 columns visible left/right of cursor
+set mouse=a                " Enable mouse support
+set clipboard=unnamed      " Use system clipboard
+set backspace=indent,eol,start " Fix backspace behavior
+
+" Visual Settings
+syntax enable              " Enable syntax highlighting
+set background=dark        " Dark background
+set cursorline            " Highlight current line
+set showmatch             " Show matching brackets
+set wildmenu              " Enhanced command completion
+set laststatus=2          " Always show status line
+
+" Performance
+set lazyredraw            " Don't redraw during macros
+set updatetime=300        " Faster update time
+
+" Key Mappings
+nnoremap <C-h> <C-w>h     " Navigate windows with Ctrl+hjkl
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Clear search highlighting with Escape
+nnoremap <Esc> :noh<CR>
+
+" Save with Ctrl+S
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <Esc>:w<CR>a
+
+" Modern vim features (if available)
+if has('persistent_undo')
+    set undodir=~/.vim/undo
+    set undofile
+endif
+
+" Auto-create directories
+if !isdirectory($HOME.'/.vim/undo')
+    call mkdir($HOME.'/.vim/undo', 'p')
+endif 

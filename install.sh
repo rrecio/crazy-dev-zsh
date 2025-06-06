@@ -66,6 +66,28 @@ backup_file() {
     fi
 }
 
+# Create symlink with backup
+link_file() {
+    local source="$1"
+    local target="$2"
+    
+    # Check if source file exists
+    if [[ ! -f "$source" ]]; then
+        log_warning "Source file does not exist: $source"
+        return 1
+    fi
+    
+    # Backup existing target if it exists
+    backup_file "$target"
+    
+    # Create directory if it doesn't exist
+    mkdir -p "$(dirname "$target")"
+    
+    # Create symlink
+    ln -sf "$source" "$target"
+    log_info "Linked $source to $target"
+}
+
 # Install Homebrew
 install_homebrew() {
     if command_exists brew; then
@@ -575,7 +597,7 @@ create_symlinks() {
     log_info "Linking configuration files..."
 
     # Link gitconfig
-    link_file "${DOTFILES_DIR}/config/gitconfig" "${HOME}/.gitconfig"
+    link_file "${DOTFILES_DIR}/config/.gitconfig" "${HOME}/.gitconfig"
 
     # Link vimrc
     link_file "${DOTFILES_DIR}/config/vimrc" "${HOME}/.vimrc"
