@@ -240,7 +240,7 @@ install_homebrew_packages() {
         return 0
     fi
     
-    log_step "Installing selected packages via Homebrew"
+    log_step "Installing Development Tools via Homebrew"
     
     local packages=()
     
@@ -392,7 +392,7 @@ install_homebrew_packages() {
 
 # Install additional tools
 install_additional_tools() {
-    log_step "Installing additional tools"
+    log_step "Installing Additional Development Tools & SDKs"
     
     # Install Oh My Zsh (optional, for users who want it)
     if [[ ! -d "${HOME}/.oh-my-zsh" ]]; then
@@ -538,7 +538,7 @@ setup_dotfiles() {
 
 # Create symlinks
 create_symlinks() {
-    log_step "Creating symlinks"
+    log_step "Creating Configuration Symlinks"
     
     # Backup and link .zshrc
     backup_file "${HOME}/.zshrc"
@@ -572,7 +572,7 @@ create_symlinks() {
 
 # Setup ZSH as default shell
 setup_zsh() {
-    log_step "Setting up ZSH as default shell"
+    log_step "Configuring ZSH as Default Shell"
     
     local zsh_path
     if command_exists brew && brew list zsh &>/dev/null; then
@@ -599,7 +599,7 @@ setup_zsh() {
 
 # Create necessary directories
 create_directories() {
-    log_step "Creating necessary directories"
+    log_step "Creating Development Workspace Directories"
     
     local directories=(
         "${HOME}/.zsh/cache"
@@ -673,40 +673,57 @@ setup_ssh() {
     fi
 }
 
-# Optimize macOS settings
+# Optimize macOS settings for better developer experience
 optimize_macos() {
     if ! is_macos; then
         return 0
     fi
     
-    log_step "Optimizing macOS settings"
+    log_step "Optimizing macOS Developer Settings"
     
-    read -p "Apply macOS optimizations? (y/N): " -n 1 -r
+    echo "The following macOS optimizations will be applied:"
+    echo "  • Show hidden files in Finder (see .dotfiles, .git, etc.)"
+    echo "  • Enable tap to click on trackpad"
+    echo "  • Disable slow dock animations"
+    echo "  • Speed up Mission Control animations"
+    echo ""
+    
+    read -p "Apply these macOS developer optimizations? [y/N]: " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
+        log_info "Applying macOS developer optimizations..."
+        
         # Show hidden files in Finder
+        log_info "• Enabling hidden files in Finder..."
         defaults write com.apple.finder AppleShowAllFiles -bool true
         
         # Enable tap to click
+        log_info "• Enabling tap to click on trackpad..."
         defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
         
         # Disable dock animation
+        log_info "• Disabling slow dock animations..."
         defaults write com.apple.dock launchanim -bool false
         
         # Speed up mission control
+        log_info "• Speeding up Mission Control animations..."
         defaults write com.apple.dock expose-animation-duration -float 0.1
         
         # Restart affected applications
+        log_info "• Restarting Dock and Finder to apply changes..."
         killall Dock 2>/dev/null || true
         killall Finder 2>/dev/null || true
         
-        log_success "macOS optimizations applied"
+        log_success "macOS developer optimizations applied successfully!"
+        log_info "You should now see hidden files in Finder and faster animations"
+    else
+        log_info "Skipped macOS optimizations - you can apply them later if needed"
     fi
 }
 
 # Final setup steps
 final_setup() {
-    log_step "Final setup steps"
+    log_step "Finalizing Installation & Testing Configuration"
     
     # Create a test file to verify everything works
     echo "# Dotfiles installation test" > "${HOME}/.dotfiles_test"
