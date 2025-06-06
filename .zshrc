@@ -65,10 +65,11 @@ elif [[ -f /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
   source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
-# Initialize starship prompt if available
-if command -v starship &> /dev/null; then
-  eval "$(starship init zsh)"
-fi
+# Load custom prompt themes (replaces starship)
+source "${HOME}/.zsh/prompt.zsh"
+
+# Load plugins
+source "${HOME}/.zsh/plugins.zsh"
 
 # Helpful dotfiles management aliases
 alias dotfiles='cd ~/.dotfiles'

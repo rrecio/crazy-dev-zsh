@@ -79,7 +79,7 @@ curl -fsSL https://raw.githubusercontent.com/rrecio/crazy-dev-zsh/main/install.s
 <td width="50%">
 
 ### 🎨 **Beautiful & Fast**
-- **Powerlevel10k-style prompt** with segments
+- **Multi-theme prompt system** with six customizable themes
 - **Nerd Font icons** everywhere
 - **Smart caching** for lightning performance
 - **Context-aware** display
@@ -454,7 +454,7 @@ crazy-dev-zsh/
 ├── 🎯 install.sh              # Smart installer with uninstall
 ├── 📝 .zshrc                  # Main configuration
 ├── zsh/
-│   ├── 🎨 prompt.zsh          # Powerlevel10k-style prompt
+│   ├── 🎨 prompt.zsh          # Custom multi-theme prompt
 │   ├── ⚡ aliases.zsh         # Smart aliases (645 lines!)
 │   ├── 🛠️ functions.zsh       # Utility functions (3327 lines!)
 │   ├── 📦 exports.zsh         # Environment setup
@@ -464,9 +464,9 @@ crazy-dev-zsh/
 │   ├── 📊 performance.zsh     # Performance monitoring
 │   └── 🎛️ custom.zsh         # Your customizations
 └── config/
-    ├── ⚙️ starship.toml       # Starship config (alternative)
-    ├── 🌿 .gitconfig          # Git configuration
-    └── 🚫 .gitignore_global   # Global ignores
+    ├── 📊 .gitignore_global   # Global git ignores
+    ├── 🔧 .tmux.conf          # Terminal multiplexer
+    └── 💻 .vimrc              # Vim configuration
 ```
 
 ---
@@ -690,9 +690,9 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ## 🙏 **Acknowledgments**
 
-- 🌟 **Powerlevel10k** - Inspiration for the prompt design
+- 🎨 **Custom Theme System** - Six unique prompt themes with performance optimization
 - 🦙 **Ollama** - Local LLM integration
-- ⭐ **Starship** - Alternative prompt option
+- 🎨 **Custom Prompt Themes** - Six beautiful themes with AI integration
 - 🍺 **Homebrew** - Package management
 - 🔍 **fzf** - Fuzzy finding magic
 

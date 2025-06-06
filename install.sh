@@ -254,16 +254,17 @@ install_homebrew_packages() {
             "zsh"
             
             # Better alternatives
-            "bat"          # Better cat
-            "eza"          # Better ls
-            "fd"           # Better find
+            "exa"          # Better ls
+            "fd"           # Better find command
             "ripgrep"      # Better grep
             "fzf"          # Fuzzy finder
             "jq"           # JSON processor
             "htop"         # Better top
             "tree"         # Directory tree
-            "dust"         # Better du
-            "procs"        # Better ps
+            "ncdu"         # Disk usage analyzer
+            "tldr"         # Better man pages
+            "httpie"       # HTTP client
+            "lazygit"      # Git TUI
             
             # Essential development tools
             "git-delta"    # Better git diff
@@ -272,7 +273,6 @@ install_homebrew_packages() {
             # ZSH enhancements
             "zsh-autosuggestions"
             "zsh-syntax-highlighting"
-            "starship"     # Modern prompt
             
             # Cursor IDE
             "--cask cursor" # Cursor IDE
@@ -354,7 +354,20 @@ install_homebrew_packages() {
         if [[ "$package" == "--cask"* ]]; then
             # Handle cask packages
             local cask_name="${package#--cask }"
-            if brew list --cask "$cask_name" &>/dev/null; then
+            local app_path=""
+            
+            # Map cask names to their application paths
+            case "$cask_name" in
+                "cursor") app_path="/Applications/Cursor.app" ;;
+                "docker") app_path="/Applications/Docker.app" ;;
+                "android-studio") app_path="/Applications/Android Studio.app" ;;
+                *) app_path="" ;;
+            esac
+            
+            # Check if app already exists in Applications folder
+            if [[ -n "$app_path" && -d "$app_path" ]]; then
+                log_info "$cask_name already installed in Applications folder"
+            elif brew list --cask "$cask_name" &>/dev/null; then
                 log_info "$cask_name already installed via Homebrew"
             else
                 log_info "Installing cask $cask_name..."
@@ -370,8 +383,10 @@ install_homebrew_packages() {
                 "git-delta") cmd_name="delta" ;;
                 "kubernetes-cli") cmd_name="kubectl" ;;
                 "fd") cmd_name="fd" ;;
-                "dust") cmd_name="dust" ;;
-                "procs") cmd_name="procs" ;;
+                "ncdu") cmd_name="ncdu" ;;
+                "tldr") cmd_name="tldr" ;;
+                "httpie") cmd_name="httpie" ;;
+                "lazygit") cmd_name="lazygit" ;;
                 "zsh-autosuggestions"|"zsh-syntax-highlighting") cmd_name="" ;; # These don't have commands
             esac
             
@@ -540,12 +555,7 @@ create_symlinks() {
     # Create config directory if it doesn't exist
     mkdir -p "${HOME}/.config"
     
-    # Link starship config if it exists
-    if [[ -f "${DOTFILES_DIR}/config/starship.toml" ]]; then
-        backup_file "${HOME}/.config/starship.toml"
-        ln -sf "${DOTFILES_DIR}/config/starship.toml" "${HOME}/.config/starship.toml"
-        log_success "Linked starship config"
-    fi
+    # Note: Starship config removed - using custom prompt themes
     
     # Link git config if it exists
     if [[ -f "${DOTFILES_DIR}/config/.gitconfig" ]]; then
@@ -560,6 +570,21 @@ create_symlinks() {
         ln -sf "${DOTFILES_DIR}/config/.gitignore_global" "${HOME}/.gitignore_global"
         log_success "Linked global gitignore"
     fi
+
+    # Link other config files
+    log_info "Linking configuration files..."
+
+    # Link gitconfig
+    link_file "${DOTFILES_DIR}/config/gitconfig" "${HOME}/.gitconfig"
+
+    # Link vimrc
+    link_file "${DOTFILES_DIR}/config/vimrc" "${HOME}/.vimrc"
+
+    # Link tmux config
+    link_file "${DOTFILES_DIR}/config/tmux.conf" "${HOME}/.tmux.conf"
+
+    # Link other dotfiles as needed
+    log_success "Configuration files linked"
 }
 
 # Setup ZSH as default shell
@@ -1014,8 +1039,8 @@ uninstall_homebrew_packages() {
     if [[ "$UNINSTALL_CORE" == true ]]; then
         packages+=(
             # Core utilities (be careful with these)
-            "bat" "eza" "fd" "ripgrep" "fzf" "jq" "htop" "tree" "dust" "procs"
-            "git-delta" "gh" "zsh-autosuggestions" "zsh-syntax-highlighting" "starship"
+            "bat" "exa" "fd" "ripgrep" "fzf" "jq" "htop" "tree" "ncdu" "tldr" "httpie" "lazygit"
+            "git-delta" "gh" "zsh-autosuggestions" "zsh-syntax-highlighting"
             "--cask cursor"
         )
     fi
@@ -1145,11 +1170,7 @@ remove_symlinks() {
         log_info "Removed .zshrc symlink"
     fi
     
-    # Remove starship config
-    if [[ -L "${HOME}/.config/starship.toml" ]]; then
-        rm "${HOME}/.config/starship.toml"
-        log_info "Removed starship config symlink"
-    fi
+    # Note: Starship config removed as we use custom prompt themes
     
     # Remove git config symlink if it exists
     if [[ -L "${HOME}/.gitconfig" ]]; then

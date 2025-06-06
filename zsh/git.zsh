@@ -1,7 +1,11 @@
 # ~/.dotfiles/zsh/git.zsh
 # Advanced git integration and shortcuts
 
-# Git status in prompt (if not using starship)
+# Git Configuration and Aliases
+# Enhanced git functionality and status information
+# Git status integrated into our custom prompt themes
+
+# Git status functions for custom prompt themes
 git_prompt_info() {
   if ! git rev-parse --git-dir &> /dev/null; then
     return 0
