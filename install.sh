@@ -394,15 +394,7 @@ install_homebrew_packages() {
 install_additional_tools() {
     log_step "Installing Additional Development Tools & SDKs"
     
-    # Install Oh My Zsh (optional, for users who want it)
-    if [[ ! -d "${HOME}/.oh-my-zsh" ]]; then
-        read -p "Install Oh My Zsh? (optional, for extra zsh plugins) [y/N]: " -n 1 -r
-        echo
-        if [[ $REPLY =~ ^[Yy]$ ]]; then
-            sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-            log_success "Oh My Zsh installed"
-        fi
-    fi
+
     
     # Install FZF key bindings
     if command_exists fzf && [[ ! -f "${HOME}/.fzf.zsh" ]]; then
@@ -1044,15 +1036,7 @@ remove_additional_tools() {
         fi
     fi
     
-    # Remove Oh My Zsh
-    if [[ "$UNINSTALL_CORE" == true ]] && [[ -d "${HOME}/.oh-my-zsh" ]]; then
-        read -p "Remove Oh My Zsh? [y/N]: " -n 1 -r
-        echo
-        if [[ $REPLY =~ ^[Yy]$ ]]; then
-            rm -rf "${HOME}/.oh-my-zsh"
-            log_success "Oh My Zsh removed"
-        fi
-    fi
+
     
     # Remove conda environments
     if [[ "$UNINSTALL_PYTHON_AI" == true ]] && command_exists conda; then
