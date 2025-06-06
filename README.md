@@ -549,52 +549,302 @@ CRAZY_DEV_ZSH_DEBUG=true           # Enable debug mode
 
 ---
 
-## 🎓 **Usage Examples**
+## 🎓 **Real-World Usage Examples**
 
-### 🚀 **Full-Stack Web Development**
-
-```bash
-# Create a new React app with TypeScript
-js_new my-web-app react yarn
-cd my-web-app
-
-# The prompt now shows: 📁 my-web-app 🌿 main ⬢ 18.17.0 TS
-
-# Install dependencies and start
-ya @types/node && yd
-# Yarn detected, TypeScript configured, dev server started
-```
-
-### 📱 **Mobile App Development**
+### 🚀 **JavaScript/TypeScript Development**
 
 ```bash
-# Create a Flutter app
-flutter_new my_mobile_app
-cd my_mobile_app
+# Create a React app with modern tooling
+js_new my-saas-app react yarn
+cd my-saas-app
 
-# The prompt shows: 📁 my_mobile_app 🌿 main 🦋 3.13.0
+# The prompt shows: 📁 my-saas-app 🌿 main ⬢ 18.17.0 TS
 
-# Start development with hot reload
-flhot debug
-# iOS simulator boots, Android emulator available, hot reload active
+# Smart development workflow
+js_run_smart          # Auto-detects and starts dev server
+js_test_smart --watch # Runs tests in watch mode
+js_deps_manager       # Interactive dependency management
+
+# Quick package operations
+ni @types/node        # Install with auto-detected package manager
+nr build              # npm/yarn run build (auto-detected)
+nt                    # npm/yarn test
+
+# Deploy to production
+smart_deploy          # Interactive deployment wizard
 ```
 
-### 🤖 **AI-Assisted Development**
+### 📱 **iOS/Swift Development**
 
-   ```bash
-# Code review with AI
-git add .
-ai_review .
-# AI analyzes your changes and provides feedback
+```bash
+# Create a new Swift package
+swift_new MyLibrary
+cd MyLibrary
 
-# Generate commit message
-ai_commit
-# AI creates descriptive commit based on staged changes
+# Analyze and format code
+xc_analyze                    # Deep project analysis
+smart_xcode_formatter        # Format all Swift files
 
-# Debug an error
-ai_debug "AttributeError: 'NoneType' object has no attribute 'get'"
-# AI suggests solutions and explains the error
+# iOS Simulator management
+ios_sim                      # Interactive simulator management
+ios_sim "iPhone 15 Pro"      # Launch specific simulator
+
+# Smart Xcode building
+smart_xcodebuild MyApp.xcodeproj Release
+# Builds with optimizations and error analysis
 ```
+
+### 🦋 **Flutter Development**
+
+```bash
+# Create Flutter project with clean architecture
+flutter_new ecommerce_app
+cd ecommerce_app
+
+# The prompt shows: 📁 ecommerce_app 🌿 main 🦋 3.16.0
+
+# Development workflow
+flutter_hot                  # Hot reload development
+device_manager              # Manage devices/emulators
+android_emulator pixel_7    # Launch Android emulator
+
+# Project analysis and building
+flutter_analyze             # Comprehensive code analysis
+flutter_build_smart android # Smart multi-target building
+flutter_deps                # Dependency management
+```
+
+### 🐹 **Go Development**
+
+```bash
+# Create microservice project
+go_new user-service
+cd user-service
+
+# The prompt shows: 📁 user-service 🌿 main 🐹 1.21.5
+
+# Development with hot reload
+go_run_smart                # Uses air for hot reload
+# Automatically rebuilds on file changes
+
+# Database integration example
+go mod init github.com/mycompany/user-service
+go get gorm.io/gorm gorm.io/driver/postgres
+# Project structure auto-detected in prompt
+```
+
+### 🐍 **Python/AI Development**
+
+```bash
+# AI-powered development workflow
+ai_init                     # Setup AI development environment
+cd my-ai-project
+
+# AI assistance commands
+ai_commit                   # Generate smart commit messages
+ai_review .                 # AI code review
+ai_explain "complex_function()" # Explain code
+ai_debug "IndexError: list index out of range" # Debug with AI
+
+# Local LLM management
+ollama_manager              # Interactive Ollama management
+ollama pull llama2          # Download models
+ai_env                      # Check AI environment status
+
+# The prompt shows: 📁 my-ai-project 🌿 main 🐍 3.11.0 🤖 ollama(3)
+```
+
+### 🐳 **Docker & Kubernetes**
+
+```bash
+# Container management
+docker_manager              # Interactive Docker interface
+drun nginx:alpine          # Quick container run
+dps                        # Docker ps with better formatting
+
+# Kubernetes workflow
+k8s_manager                # Cluster management interface
+kubectl config get-contexts
+deploy_k8s my-app          # Deploy with smart configuration
+
+# The prompt shows: 📁 my-k8s-app 🌿 main 🐳 3 ☸️ prod-cluster
+```
+
+### ☁️ **Cloud Deployment**
+
+```bash
+# Multi-cloud deployment
+smart_deploy               # Interactive deployment wizard
+# Detects project type and suggests best deployment strategy
+
+# Platform-specific deployments
+deploy_heroku my-web-app   # Heroku with auto-detection
+deploy_aws --lambda        # AWS Lambda deployment
+deploy_k8s --production    # Production Kubernetes
+
+# Environment management
+setenv staging             # Switch to staging environment
+# Prompt updates to show current environment
+```
+
+### 🛠️ **Daily Development Workflow**
+
+```bash
+# Morning routine
+proj                       # Navigate to projects
+gstatus                    # Check git status across repos
+brewup                     # Update system packages
+
+# Project work
+mcd new-feature           # Make and cd to directory
+gco -b feature/user-auth  # Create feature branch
+# Work on code...
+ai_commit                 # AI-generated commit message
+gpu                       # Push to origin with upstream
+
+# Debugging and testing
+killport 3000             # Kill process on port 3000
+weather                   # Check weather (because why not?)
+perf_tips                 # Performance optimization suggestions
+
+# End of day
+backup important-file.js  # Smart backup
+gsync                     # Sync with main branch
+```
+
+### 🎨 **Prompt Customization**
+
+```bash
+# Change themes based on work context
+switch_theme minimal      # Minimal theme for focus
+switch_theme ai-powered   # AI theme for ML work
+switch_theme corporate    # Professional theme for meetings
+list_themes              # See all available themes
+
+# Performance monitoring
+dotfiles_perf            # Check shell performance
+CRAZY_DEV_ZSH_DEBUG=true # Enable debug mode
+# Shows prompt render times and performance metrics
+```
+
+---
+
+## 📚 **Quick Command Reference**
+
+<details>
+<summary><strong>🛠️ Core Commands</strong></summary>
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `reload` | Reload shell configuration | `reload` |
+| `switch_theme` | Change prompt theme | `switch_theme minimal` |
+| `list_themes` | Show available themes | `list_themes` |
+| `mcd <dir>` | Make directory and cd into it | `mcd project/src` |
+| `extract <file>` | Extract any archive format | `extract archive.tar.gz` |
+| `killport <port>` | Kill process on port | `killport 3000` |
+| `weather` | Show weather info | `weather` |
+| `proj` | Navigate to projects directory | `proj` |
+| `gstatus` | Enhanced git status | `gstatus` |
+
+</details>
+
+<details>
+<summary><strong>🟨 JavaScript/TypeScript</strong></summary>
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `js_new <name> <type>` | Create JS project | `js_new my-app react` |
+| `js_run_smart` | Smart dev server | `js_run_smart` |
+| `js_test_smart` | Smart testing | `js_test_smart --watch` |
+| `js_deps_manager` | Manage dependencies | `js_deps_manager` |
+| `npminit` | Initialize with templates | `npminit` |
+
+</details>
+
+<details>
+<summary><strong>📱 iOS/Swift</strong></summary>
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `swift_new <name>` | Create Swift package | `swift_new MyLibrary` |
+| `ios_sim` | Manage simulators | `ios_sim "iPhone 15 Pro"` |
+| `xc_analyze` | Analyze Xcode project | `xc_analyze` |
+| `smart_xcodebuild` | Smart Xcode building | `smart_xcodebuild MyApp.xcodeproj` |
+
+</details>
+
+<details>
+<summary><strong>🦋 Flutter</strong></summary>
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `flutter_new <name>` | Create Flutter project | `flutter_new my_app` |
+| `flutter_hot` | Hot reload development | `flutter_hot` |
+| `flutter_analyze` | Project analysis | `flutter_analyze` |
+| `device_manager` | Manage devices | `device_manager` |
+| `android_emulator` | Control emulators | `android_emulator pixel_7` |
+
+</details>
+
+<details>
+<summary><strong>🐹 Go</strong></summary>
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `go_new <name>` | Create Go project | `go_new user-service` |
+| `go_run_smart` | Hot reload with air | `go_run_smart` |
+
+</details>
+
+<details>
+<summary><strong>🐍 Python/AI</strong></summary>
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `ai_commit` | Generate commit messages | `ai_commit` |
+| `ai_review` | AI code review | `ai_review .` |
+| `ai_explain <code>` | Explain code | `ai_explain "function_name()"` |
+| `ai_debug <error>` | Debug with AI | `ai_debug "TypeError: ..."` |
+| `ollama_manager` | Manage AI models | `ollama_manager` |
+| `ai_init` | Setup AI environment | `ai_init` |
+
+</details>
+
+<details>
+<summary><strong>🐳 Docker & Kubernetes</strong></summary>
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `docker_manager` | Interactive Docker management | `docker_manager` |
+| `k8s_manager` | Kubernetes management | `k8s_manager` |
+| `drun <image>` | Quick container run | `drun nginx:alpine` |
+
+</details>
+
+<details>
+<summary><strong>☁️ Cloud Deployment</strong></summary>
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `smart_deploy` | Deployment wizard | `smart_deploy` |
+| `deploy_heroku` | Deploy to Heroku | `deploy_heroku my-app` |
+| `deploy_k8s` | Deploy to Kubernetes | `deploy_k8s --production` |
+| `deploy_aws` | Deploy to AWS | `deploy_aws --lambda` |
+
+</details>
+
+<details>
+<summary><strong>🔧 System & Performance</strong></summary>
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `dotfiles_perf` | Performance monitoring | `dotfiles_perf` |
+| `perf_tips` | Optimization tips | `perf_tips` |
+| `sysinfo` | System information | `sysinfo` |
+| `brewup` | Update Homebrew | `brewup` |
+| `backup <file>` | Smart backup | `backup important.js` |
+
+</details>
 
 ---
 

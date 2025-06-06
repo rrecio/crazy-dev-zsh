@@ -877,18 +877,88 @@ print_summary() {
     
     echo -e "\n${PURPLE}Next steps:${NC}"
     echo -e "1. Restart your terminal"
-    echo -e "2. Run 'dotfiles_perf' to check performance"
-    echo -e "3. Run 'perf_tips' for optimization tips"
+    echo -e "2. Run 'switch_theme' to change prompt themes"
+    echo -e "3. Run 'dotfiles_perf' to check performance"
     echo -e "4. Customize ${DOTFILES_DIR}/zsh/custom.zsh"
     
-    echo -e "\n${CYAN}Useful commands:${NC}"
-    echo -e "• reload       - Reload configuration"
-    echo -e "• dotfiles     - Go to dotfiles directory"
-    echo -e "• brewup       - Update Homebrew packages"
+    echo -e "\n${CYAN}🛠️  Core Commands:${NC}"
+    echo -e "• reload       - Reload shell configuration"
+    echo -e "• switch_theme - Change prompt theme"
+    echo -e "• list_themes  - Show available prompt themes"
     echo -e "• gstatus      - Enhanced git status"
-    echo -e "• proj         - Navigate to projects"
+    echo -e "• proj         - Navigate to projects directory"
+    echo -e "• mcd <dir>    - Make directory and cd into it"
+    echo -e "• extract <file> - Extract any archive format"
+    echo -e "• killport <port> - Kill process on specific port"
+    echo -e "• weather      - Show weather information"
     
-    echo -e "\n${GREEN}Enjoy your new shell environment!${NC}"
+    # Show commands based on installed stacks
+    if [[ "$INSTALL_IOS" == true ]]; then
+        echo -e "\n${CYAN}📱 iOS/Swift Commands:${NC}"
+        echo -e "• swift_new <name>    - Create new Swift package"
+        echo -e "• ios_sim            - Manage iOS simulators"
+        echo -e "• xc_analyze         - Analyze Xcode project"
+        echo -e "• smart_xcodebuild   - Smart Xcode building"
+    fi
+    
+    if [[ "$INSTALL_FLUTTER" == true ]]; then
+        echo -e "\n${CYAN}🦋 Flutter Commands:${NC}"
+        echo -e "• flutter_new <name> - Create Flutter project"
+        echo -e "• flutter_hot        - Start hot reload development"
+        echo -e "• flutter_analyze    - Analyze Flutter project"
+        echo -e "• device_manager     - Manage devices/emulators"
+        echo -e "• android_emulator   - Control Android emulators"
+    fi
+    
+    if [[ "$INSTALL_GO" == true ]]; then
+        echo -e "\n${CYAN}🐹 Go Commands:${NC}"
+        echo -e "• go_new <name>      - Create new Go project"
+        echo -e "• go_run_smart       - Smart Go running with air"
+    fi
+    
+    if [[ "$INSTALL_JAVASCRIPT" == true ]]; then
+        echo -e "\n${CYAN}🟨 JavaScript Commands:${NC}"
+        echo -e "• js_new <name> <type> - Create JS project (react, vue, etc.)"
+        echo -e "• js_run_smart       - Smart development server"
+        echo -e "• js_test_smart      - Smart testing"
+        echo -e "• js_deps_manager    - Manage dependencies"
+        echo -e "• npminit           - Initialize npm project with templates"
+    fi
+    
+    if [[ "$INSTALL_PYTHON_AI" == true ]]; then
+        echo -e "\n${CYAN}🐍 Python/AI Commands:${NC}"
+        echo -e "• ai_commit         - Generate commit messages with AI"
+        echo -e "• ai_review         - AI code review"
+        echo -e "• ai_explain <code> - Explain code with AI"
+        echo -e "• ai_debug <error>  - Debug with AI assistance"
+        echo -e "• ollama_manager    - Manage local AI models"
+        echo -e "• ai_init           - Setup AI development environment"
+    fi
+    
+    if [[ "$INSTALL_DOCKER" == true ]]; then
+        echo -e "\n${CYAN}🐳 Docker Commands:${NC}"
+        echo -e "• docker_manager    - Interactive Docker management"
+        echo -e "• k8s_manager       - Kubernetes cluster management"
+        echo -e "• drun <image>      - Quick container run"
+    fi
+    
+    if [[ "$INSTALL_CLOUD" == true ]]; then
+        echo -e "\n${CYAN}☁️  Cloud Commands:${NC}"
+        echo -e "• smart_deploy      - Smart deployment wizard"
+        echo -e "• deploy_heroku     - Deploy to Heroku"
+        echo -e "• deploy_k8s        - Deploy to Kubernetes"
+        echo -e "• deploy_aws        - Deploy to AWS"
+    fi
+    
+    echo -e "\n${CYAN}🔧 System & Performance:${NC}"
+    echo -e "• dotfiles_perf     - Performance monitoring"
+    echo -e "• perf_tips         - Performance optimization tips"
+    echo -e "• sysinfo           - System information"
+    echo -e "• brewup            - Update Homebrew packages"
+    echo -e "• backup <file>     - Smart backup utility"
+    
+    echo -e "\n${GREEN}Enjoy your supercharged development environment!${NC}"
+    echo -e "${YELLOW}💡 Tip: Type any command name to see its help/options${NC}"
 }
 
 # Error handling
