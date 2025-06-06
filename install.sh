@@ -713,6 +713,81 @@ optimize_macos() {
     fi
 }
 
+# Select prompt theme
+select_prompt_theme_install() {
+    log_step "Choosing Your Prompt Theme"
+    
+    # Skip interactive selection if automation mode
+    if [[ "${DOTFILES_INSTALL_ALL:-}" == "true" ]]; then
+        echo "powerline" > "${HOME}/.dotfiles/.selected_theme"
+        log_success "Default powerline theme selected (automation mode)"
+        return 0
+    fi
+    
+    echo "🎨 Choose your terminal prompt theme:"
+    echo
+    echo "%F{yellow}1)%f 🚀 Powerline - Full-featured with all segments (recommended)"
+    echo "%F{yellow}2)%f ⚡ Minimal - Lightning fast and clean"
+    echo "%F{yellow}3)%f 👨‍💻 Developer - Enhanced coding context"
+    echo "%F{yellow}4)%f 🤖 AI-Powered - Intelligent context awareness"
+    echo "%F{yellow}5)%f 🕹️ Retro - Nostalgic terminal aesthetics"
+    echo "%F{yellow}6)%f 🏢 Corporate - Professional and enterprise-ready"
+    echo
+    
+    local selection=""
+    while true; do
+        read -p "Enter your choice (1-6) [1]: " selection
+        
+        # Default to powerline if empty
+        if [[ -z "$selection" ]]; then
+            selection="1"
+        fi
+        
+        case "$selection" in
+            1|"powerline") 
+                echo "powerline" > "${HOME}/.dotfiles/.selected_theme"
+                log_success "Powerline theme selected - Full-featured with all segments"
+                break
+                ;;
+            2|"minimal")
+                echo "minimal" > "${HOME}/.dotfiles/.selected_theme"
+                log_success "Minimal theme selected - Lightning fast and clean"
+                break
+                ;;
+            3|"developer")
+                echo "developer" > "${HOME}/.dotfiles/.selected_theme"
+                log_success "Developer theme selected - Enhanced coding context"
+                break
+                ;;
+            4|"ai-powered")
+                echo "ai-powered" > "${HOME}/.dotfiles/.selected_theme"
+                log_success "AI-Powered theme selected - Intelligent context awareness"
+                break
+                ;;
+            5|"retro")
+                echo "retro" > "${HOME}/.dotfiles/.selected_theme"
+                log_success "Retro theme selected - Nostalgic terminal aesthetics"
+                break
+                ;;
+            6|"corporate")
+                echo "corporate" > "${HOME}/.dotfiles/.selected_theme"
+                log_success "Corporate theme selected - Professional and enterprise-ready"
+                break
+                ;;
+            *)
+                echo "Invalid selection. Please choose 1-6."
+                continue
+                ;;
+        esac
+    done
+    
+    echo
+    echo "💡 You can change themes anytime with these commands:"
+    echo "  • switch_theme          - Interactive theme selection"
+    echo "  • switch_theme minimal  - Switch directly to a theme"
+    echo "  • list_themes          - See all available themes"
+}
+
 # Final setup steps
 final_setup() {
     log_step "Finalizing Installation & Testing Configuration"
@@ -1183,6 +1258,7 @@ EOF
     create_directories || error_exit "Failed to create directories"
     create_symlinks || error_exit "Failed to create symlinks"
     setup_zsh || error_exit "Failed to setup ZSH"
+    select_prompt_theme_install || error_exit "Failed to select prompt theme"
     setup_git
     setup_ssh
     optimize_macos
