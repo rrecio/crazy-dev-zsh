@@ -355,15 +355,31 @@ install_homebrew_packages() {
             # Handle cask packages
             local cask_name="${package#--cask }"
             if brew list --cask "$cask_name" &>/dev/null; then
-                log_info "$cask_name already installed"
+                log_info "$cask_name already installed via Homebrew"
             else
                 log_info "Installing cask $cask_name..."
                 brew install --cask "$cask_name" || log_warning "Failed to install $cask_name"
             fi
         else
-            # Handle regular packages
-            if brew list "$package" &>/dev/null; then
-                log_info "$package already installed"
+            # Handle regular packages - check if command exists first, then check brew
+            local cmd_name="$package"
+            
+            # Handle special cases where package name differs from command name
+            case "$package" in
+                "ripgrep") cmd_name="rg" ;;
+                "git-delta") cmd_name="delta" ;;
+                "kubernetes-cli") cmd_name="kubectl" ;;
+                "fd") cmd_name="fd" ;;
+                "dust") cmd_name="dust" ;;
+                "procs") cmd_name="procs" ;;
+                "zsh-autosuggestions"|"zsh-syntax-highlighting") cmd_name="" ;; # These don't have commands
+            esac
+            
+            # Check if command already exists in system (skip for zsh plugins)
+            if [[ -n "$cmd_name" ]] && command_exists "$cmd_name"; then
+                log_info "$package already available in system"
+            elif brew list "$package" &>/dev/null; then
+                log_info "$package already installed via Homebrew"
             else
                 log_info "Installing $package..."
                 brew install "$package" || log_warning "Failed to install $package"
