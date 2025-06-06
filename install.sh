@@ -106,7 +106,7 @@ select_tech_stacks() {
     INSTALL_CLOUD=false
     
     # Check for environment variables for non-interactive installation
-    if [[ -n "$DOTFILES_INSTALL_ALL" ]]; then
+    if [[ -n "${DOTFILES_INSTALL_ALL:-}" ]]; then
         INSTALL_IOS=true
         INSTALL_FLUTTER=true
         INSTALL_GO=true
@@ -119,18 +119,18 @@ select_tech_stacks() {
     fi
     
     # Check individual environment variables
-    [[ -n "$DOTFILES_INSTALL_IOS" ]] && INSTALL_IOS=true
-    [[ -n "$DOTFILES_INSTALL_FLUTTER" ]] && INSTALL_FLUTTER=true
-    [[ -n "$DOTFILES_INSTALL_GO" ]] && INSTALL_GO=true
-    [[ -n "$DOTFILES_INSTALL_JAVASCRIPT" ]] && INSTALL_JAVASCRIPT=true
-    [[ -n "$DOTFILES_INSTALL_PYTHON_AI" ]] && INSTALL_PYTHON_AI=true
-    [[ -n "$DOTFILES_INSTALL_DOCKER" ]] && INSTALL_DOCKER=true
-    [[ -n "$DOTFILES_INSTALL_CLOUD" ]] && INSTALL_CLOUD=true
+    [[ -n "${DOTFILES_INSTALL_IOS:-}" ]] && INSTALL_IOS=true
+    [[ -n "${DOTFILES_INSTALL_FLUTTER:-}" ]] && INSTALL_FLUTTER=true
+    [[ -n "${DOTFILES_INSTALL_GO:-}" ]] && INSTALL_GO=true
+    [[ -n "${DOTFILES_INSTALL_JAVASCRIPT:-}" ]] && INSTALL_JAVASCRIPT=true
+    [[ -n "${DOTFILES_INSTALL_PYTHON_AI:-}" ]] && INSTALL_PYTHON_AI=true
+    [[ -n "${DOTFILES_INSTALL_DOCKER:-}" ]] && INSTALL_DOCKER=true
+    [[ -n "${DOTFILES_INSTALL_CLOUD:-}" ]] && INSTALL_CLOUD=true
     
     # If any environment variables are set, skip interactive selection
-    if [[ -n "$DOTFILES_INSTALL_IOS" || -n "$DOTFILES_INSTALL_FLUTTER" || -n "$DOTFILES_INSTALL_GO" || 
-          -n "$DOTFILES_INSTALL_JAVASCRIPT" || -n "$DOTFILES_INSTALL_PYTHON_AI" || 
-          -n "$DOTFILES_INSTALL_DOCKER" || -n "$DOTFILES_INSTALL_CLOUD" ]]; then
+    if [[ -n "${DOTFILES_INSTALL_IOS:-}" || -n "${DOTFILES_INSTALL_FLUTTER:-}" || -n "${DOTFILES_INSTALL_GO:-}" || 
+          -n "${DOTFILES_INSTALL_JAVASCRIPT:-}" || -n "${DOTFILES_INSTALL_PYTHON_AI:-}" || 
+          -n "${DOTFILES_INSTALL_DOCKER:-}" || -n "${DOTFILES_INSTALL_CLOUD:-}" ]]; then
         log_info "Using environment variables for tech stack selection"
         return 0
     fi
