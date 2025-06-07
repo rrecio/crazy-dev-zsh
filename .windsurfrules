@@ -1,0 +1,67 @@
+# Windsurf Rules for Crazy Dev
+
+## Naming Conventions
+- Files: Use snake_case for Go files (e.g., `ai_engine.go`)
+- Files: Use kebab-case for configuration files (e.g., `config-dev.yaml`)
+- Functions: Use camelCase for public functions (e.g., `GetModel()`)
+- Functions: Use camelCase for private functions (e.g., `validateInput()`)
+- Constants: Use UPPER_SNAKE_CASE (e.g., `MAX_RETRY_COUNT`)
+- Interfaces: Suffix with 'er' (e.g., `ContextAnalyzer`)
+- Packages: Use descriptive, single-word names that reflect functionality
+
+## Code Organization
+- Place interface definitions in separate files named `interfaces.go`
+- Place types in separate files named `types.go`
+- Place core functionality in separate packages under `src/core/`
+- Place AI engine components under `src/ai/`
+- Place plugin system code under `src/plugins/`
+- Place tech stack modules under `src/stacks/`
+- Tests should be in the same package as the code being tested with `_test.go` suffix
+
+## Preferred Libraries
+- CLI Framework: Use `github.com/spf13/cobra` for command structure
+- Configuration: Use `github.com/spf13/viper` for configuration management
+- Terminal UI: Use `github.com/charmbracelet/bubbletea` for rich interfaces
+- Database: Use SQLite for local storage, PostgreSQL for cloud sync
+- Testing: Use Go's built-in testing with testify for assertions
+
+## Error Handling
+- Use Go's idiomatic error handling with wrapped errors
+- Always wrap errors with context: `fmt.Errorf("operation failed: %w", err)`
+- Use structured logging with appropriate levels (debug, info, warn, error)
+- Provide clear, actionable error messages for users
+
+## AI Integration
+- Use Ollama for local AI with fallback to cloud APIs
+- Implement rate limiting for all AI API calls
+- Cache AI responses to improve performance and reduce API costs
+- Handle AI service failures gracefully with fallback options
+- Never send sensitive data (secrets, tokens) to external AI services
+
+## Plugin System
+- All plugins must implement the defined plugin interface
+- Support dynamic loading/unloading of plugins
+- Check plugin compatibility with core version
+- Enforce resource limits for plugins
+- Maintain security isolation for plugins
+
+## Performance Considerations
+- Startup time must be <100ms
+- AI responses <2s local/<5s cloud
+- Use lazy loading to load components only when needed
+- Use goroutines for I/O operations
+- Implement caching with appropriate TTL
+
+## Security Requirements
+- Validate all user inputs and external data
+- Use secure configurations by default
+- Never log or expose credentials
+- Restrict plugin file system and network access
+- Regularly scan dependencies for vulnerabilities
+
+## User Experience
+- Auto-detect project settings and provide sensible defaults
+- Show basic options first, advanced options on demand
+- Follow established CLI patterns and conventions
+- Provide clear progress indicators and status messages
+- Support high contrast themes and screen readers

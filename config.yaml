@@ -1,0 +1,155 @@
+# Crazy Dev Configuration
+# This file contains default settings for the Crazy Dev terminal
+
+# Core Settings
+core:
+  # Performance settings
+  startup_timeout: 100ms
+  ai_response_timeout: 2s
+  cloud_ai_timeout: 5s
+  
+  # Logging configuration
+  log_level: info
+  log_file: ~/.crazy-dev/logs/crazy-dev.log
+  
+  # Database settings
+  database:
+    path: ~/.crazy-dev/data/crazy-dev.db
+    backup_interval: 24h
+
+# AI Engine Configuration
+ai:
+  # Local AI settings (Ollama)
+  local:
+    enabled: true
+    endpoint: http://localhost:11434
+    models:
+      - llama3.2
+      - codellama
+    fallback_to_cloud: true
+  
+  # Cloud AI settings
+  cloud:
+    provider: ollama  # ollama, openai, anthropic
+    rate_limit: 60    # requests per minute
+    cache_ttl: 1h
+  
+  # Context settings
+  context:
+    max_files: 100
+    max_file_size: 1MB
+    analysis_cache_ttl: 30m
+
+# Plugin System
+plugins:
+  # Plugin directories
+  directories:
+    - ~/.crazy-dev/plugins
+    - /usr/local/share/crazy-dev/plugins
+  
+  # Security settings
+  security:
+    sandbox_enabled: true
+    allowed_file_patterns:
+      - "*.go"
+      - "*.js"
+      - "*.ts"
+      - "*.py"
+      - "*.yaml"
+      - "*.json"
+    
+  # Auto-loading
+  auto_load: true
+  hot_reload: true
+
+# Tech Stack Modules
+stacks:
+  # Go configuration
+  golang:
+    enabled: true
+    auto_detect: true
+    tools:
+      - go
+      - air
+      - golangci-lint
+  
+  # JavaScript/TypeScript
+  javascript:
+    enabled: true
+    auto_detect: true
+    package_managers:
+      - npm
+      - yarn
+      - pnpm
+  
+  # Python configuration
+  python:
+    enabled: true
+    auto_detect: true
+    tools:
+      - pip
+      - poetry
+      - conda
+  
+  # Flutter configuration
+  flutter:
+    enabled: true
+    auto_detect: true
+    tools:
+      - flutter
+      - dart
+  
+  # Docker configuration
+  docker:
+    enabled: true
+    auto_detect: true
+    tools:
+      - docker
+      - docker-compose
+      - kubectl
+
+# User Interface
+ui:
+  # Theme settings
+  theme:
+    name: adaptive
+    color_scheme: auto  # auto, light, dark
+    accent_color: blue
+  
+  # Terminal settings
+  terminal:
+    animations: true
+    progress_bars: true
+    icons: true
+    
+  # Voice settings
+  voice:
+    enabled: false
+    language: en-US
+    wake_word: "crazy dev"
+
+# Sync Settings
+sync:
+  enabled: false
+  endpoint: https://api.crazy-dev.io
+  encryption: true
+  sync_interval: 5m
+  
+  # What to sync
+  include:
+    - themes
+    - plugins
+    - configurations
+    - command_history
+  
+  exclude:
+    - credentials
+    - local_paths
+    - temporary_files
+
+# Development Settings (only in dev mode)
+development:
+  debug: false
+  profiling: false
+  mock_ai: false
+  test_mode: false 

@@ -1,0 +1,309 @@
+# windsurf-patterns.yaml - Reusable code patterns for Crazy Dev
+# These patterns align with project standards and architecture guidelines
+
+patterns:
+  # Standard plugin implementation pattern
+  plugin_implementation:
+    description: "Standard plugin implementation with proper interface compliance"
+    code: |
+      package myplugin
+      
+      import (
+        "context"
+        "fmt"
+        "log"
+        
+        "github.com/rrecio/crazy-dev-zsh/src/plugins"
+      )
+      
+      // MyPlugin implements the Plugin interface
+      type MyPlugin struct {
+        name        string
+        version     string
+        description string
+        logger      *log.Logger
+        isEnabled   bool
+      }
+      
+      // NewMyPlugin creates a new instance of MyPlugin
+      func NewMyPlugin() *MyPlugin {
+        return &MyPlugin{
+          name:        "my-plugin",
+          version:     "0.1.0",
+          description: "A sample plugin implementation",
+          logger:      log.Default(),
+          isEnabled:   false,
+        }
+      }
+      
+      // Name returns the plugin name
+      func (p *MyPlugin) Name() string {
+        return p.name
+      }
+      
+      // Version returns the plugin version
+      func (p *MyPlugin) Version() string {
+        return p.version
+      }
+      
+      // Description returns the plugin description
+      func (p *MyPlugin) Description() string {
+        return p.description
+      }
+      
+      // Init initializes the plugin
+      func (p *MyPlugin) Init(ctx context.Context) error {
+        p.logger.Println("Initializing plugin", p.name)
+        p.isEnabled = true
+        return nil
+      }
+      
+      // Shutdown cleans up plugin resources
+      func (p *MyPlugin) Shutdown(ctx context.Context) error {
+        p.logger.Println("Shutting down plugin", p.name)
+        p.isEnabled = false
+        return nil
+      }
+      
+      // IsEnabled checks if the plugin is enabled
+      func (p *MyPlugin) IsEnabled() bool {
+        return p.isEnabled
+      }
+
+  # Adapter pattern for AI components
+  ai_adapter_pattern:
+    description: "Adapter for AI components following project standards"
+    code: |
+      package factory
+      
+      import (
+        "context"
+        "fmt"
+        "time"
+        
+        "github.com/rrecio/crazy-dev-zsh/src/ai/types"
+      )
+      
+      // serviceAdapter adapts an internal service to a public interface
+      type serviceAdapter struct {
+        internalService interface{}
+        config          *types.Config
+      }
+      
+      // NewServiceAdapter creates a new service adapter
+      func NewServiceAdapter(service interface{}, config *types.Config) *serviceAdapter {
+        return &serviceAdapter{
+          internalService: service,
+          config:          config,
+        }
+      }
+      
+      // Execute runs the operation with timing and error handling
+      func (a *serviceAdapter) Execute(ctx context.Context, request *types.Request) (*types.Response, error) {
+        start := time.Now()
+        
+        // Add context timeout if specified
+        if a.config.Timeout > 0 {
+          var cancel context.CancelFunc
+          ctx, cancel = context.WithTimeout(ctx, a.config.Timeout)
+          defer cancel()
+        }
+        
+        // Execute operation
+        result, err := a.executeInternal(ctx, request)
+        if err != nil {
+          return nil, fmt.Errorf("service execution failed: %w", err)
+        }
+        
+        // Record metrics
+        latency := time.Since(start)
+        if a.config.LogLatency {
+          fmt.Printf("Operation completed in %s\n", latency)
+        }
+        
+        return result, nil
+      }
+      
+      func (a *serviceAdapter) executeInternal(ctx context.Context, request *types.Request) (*types.Response, error) {
+        // Implementation specific logic
+        // ...
+        
+        return &types.Response{
+          Success: true,
+        }, nil
+      }
+
+  # Error handling pattern
+  error_handling:
+    description: "Standard error handling with proper wrapping and logging"
+    code: |
+      package example
+      
+      import (
+        "errors"
+        "fmt"
+        "log"
+      )
+      
+      // Predefined errors
+      var (
+        ErrNotFound = errors.New("resource not found")
+        ErrInvalid  = errors.New("invalid request")
+        ErrTimeout  = errors.New("operation timed out")
+      )
+      
+      // ProcessRequest handles a request with proper error handling
+      func ProcessRequest(request interface{}) (interface{}, error) {
+        // Validate input
+        if err := validateRequest(request); err != nil {
+          log.Printf("ERROR: Invalid request: %v", err)
+          return nil, fmt.Errorf("validation failed: %w", err)
+        }
+        
+        // Process the request
+        result, err := processInternal(request)
+        if err != nil {
+          if errors.Is(err, ErrNotFound) {
+            log.Printf("WARN: Resource not found: %v", err)
+          } else if errors.Is(err, ErrTimeout) {
+            log.Printf("ERROR: Operation timed out: %v", err)
+          } else {
+            log.Printf("ERROR: Unexpected error: %v", err)
+          }
+          return nil, fmt.Errorf("processing failed: %w", err)
+        }
+        
+        return result, nil
+      }
+      
+      func validateRequest(request interface{}) error {
+        // Validation logic
+        return nil
+      }
+      
+      func processInternal(request interface{}) (interface{}, error) {
+        // Processing logic
+        return nil, nil
+      }
+
+  # Context-aware operations
+  context_aware_operation:
+    description: "Operations that properly handle context cancellation and timeouts"
+    code: |
+      package operations
+      
+      import (
+        "context"
+        "fmt"
+        "time"
+      )
+      
+      // Operation performs a context-aware operation
+      func Operation(ctx context.Context, params interface{}) (interface{}, error) {
+        // Check if context is already done
+        if ctx.Err() != nil {
+          return nil, fmt.Errorf("operation aborted: %w", ctx.Err())
+        }
+        
+        // Create channel for results
+        resultCh := make(chan interface{}, 1)
+        errCh := make(chan error, 1)
+        
+        // Run operation in goroutine
+        go func() {
+          result, err := performOperation(params)
+          if err != nil {
+            errCh <- err
+            return
+          }
+          resultCh <- result
+        }()
+        
+        // Wait for result or context cancellation
+        select {
+        case result := <-resultCh:
+          return result, nil
+        case err := <-errCh:
+          return nil, fmt.Errorf("operation failed: %w", err)
+        case <-ctx.Done():
+          return nil, fmt.Errorf("operation cancelled: %w", ctx.Err())
+        }
+      }
+      
+      func performOperation(params interface{}) (interface{}, error) {
+        // Implementation details
+        time.Sleep(100 * time.Millisecond)
+        return "result", nil
+      }
+
+  # Graceful resource management
+  resource_management:
+    description: "Pattern for graceful resource acquisition and release"
+    code: |
+      package resources
+      
+      import (
+        "context"
+        "fmt"
+        "sync"
+      )
+      
+      // Resource represents a managed resource
+      type Resource struct {
+        name   string
+        mutex  sync.Mutex
+        closed bool
+      }
+      
+      // NewResource creates and initializes a new resource
+      func NewResource(name string) (*Resource, error) {
+        r := &Resource{
+          name: name,
+        }
+        
+        if err := r.init(); err != nil {
+          return nil, fmt.Errorf("failed to initialize resource %s: %w", name, err)
+        }
+        
+        return r, nil
+      }
+      
+      // Use executes an operation with the resource
+      func (r *Resource) Use(ctx context.Context, operation func(ctx context.Context) error) error {
+        r.mutex.Lock()
+        if r.closed {
+          r.mutex.Unlock()
+          return fmt.Errorf("resource %s is closed", r.name)
+        }
+        r.mutex.Unlock()
+        
+        // Execute operation
+        if err := operation(ctx); err != nil {
+          return fmt.Errorf("operation failed: %w", err)
+        }
+        
+        return nil
+      }
+      
+      // Close releases the resource
+      func (r *Resource) Close() error {
+        r.mutex.Lock()
+        defer r.mutex.Unlock()
+        
+        if r.closed {
+          return nil // Already closed
+        }
+        
+        r.closed = true
+        return r.cleanup()
+      }
+      
+      func (r *Resource) init() error {
+        // Initialization logic
+        return nil
+      }
+      
+      func (r *Resource) cleanup() error {
+        // Cleanup logic
+        return nil
+      }

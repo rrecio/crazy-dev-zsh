@@ -1,0 +1,70 @@
+graph TB
+    subgraph "Crazy Dev Terminal"
+        CLI[CLI Interface]
+        Voice[Voice Input Module]
+        GUI[Visual Workflow Canvas]
+    end
+    
+    subgraph "AI Engine"
+        Context[Dynamic Context Engine]
+        Workflow[AI Workflow Agents]
+        Predict[Predictive Debugging]
+        Chat[Chat Interface]
+    end
+    
+    subgraph "Core Systems"
+        Plugin[Plugin System]
+        Theme[Theme Engine]
+        Config[Configuration Manager]
+        Sync[Cross-Platform Sync]
+    end
+    
+    subgraph "Tech Stack Modules"
+        iOS[iOS/Swift Module]
+        Flutter[Flutter Module]
+        Go[Go Module]
+        JS[JavaScript/TypeScript Module]
+        Python[Python/AI Module]
+        Docker[Docker/K8s Module]
+        Cloud[Cloud Module]
+    end
+    
+    subgraph "External Services"
+        GitHub[GitHub API]
+        CloudProviders[AWS/GCP/Azure]
+        Registry[Plugin Registry]
+        SyncService[Cloud Sync Service]
+    end
+    
+    CLI --> Context
+    Voice --> Context
+    GUI --> Context
+    
+    Context --> Workflow
+    Context --> Predict
+    Context --> Chat
+    
+    Workflow --> Plugin
+    Plugin --> Theme
+    Plugin --> Config
+    
+    Config --> Sync
+    Sync --> SyncService
+    
+    Context --> iOS
+    Context --> Flutter
+    Context --> Go
+    Context --> JS
+    Context --> Python
+    Context --> Docker
+    Context --> Cloud
+    
+    iOS --> GitHub
+    Flutter --> GitHub
+    Go --> GitHub
+    JS --> GitHub
+    Python --> GitHub
+    Docker --> CloudProviders
+    Cloud --> CloudProviders
+    
+    Plugin --> Registry 

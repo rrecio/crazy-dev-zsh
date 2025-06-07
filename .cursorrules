@@ -1,0 +1,104 @@
+# Crazy Dev Project Rules
+
+## Project Context
+You are working on Crazy Dev, an AI-driven developer terminal that provides intelligent, adaptive, and visually immersive workspace for developers. The project uses Go as the primary language with a plugin-based architecture.
+
+## Core Architecture Rules
+
+1. **Follow the established architecture**: Reference `docs/architecture.mermaid` and `docs/technical.md` for system design decisions
+2. **Modular design**: All features must be implemented as pluggable modules following the plugin interface
+3. **Performance first**: Startup time must be <100ms, AI responses <2s local/<5s cloud
+4. **Error handling**: Use Go's idiomatic error handling with wrapped errors and structured logging
+5. **Security by design**: All plugins must be sandboxed, all user inputs validated
+
+## Code Organization & Naming
+
+1. **Directory structure**: Follow the structure defined in `docs/technical.md`
+   - `src/cmd/` for CLI commands
+   - `src/core/` for core functionality  
+   - `src/ai/` for AI engine components
+   - `src/plugins/` for plugin system
+   - `src/stacks/` for tech stack modules
+
+2. **Naming conventions**:
+   - Files: snake_case for Go files, kebab-case for configs
+   - Functions: camelCase for public, camelCase for private
+   - Constants: UPPER_SNAKE_CASE
+   - Interfaces: Suffix with 'er' (e.g., `ContextAnalyzer`)
+
+3. **Package naming**: Use descriptive, single-word package names that reflect functionality
+
+## Technology Stack Requirements
+
+1. **CLI Framework**: Use `github.com/spf13/cobra` for command structure
+2. **Configuration**: Use `github.com/spf13/viper` for configuration management
+3. **Terminal UI**: Use `github.com/charmbracelet/bubbletea` for rich interfaces
+4. **Database**: SQLite for local storage, PostgreSQL for cloud sync
+5. **AI Integration**: Ollama for local AI, with fallback to cloud APIs
+6. **Testing**: Use Go's built-in testing with testify for assertions
+
+## Code Quality Standards
+
+1. **Test coverage**: Maintain >80% test coverage for all core functionality
+2. **Documentation**: All public functions and types must have Go doc comments
+3. **Linting**: Code must pass `golangci-lint` with project configuration
+4. **Error messages**: Provide clear, actionable error messages for users
+5. **Logging**: Use structured logging with appropriate levels (debug, info, warn, error)
+
+## AI-Specific Guidelines
+
+1. **Context awareness**: Always consider the current project context when generating suggestions
+2. **Graceful degradation**: Handle AI service failures gracefully with fallback options
+3. **Rate limiting**: Implement rate limiting for all AI API calls
+4. **Caching**: Cache AI responses to improve performance and reduce API costs
+5. **Privacy**: Never send sensitive data (secrets, tokens) to external AI services
+
+## Plugin System Rules
+
+1. **Interface compliance**: All plugins must implement the defined plugin interface
+2. **Hot reloading**: Support dynamic loading/unloading of plugins
+3. **Version compatibility**: Check plugin compatibility with core version
+4. **Resource limits**: Plugins must respect memory and CPU limits
+5. **Security isolation**: Plugins cannot access files outside their designated directories
+
+## User Experience Principles
+
+1. **Zero configuration**: Auto-detect project settings and provide sensible defaults
+2. **Progressive disclosure**: Show basic options first, advanced options on demand
+3. **Consistent commands**: Follow established CLI patterns and conventions
+4. **Helpful feedback**: Provide clear progress indicators and status messages
+5. **Accessibility**: Support high contrast themes and screen readers
+
+## Development Workflow
+
+1. **TDD approach**: Write tests before implementing functionality
+2. **Small commits**: Make focused commits with clear messages
+3. **Branch naming**: Use format `feature/TASK-ID-description` or `fix/TASK-ID-description`
+4. **Code review**: All changes require review before merging
+5. **Documentation updates**: Update relevant docs when changing functionality
+
+## Security Requirements
+
+1. **Input validation**: Validate all user inputs and external data
+2. **Secure defaults**: Use secure configurations by default
+3. **Credential handling**: Never log or expose credentials
+4. **Plugin sandboxing**: Restrict plugin file system and network access
+5. **Dependency scanning**: Regularly scan dependencies for vulnerabilities
+
+## Performance Guidelines
+
+1. **Lazy loading**: Load components only when needed
+2. **Concurrent operations**: Use goroutines for I/O operations
+3. **Memory management**: Avoid memory leaks, use context for cancellation
+4. **Caching strategy**: Cache expensive operations with appropriate TTL
+5. **Profiling**: Include performance benchmarks for critical paths
+
+## When generating code:
+- Always reference the task requirements from `tasks/tasks.md`
+- Follow the acceptance criteria exactly as specified
+- Include comprehensive error handling
+- Add appropriate logging statements
+- Write corresponding unit tests
+- Update documentation if needed
+- Consider the impact on overall system performance
+- Ensure compatibility with the plugin architecture 

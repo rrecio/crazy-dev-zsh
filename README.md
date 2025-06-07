@@ -1,6 +1,4 @@
-# ⚡ Crazy Dev ZSH
-
-<div align="center">
+# Crazy Dev: AI-Driven Developer Terminal
 
 ```
    ▄████▄   ██▀███   ▄▄▄      ▒███████▒▓██   ██▓    ▓█████▄ ▓█████ ██▒   █▓
@@ -15,415 +13,204 @@
   ░                           ░         ░ ░          ░                  ░  
 ```
 
-**🚀 The Ultimate Developer Terminal Experience**
+> The next-generation terminal that anticipates your needs, automates repetitive tasks, and provides intelligent, context-aware assistance.
 
-*Transform your terminal into a productivity powerhouse with AI-powered tools, stunning themes, and intelligent automation*
+## 🚀 Quick Start
 
-[![macOS](https://img.shields.io/badge/macOS-000000?style=flat-square&logo=apple&logoColor=white)](https://www.apple.com/macos/)
-[![Zsh](https://img.shields.io/badge/Zsh-F15A24?style=flat-square&logo=zsh&logoColor=white)](https://www.zsh.org/)
-[![AI Powered](https://img.shields.io/badge/AI-Powered-00D4FF?style=flat-square&logo=openai&logoColor=white)](https://ollama.ai/)
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Stars](https://img.shields.io/github/stars/rrecio/crazy-dev-zsh?style=flat-square&logo=github)](https://github.com/rrecio/crazy-dev-zsh)
+```bash
+# Install Crazy Dev
+curl -fsSL https://raw.githubusercontent.com/crazy-dev/main/install.sh | bash
 
-</div>
+# Initialize in your project
+crazy init
+
+# Get AI-powered suggestions
+crazy suggest
+
+# Ask the AI assistant
+crazy ask "How do I optimize my Go server?"
+```
+
+## 📋 Project Structure
+
+This project follows a structured development approach inspired by AI-powered development best practices:
+
+```
+crazy-dev-zsh/
+├── docs/                    # Architecture and technical documentation
+│   ├── architecture.mermaid # System architecture diagram
+│   ├── technical.md         # Technical specifications
+│   └── status.md           # Project status and milestones
+├── tasks/                   # Structured task management
+│   └── tasks.md            # Detailed task definitions
+├── src/                     # Source code
+│   ├── cmd/                # CLI commands
+│   ├── core/               # Core functionality
+│   ├── ai/                 # AI engine components
+│   ├── plugins/            # Plugin system
+│   ├── ui/                 # Terminal UI components
+│   ├── sync/               # Cloud sync functionality
+│   ├── stacks/             # Tech stack modules
+│   └── utils/              # Utility functions
+├── .cursorrules            # AI development guidelines
+├── go.mod                  # Go module definition
+└── README.md               # This file
+```
+
+## 🛠️ Development Setup
+
+### Prerequisites
+
+- Go 1.21+
+- Git
+- Optional: Ollama (for local AI)
+
+### Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/crazy-dev/crazy-dev-zsh.git
+cd crazy-dev-zsh
+
+# Install dependencies
+go mod download
+
+# Run tests
+go test ./...
+
+# Build the project
+go build -o crazy ./src/cmd/main.go
+```
+
+## 🎯 Key Features
+
+### 🤖 AI-Powered Intelligence
+- **Context Analysis**: Understands your project structure and tech stack
+- **Predictive Suggestions**: Anticipates your next command
+- **Error Prevention**: Catches issues before they happen
+- **Natural Language**: Ask questions in plain English
+
+### 🔧 Tech Stack Support
+- **iOS/Swift**: Xcode optimization, SwiftLint integration
+- **Flutter**: Device management, hot reload
+- **Go**: Air integration, API generation
+- **JavaScript/TypeScript**: React/Vue/Next.js setup, bundle analysis
+- **React Native/Expo**: Device management, hot reload
+- **Android/Kotlin**: Device management, hot reload
+- **Python/AI**: Jupyter integration, ML model optimization
+- **Docker/K8s**: Container visualization, auto-scaling
+- **Cloud**: Multi-provider support, cost optimization
+
+
+### 🎨 Rich Terminal Experience
+- **Dynamic Themes**: Adapts to your project type
+- **Visual Workflows**: Terminal-based GUI for complex operations
+- **Voice Commands**: Hands-free operation
+- **Cross-Platform Sync**: Consistent experience across devices
+
+## 📚 Documentation
+
+- **[Architecture](docs/architecture.mermaid)**: System design and component relationships
+- **[Technical Specs](docs/technical.md)**: Implementation details and guidelines
+- **[Project Status](docs/status.md)**: Current progress and milestones
+- **[Task Management](tasks/tasks.md)**: Detailed task definitions and sprint planning
+
+## 🔄 Development Workflow
+
+This project uses a structured development approach:
+
+1. **Architecture-First**: All features are designed with the overall architecture in mind
+2. **Task-Driven**: Development follows structured tasks with clear acceptance criteria
+3. **Test-Driven**: Tests are written before implementation
+4. **AI-Assisted**: Uses Cursor with custom rules for consistent code generation
+5. **Documentation-Focused**: All changes are documented and reviewed
+
+### Working with Tasks
+
+Tasks are managed in `tasks/tasks.md` with detailed specifications:
+
+```bash
+# View current tasks
+cat tasks/tasks.md
+
+# Start working on a task
+git checkout -b feature/CORE-001-cli-framework
+
+# Follow the acceptance criteria and technical notes
+# Write tests first, then implement
+# Update documentation as needed
+```
+
+### AI Development Guidelines
+
+This project uses `.cursorrules` to ensure consistent AI-generated code:
+
+- Follows established architecture patterns
+- Maintains code quality standards
+- Includes comprehensive error handling
+- Generates appropriate tests
+- Updates documentation automatically
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+go test ./...
+
+# Run tests with coverage
+go test -cover ./...
+
+# Run specific test
+go test ./src/core/context/
+
+# Run benchmarks
+go test -bench=. ./...
+```
+
+## 🚀 Building and Deployment
+
+```bash
+# Build for current platform
+go build -o crazy ./src/cmd/main.go
+
+# Build for multiple platforms
+GOOS=linux GOARCH=amd64 go build -o crazy-linux ./src/cmd/main.go
+GOOS=darwin GOARCH=amd64 go build -o crazy-darwin ./src/cmd/main.go
+GOOS=windows GOARCH=amd64 go build -o crazy-windows.exe ./src/cmd/main.go
+
+# Install locally
+go install ./src/cmd/main.go
+```
+
+## 🤝 Contributing
+
+1. **Read the Documentation**: Familiarize yourself with the architecture and guidelines
+2. **Check Tasks**: Look at `tasks/tasks.md` for available work
+3. **Follow Standards**: Use the `.cursorrules` for consistent development
+4. **Write Tests**: Maintain >80% test coverage
+5. **Update Docs**: Keep documentation current with changes
+
+### Pull Request Process
+
+1. Create a feature branch: `feature/TASK-ID-description`
+2. Follow TDD: Write tests first
+3. Implement following `.cursorrules` guidelines
+4. Update relevant documentation
+5. Ensure all tests pass
+6. Submit PR with clear description
+
+## 📄 License
+
+MIT License - see LICENSE file for details
+
+## 🌟 Why Crazy Dev?
+
+- **10x Productivity**: Automate 90% of repetitive tasks
+- **Zero Configuration**: Works out of the box with intelligent defaults
+- **Future-Proof**: Extensible plugin system grows with your needs
+- **Privacy-First**: Local AI processing with optional cloud features
+- **Developer-Centric**: Built by developers, for developers
 
 ---
 
-## 🎯 **Quick Start**
-
-<div align="center">
-
-### **One command. Two minutes. Infinite possibilities.**
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/rrecio/crazy-dev-zsh/main/install.sh | bash
-```
-
-*Interactive installer • Choose your tech stacks • Ready instantly*
-
-</div>
-
----
-
-## ✨ **What Makes This Special?**
-
-<table>
-<tr>
-<td width="33%">
-
-### 🎨 **Stunning Visuals**
-- **6 Designer Themes** with HSL color theory
-- **Nerd Font Icons** everywhere
-- **Context-Aware** prompts
-- **Zero Parse Errors** - Rock solid
-
-</td>
-<td width="33%">
-
-### 🤖 **AI-Powered**
-- **Local LLM** integration
-- **Smart Code Review**
-- **Auto Commit Messages**
-- **Intelligent Debugging**
-
-</td>
-<td width="33%">
-
-### ⚡ **Multi-Stack**
-- **iOS/Swift** • **Flutter** • **Go**
-- **JavaScript/TypeScript** • **Python/AI**
-- **Docker/K8s** • **Cloud Deploy**
-- **Smart Project Detection**
-
-</td>
-</tr>
-</table>
-
----
-
-## 🎭 **Theme Showcase**
-
-<details>
-<summary><strong>🚀 Powerline Theme</strong> - <em>Professional Excellence</em></summary>
-
-```bash
- 󰀵 rod  󰜫 ~/my-app ▲   󰊢 main ◆7 ◇1  󰎙 18.17  🐳 3  󰁹 85%
-❯ npm run build                                                         󰥔 14:23:45
-```
-*80+ HSL-based colors • Full context awareness • Premium visual hierarchy*
-
-</details>
-
-<details>
-<summary><strong>⚡ Minimal Theme</strong> - <em>Focused Simplicity</em></summary>
-
-```bash
- ~/my-app on  main ● 📦 v2.1.0  
-❯ code .                                                                14:23
-```
-*50+ calming colors • Eye comfort optimization • Distraction-free coding*
-
-</details>
-
-<details>
-<summary><strong>🤖 AI-Powered Theme</strong> - <em>Futuristic Elegance</em></summary>
-
-```bash
-🧠 rod  ⚡ ~/ml-project 🐍   󰊢 main ✓  🤖 ollama(3) 🧠 llama3.2  󰁹 92%
-❯ python train.py                                                       󰥔 14:24:12
-```
-*60+ neural-inspired colors • Quantum aesthetics • ML/AI context awareness*
-
-</details>
-
-<details>
-<summary><strong>👨‍💻 Developer Theme</strong> - <em>Code-Focused Design</em></summary>
-
-```bash
-💻 rod  ~/api-server 🐹 1.21  main ~3|?1  📦 go.mod  🐳 2  ⏱ 1.2s
-▶ go run main.go                                                         14:23
-```
-*45+ context colors • Language-specific styling • Performance monitoring*
-
-</details>
-
-<details>
-<summary><strong>🏢 Corporate Theme</strong> - <em>Business Professional</em></summary>
-
-```bash
-🏢 rod@corp-server  ~/enterprise-app  📊 main ✓  TypeScript 4.9  🐳 Docker
-❯ npm run build:production                                              14:23:45
-```
-*35+ business colors • Enterprise context • Meeting-friendly design*
-
-</details>
-
-<details>
-<summary><strong>🕹️ Retro Theme</strong> - <em>Classic Terminal Vibes</em></summary>
-
-```bash
-[rod@computer ~/code/project]$ git status: modified files    (14:23:45)
-> vim main.c
-```
-*25+ vintage colors • Classic UNIX aesthetics • Nostalgic terminal feel*
-
-</details>
-
-**Switch themes instantly:** `switch_theme <name>`
-
----
-
-## 🛠️ **Tech Stack Support**
-
-<div align="center">
-
-| Stack | Tools | Key Commands |
-|-------|-------|--------------|
-| 📱 **iOS/Swift** | SwiftLint, Xcode tools | `smart_xcodebuild`, `ios_sim boot` |
-| 🦋 **Flutter** | Flutter SDK, Android Studio | `flutter_hot run`, `device list` |
-| 🐹 **Go** | Go, Air hot reload | `go_new MyAPI`, `air` |
-| 🟨 **JavaScript** | Node, yarn, pnpm, bun | `js_new MyApp react`, `jsrun build` |
-| 🐍 **Python/AI** | Python, Ollama, Jupyter | `ai_explain`, `conda activate ai-dev` |
-| 🐳 **Docker** | Docker, kubectl, K9s | `dock clean`, `k get all` |
-| ☁️ **Cloud** | AWS CLI, Terraform | `smart_deploy`, `awswhoami` |
-
-</div>
-
----
-
-## 🤖 **AI Commands**
-
-<table>
-<tr>
-<td width="50%">
-
-### 📝 **Code Analysis**
-```bash
-ai_explain src/main.py      # Explain code
-ai_review .                 # Review changes  
-ai_commit                   # Generate commits
-ai_docs src/                # Generate docs
-ai_test utils.py           # Generate tests
-```
-
-</td>
-<td width="50%">
-
-### 🔧 **Development Help**
-```bash
-ai_debug "TypeError: ..."   # Debug errors
-ai_translate app.py go      # Translate code
-ai_refactor api.py perf     # Refactor suggestions
-quality                     # Code quality analysis
-security                    # Security review
-```
-
-</td>
-</tr>
-</table>
-
-### 💬 **Interactive AI Chat**
-```bash
-code        # Chat with CodeLlama
-coder       # Chat with DeepSeek Coder  
-mistral     # Chat with Mistral
-pycode      # Python-specific help
-```
-
----
-
-## 🚀 **Installation Options**
-
-### 🎯 **Interactive Install** *(Recommended)*
-```bash
-curl -fsSL https://raw.githubusercontent.com/rrecio/crazy-dev-zsh/main/install.sh | bash
-```
-
-### ⚡ **Install Everything**
-```bash
-curl -fsSL https://raw.githubusercontent.com/rrecio/crazy-dev-zsh/main/install.sh | DOTFILES_INSTALL_ALL=1 bash
-```
-
-### 🎛️ **Custom Installation**
-```bash
-# Example: JavaScript + Docker + Python/AI only
-curl -fsSL https://raw.githubusercontent.com/rrecio/crazy-dev-zsh/main/install.sh | \
-  DOTFILES_INSTALL_JAVASCRIPT=1 \
-  DOTFILES_INSTALL_DOCKER=1 \
-  DOTFILES_INSTALL_PYTHON_AI=1 bash
-```
-
----
-
-## 🎮 **Key Features**
-
-<div align="center">
-
-### **Smart Aliases & Functions**
-*645 lines of aliases • 3327 lines of functions • Intelligent automation*
-
-</div>
-
-<table>
-<tr>
-<td width="50%">
-
-### 🔥 **Popular Commands**
-```bash
-reload          # Reload shell config
-mcd new-dir     # Make & cd directory
-killport 3000   # Kill process on port
-extract file.zip # Extract any archive
-gstatus         # Enhanced git status
-proj            # Navigate to projects
-weather         # Check weather
-backup file.js  # Smart backup
-```
-
-</td>
-<td width="50%">
-
-### ⚡ **Smart Shortcuts**
-```bash
-ll              # Better ls with colors
-..              # cd ..
-...             # cd ../..
-....            # cd ../../..
-h               # History with search
-c               # Clear screen
-e               # Edit with $EDITOR
-o               # Open with default app
-```
-
-</td>
-</tr>
-</table>
-
----
-
-## 🎯 **Quick Command Reference**
-
-<details>
-<summary><strong>🟨 JavaScript/TypeScript</strong></summary>
-
-```bash
-js_new my-app react         # Create React app
-js_run_smart               # Smart dev server
-js_test_smart --watch      # Test with watch
-ni @types/node             # Install packages
-nr build                   # Run build script
-```
-
-</details>
-
-<details>
-<summary><strong>📱 iOS/Swift</strong></summary>
-
-```bash
-swift_new MyLibrary        # Create Swift package
-ios_sim "iPhone 15 Pro"    # Launch simulator
-xc_analyze                 # Analyze project
-smart_xcodebuild Release   # Smart building
-```
-
-</details>
-
-<details>
-<summary><strong>🦋 Flutter</strong></summary>
-
-```bash
-flutter_new my_app         # Create Flutter project
-flutter_hot                # Hot reload dev
-device_manager             # Manage devices
-android_emulator pixel_7   # Launch emulator
-```
-
-</details>
-
-<details>
-<summary><strong>🐹 Go</strong></summary>
-
-```bash
-go_new user-service        # Create Go project
-go_run_smart               # Hot reload with air
-gob && ./myapp            # Build and run
-got -cover ./...          # Test with coverage
-```
-
-</details>
-
-<details>
-<summary><strong>🐳 Docker & Kubernetes</strong></summary>
-
-```bash
-docker_manager             # Interactive Docker UI
-k8s_manager               # Kubernetes management
-drun nginx:alpine         # Quick container run
-k get all                 # Get all resources
-```
-
-</details>
-
----
-
-## 🎨 **Customization**
-
-### 📝 **Personal Config**
-Edit `~/.dotfiles/zsh/custom.zsh` for your tweaks without touching core files.
-
-### 🔧 **Environment Variables**
-```bash
-# Installation
-DOTFILES_INSTALL_ALL=1              # Install everything
-DOTFILES_INSTALL_JAVASCRIPT=1       # JavaScript tools
-DOTFILES_INSTALL_PYTHON_AI=1        # Python/AI tools
-
-# Debug & Performance
-CRAZY_DEV_ZSH_DEBUG=true           # Enable debug mode
-```
-
----
-
-## 📋 **Requirements**
-
-- 🍎 **macOS 10.15+** (Catalina or newer)
-- 🐚 **Zsh** (default on macOS Catalina+)
-- 🍺 **Homebrew** (auto-installed)
-- 🔤 **Nerd Font** (recommended for icons)
-
----
-
-## 🗑️ **Uninstall**
-
-```bash
-# Interactive uninstall
-./install.sh uninstall
-
-# Remove everything
-DOTFILES_UNINSTALL_ALL=1 ./install.sh uninstall
-```
-
----
-
-## 🤝 **Contributing**
-
-1. 🍴 Fork the repository
-2. 🌿 Create feature branch (`git checkout -b amazing-feature`)
-3. 💾 Commit changes (`git commit -m 'Add amazing feature'`)
-4. 📤 Push to branch (`git push origin amazing-feature`)
-5. 🎯 Open Pull Request
-
----
-
-## 📜 **License**
-
-MIT License - see [LICENSE](LICENSE) file for details.
-
----
-
-<div align="center">
-
-## 🌟 **Sponsored by [Owera Software](https://owera.ai)**
-
-**🚀 AI-Powered Development Solutions**
-
-*Built with ❤️ by [Rodrigo Recio](mailto:info@owera.ai)*
-
-[Visit Owera.ai →](https://owera.ai) • [Contact us](mailto:info@owera.ai)
-
----
-
-### **Ready to Transform Your Terminal?**
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/rrecio/crazy-dev-zsh/main/install.sh | bash
-```
-
-**⭐ Star this repo if it supercharged your development workflow!**
-
-[![Made with ❤️](https://img.shields.io/badge/Made%20with-❤️-red.svg?style=flat-square)](https://github.com/rrecio/crazy-dev-zsh)
-[![Follow](https://img.shields.io/github/followers/rrecio?style=flat-square&logo=github)](https://github.com/rrecio)
-
-*Transforming development workflows with intelligent automation and beautiful tooling.*
-
-</div> 
+**Ready to revolutionize your development workflow?** Get started with Crazy Dev today! 

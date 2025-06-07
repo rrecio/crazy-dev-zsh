@@ -1,0 +1,88 @@
+# windsurf.yaml - Configuration for the Crazy Dev project
+# Following project rules defined in docs/technical.md
+
+project: crazy-dev
+language: go
+description: "AI-driven developer terminal with intelligent, adaptive, and visually immersive workspace for developers"
+
+# Required documentation structure - aligns with Cursor guide recommendations
+documentation:
+  architecture_diagram: "docs/architecture.mermaid"
+  technical_specification: "docs/technical.md"
+  project_status: "docs/status.md"
+
+architecture:
+  enforce_module_boundaries:
+    - src/cmd: ["CLI commands and entry points"]
+    - src/core: ["Core functionality and interfaces"]
+    - src/ai: ["AI engine components and adapters"]
+    - src/plugins: ["Plugin system and implementations"]
+    - src/stacks: ["Technology stack detection and integration"]
+
+style:
+  naming:
+    files: snake_case
+    config_files: kebab-case
+    packages: single_word_descriptive
+    public_functions: camelCase
+    private_functions: camelCase
+    constants: UPPER_SNAKE_CASE
+    interfaces: suffix_er
+  
+code_quality:
+  linting:
+    tool: golangci-lint
+    config: .golangci.yml
+  test_coverage:
+    minimum_threshold: 80
+    critical_paths: ["src/core", "src/ai/factory", "src/plugins"]
+  documentation:
+    public_apis: required
+    interfaces: required
+    packages: required
+
+dependencies:
+  required:
+    - github.com/spf13/cobra: "Command structure"
+    - github.com/spf13/viper: "Configuration management"
+    - github.com/charmbracelet/bubbletea: "Terminal UI"
+  database:
+    local: SQLite
+    cloud: PostgreSQL
+  ai:
+    local: Ollama
+    cloud: ["openai", "anthropic"]
+
+performance:
+  startup_time_ms: 100
+  local_ai_response_ms: 2000
+  cloud_ai_response_ms: 5000
+  lazy_loading: true
+  caching: required
+
+security:
+  input_validation: required
+  plugin_sandboxing: required
+  credential_handling: secure_storage
+  dependency_scanning: weekly
+
+development_workflow:
+  approach: test_driven
+  commit_style: small_focused
+  branch_naming: "feature/TASK-ID-description or fix/TASK-ID-description"
+  code_review: required
+  documentation_updates: required_with_changes
+
+user_experience:
+  zero_configuration: true
+  progressive_disclosure: true
+  command_consistency: follow_established_patterns
+  feedback: clear_status_indicators
+  accessibility: high_contrast_support
+
+plugin_system:
+  interface_compliance: required
+  hot_reloading: supported
+  version_compatibility: checked
+  resource_limits: enforced
+  security_isolation: required
