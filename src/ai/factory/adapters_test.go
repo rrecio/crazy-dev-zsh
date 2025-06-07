@@ -41,6 +41,16 @@ func (m *MockOllamaClient) GetModelInfo(ctx context.Context, model string) (*typ
 	return args.Get(0).(*types.ModelInfo), args.Error(1)
 }
 
+func (m *MockOllamaClient) GetEmbedding(ctx context.Context, text string, model string) ([]float32, error) {
+	args := m.Called(ctx, text, model)
+	return args.Get(0).([]float32), args.Error(1)
+}
+
+func (m *MockOllamaClient) CheckModelAvailability(ctx context.Context, model string) (bool, error) {
+	args := m.Called(ctx, model)
+	return args.Bool(0), args.Error(1)
+}
+
 func (m *MockOllamaClient) InstallModel(ctx context.Context, model string) error {
 	args := m.Called(ctx, model)
 	return args.Error(0)
@@ -66,9 +76,19 @@ func (m *MockCloudClient) StreamChat(ctx context.Context, model string, messages
 	return args.Get(0).(*types.AIResponse), args.Error(1)
 }
 
+func (m *MockCloudClient) GetEmbedding(ctx context.Context, text string, model string) ([]float32, error) {
+	args := m.Called(ctx, text, model)
+	return args.Get(0).([]float32), args.Error(1)
+}
+
 func (m *MockCloudClient) ListModels(ctx context.Context) ([]types.ModelInfo, error) {
 	args := m.Called(ctx)
 	return args.Get(0).([]types.ModelInfo), args.Error(1)
+}
+
+func (m *MockCloudClient) CheckModelAvailability(ctx context.Context, model string, provider string) (bool, error) {
+	args := m.Called(ctx, model, provider)
+	return args.Bool(0), args.Error(1)
 }
 
 // MockPromptEngine is a mock implementation of types.PromptEngine

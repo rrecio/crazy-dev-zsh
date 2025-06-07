@@ -32,9 +32,19 @@ func (a *aiEngineAdapter) Chat(ctx context.Context, req types.AIRequest) (*types
 	var err error
 	
 	if req.Provider == "ollama" {
-		resp, err = a.ollamaClient.Chat(ctx, req)
+		resp, err = a.ollamaClient.Chat(ctx, req.Model, req.Messages, types.ChatOptions{
+			Temperature:   req.Temperature,
+			MaxTokens:     req.MaxTokens,
+			TopP:          req.TopP,
+			StopSequences: req.StopSequences,
+		})
 	} else {
-		resp, err = a.cloudClient.Chat(ctx, req)
+		resp, err = a.cloudClient.Chat(ctx, req.Model, req.Messages, types.ChatOptions{
+			Temperature:   req.Temperature,
+			MaxTokens:     req.MaxTokens,
+			TopP:          req.TopP,
+			StopSequences: req.StopSequences,
+		})
 	}
 	
 	if err != nil {
@@ -60,9 +70,19 @@ func (a *aiEngineAdapter) StreamChat(ctx context.Context, req types.AIRequest, c
 	var err error
 	
 	if req.Provider == "ollama" {
-		resp, err = a.ollamaClient.StreamChat(ctx, req, callback)
+		resp, err = a.ollamaClient.StreamChat(ctx, req.Model, req.Messages, types.ChatOptions{
+			Temperature:   req.Temperature,
+			MaxTokens:     req.MaxTokens,
+			TopP:          req.TopP,
+			StopSequences: req.StopSequences,
+		}, callback)
 	} else {
-		resp, err = a.cloudClient.StreamChat(ctx, req, callback)
+		resp, err = a.cloudClient.StreamChat(ctx, req.Model, req.Messages, types.ChatOptions{
+			Temperature:   req.Temperature,
+			MaxTokens:     req.MaxTokens,
+			TopP:          req.TopP,
+			StopSequences: req.StopSequences,
+		}, callback)
 	}
 	
 	if err != nil {
@@ -88,9 +108,19 @@ func (a *aiEngineAdapter) Complete(ctx context.Context, req types.AIRequest) (*t
 	var err error
 	
 	if req.Provider == "ollama" {
-		resp, err = a.ollamaClient.Complete(ctx, req)
+		resp, err = a.ollamaClient.Complete(ctx, req.Model, req.Prompt, types.CompletionOptions{
+			Temperature:   req.Temperature,
+			MaxTokens:     req.MaxTokens,
+			TopP:          req.TopP,
+			StopSequences: req.StopSequences,
+		})
 	} else {
-		resp, err = a.cloudClient.Complete(ctx, req)
+		resp, err = a.cloudClient.Complete(ctx, req.Model, req.Prompt, types.CompletionOptions{
+			Temperature:   req.Temperature,
+			MaxTokens:     req.MaxTokens,
+			TopP:          req.TopP,
+			StopSequences: req.StopSequences,
+		})
 	}
 	
 	if err != nil {
@@ -126,11 +156,22 @@ func (a *aiEngineAdapter) ListModels(ctx context.Context, provider string) ([]ty
 	
 	if provider != "ollama" {
 		// Get cloud models if provider is not specifically Ollama
-		cloudModels, err := a.cloudClient.ListModels(ctx, provider)
+		cloudModels, err := a.cloudClient.ListModels(ctx)
 		if err != nil {
 			return nil, fmt.Errorf("failed to list cloud models: %w", err)
 		}
-		models = append(models, cloudModels...)
+		// Filter by provider if specified
+		if provider != "" {
+			var filteredModels []types.ModelInfo
+			for _, model := range cloudModels {
+				if string(model.Provider) == provider {
+					filteredModels = append(filteredModels, model)
+				}
+			}
+			models = append(models, filteredModels...)
+		} else {
+			models = append(models, cloudModels...)
+		}
 	}
 	
 	return models, nil

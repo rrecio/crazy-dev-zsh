@@ -47,7 +47,12 @@ func (e *AIEngineImpl) Complete(ctx context.Context, req types.AIRequest) (*type
 		localReq := req
 		localReq.Provider = string(types.ProviderOllama)
 		
-		response, err := e.OllamaClient.Complete(ctx, localReq)
+		response, err := e.OllamaClient.Complete(ctx, localReq.Model, localReq.Prompt, types.CompletionOptions{
+			MaxTokens:     localReq.MaxTokens,
+			Temperature:   localReq.Temperature,
+			TopP:          localReq.TopP,
+			StopSequences: localReq.StopSequences,
+		})
 		if err == nil {
 			return response, nil
 		}
@@ -59,14 +64,24 @@ func (e *AIEngineImpl) Complete(ctx context.Context, req types.AIRequest) (*type
 			cloudTimeout := e.Config.CloudAITimeout
 			cloudReq.Timeout = &cloudTimeout
 			
-			return e.CloudClient.Complete(ctx, cloudReq)
+			return e.CloudClient.Complete(ctx, cloudReq.Model, cloudReq.Prompt, types.CompletionOptions{
+				MaxTokens:     cloudReq.MaxTokens,
+				Temperature:   cloudReq.Temperature,
+				TopP:          cloudReq.TopP,
+				StopSequences: cloudReq.StopSequences,
+			})
 		}
 		
 		return nil, err
 	}
 	
 	// Use cloud directly if local is disabled or another provider is specified
-	return e.CloudClient.Complete(ctx, req)
+	return e.CloudClient.Complete(ctx, req.Model, req.Prompt, types.CompletionOptions{
+		MaxTokens:     req.MaxTokens,
+		Temperature:   req.Temperature,
+		TopP:          req.TopP,
+		StopSequences: req.StopSequences,
+	})
 }
 
 // Chat generates a response for the given chat messages
@@ -89,7 +104,12 @@ func (e *AIEngineImpl) Chat(ctx context.Context, req types.AIRequest) (*types.AI
 		localReq := req
 		localReq.Provider = string(types.ProviderOllama)
 		
-		response, err := e.OllamaClient.Chat(ctx, localReq)
+		response, err := e.OllamaClient.Chat(ctx, localReq.Model, localReq.Messages, types.ChatOptions{
+			MaxTokens:     localReq.MaxTokens,
+			Temperature:   localReq.Temperature,
+			TopP:          localReq.TopP,
+			StopSequences: localReq.StopSequences,
+		})
 		if err == nil {
 			return response, nil
 		}
@@ -101,14 +121,24 @@ func (e *AIEngineImpl) Chat(ctx context.Context, req types.AIRequest) (*types.AI
 			cloudTimeout := e.Config.CloudAITimeout
 			cloudReq.Timeout = &cloudTimeout
 			
-			return e.CloudClient.Chat(ctx, cloudReq)
+			return e.CloudClient.Chat(ctx, cloudReq.Model, cloudReq.Messages, types.ChatOptions{
+				MaxTokens:     cloudReq.MaxTokens,
+				Temperature:   cloudReq.Temperature,
+				TopP:          cloudReq.TopP,
+				StopSequences: cloudReq.StopSequences,
+			})
 		}
 		
 		return nil, err
 	}
 	
 	// Use cloud directly if local is disabled or another provider is specified
-	return e.CloudClient.Chat(ctx, req)
+	return e.CloudClient.Chat(ctx, req.Model, req.Messages, types.ChatOptions{
+		MaxTokens:     req.MaxTokens,
+		Temperature:   req.Temperature,
+		TopP:          req.TopP,
+		StopSequences: req.StopSequences,
+	})
 }
 
 // StreamChat streams a chat response token by token
@@ -131,7 +161,12 @@ func (e *AIEngineImpl) StreamChat(ctx context.Context, req types.AIRequest, call
 		localReq := req
 		localReq.Provider = string(types.ProviderOllama)
 		
-		response, err := e.OllamaClient.StreamChat(ctx, localReq, callback)
+		response, err := e.OllamaClient.StreamChat(ctx, localReq.Model, localReq.Messages, types.ChatOptions{
+			MaxTokens:     localReq.MaxTokens,
+			Temperature:   localReq.Temperature,
+			TopP:          localReq.TopP,
+			StopSequences: localReq.StopSequences,
+		}, callback)
 		if err == nil {
 			return response, nil
 		}
@@ -143,14 +178,24 @@ func (e *AIEngineImpl) StreamChat(ctx context.Context, req types.AIRequest, call
 			cloudTimeout := e.Config.CloudAITimeout
 			cloudReq.Timeout = &cloudTimeout
 			
-			return e.CloudClient.StreamChat(ctx, cloudReq, callback)
+			return e.CloudClient.StreamChat(ctx, cloudReq.Model, cloudReq.Messages, types.ChatOptions{
+				MaxTokens:     cloudReq.MaxTokens,
+				Temperature:   cloudReq.Temperature,
+				TopP:          cloudReq.TopP,
+				StopSequences: cloudReq.StopSequences,
+			}, callback)
 		}
 		
 		return nil, err
 	}
 	
 	// Use cloud directly if local is disabled or another provider is specified
-	return e.CloudClient.StreamChat(ctx, req, callback)
+	return e.CloudClient.StreamChat(ctx, req.Model, req.Messages, types.ChatOptions{
+		MaxTokens:     req.MaxTokens,
+		Temperature:   req.Temperature,
+		TopP:          req.TopP,
+		StopSequences: req.StopSequences,
+	}, callback)
 }
 
 // GetEmbedding generates embeddings for the given text
@@ -185,7 +230,15 @@ func (e *AIEngineImpl) ListModels(ctx context.Context, provider string) ([]types
 		case types.ProviderOllama:
 			return e.OllamaClient.ListModels(ctx)
 		case types.ProviderOpenAI, types.ProviderAnthropic:
-			return e.CloudClient.ListModels(ctx, provider)
+			models, err := e.CloudClient.ListModels(ctx)
+			// Filter models by provider
+			var filteredModels []types.ModelInfo
+			for _, model := range models {
+				if string(model.Provider) == provider {
+					filteredModels = append(filteredModels, model)
+				}
+			}
+			return filteredModels, err
 		default:
 			return nil, fmt.Errorf("unsupported provider: %s", provider)
 		}
@@ -199,7 +252,15 @@ func (e *AIEngineImpl) ListModels(ctx context.Context, provider string) ([]types
 		err = errors.New("failed to list Ollama models")
 	}
 
-	cloudModels, cloudErr := e.CloudClient.ListModels(ctx, e.Config.CloudProvider)
+	cloudModels, cloudErr := e.CloudClient.ListModels(ctx)
+	// Filter models by provider
+	var filteredCloudModels []types.ModelInfo
+	for _, model := range cloudModels {
+		if string(model.Provider) == e.Config.CloudProvider {
+			filteredCloudModels = append(filteredCloudModels, model)
+		}
+	}
+	cloudModels = filteredCloudModels
 	if cloudErr == nil {
 		models = append(models, cloudModels...)
 	} else if err == nil {

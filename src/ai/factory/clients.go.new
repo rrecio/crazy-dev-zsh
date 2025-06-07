@@ -24,23 +24,21 @@ func NewOllamaClient(endpoint string) (types.OllamaClient, error) {
 }
 
 // Complete generates a completion for the given prompt
-func (c *ollamaClientAdapter) Complete(ctx context.Context, model string, prompt string, opts types.CompletionOptions) (*types.AIResponse, error) {
+func (c *ollamaClientAdapter) Complete(ctx context.Context, req types.AIRequest) (*types.AIResponse, error) {
 	start := time.Now()
 	
-	// Mock response for completion
-	mockResponse := "This is a mock completion response from Ollama."
-	
+	// Mock implementation - in real code this would call the actual Ollama client
 	response := &types.AIResponse{
-		Text:             mockResponse,
+		Text:             "This is a mock response from Ollama Complete API for: " + req.Prompt,
 		FinishReason:     "stop",
-		SelectedModel:    model,
+		SelectedModel:    req.Model,
 		SelectedProvider: string(types.ProviderOllama),
-		Model:            model,
+		Model:            req.Model,
 		Provider:         string(types.ProviderOllama),
 		Usage: types.AIUsage{
-			PromptTokens:     50, // Mocked token count
-			CompletionTokens: 10,
-			TotalTokens:      60,
+			PromptTokens:     len(strings.Split(req.Prompt, " ")),
+			CompletionTokens: 20,
+			TotalTokens:      len(strings.Split(req.Prompt, " ")) + 20,
 		},
 		Latency: time.Since(start),
 	}
@@ -49,14 +47,14 @@ func (c *ollamaClientAdapter) Complete(ctx context.Context, model string, prompt
 }
 
 // Chat generates a response for the given chat messages
-func (c *ollamaClientAdapter) Chat(ctx context.Context, model string, messages []types.Message, opts types.ChatOptions) (*types.AIResponse, error) {
+func (c *ollamaClientAdapter) Chat(ctx context.Context, req types.AIRequest) (*types.AIResponse, error) {
 	start := time.Now()
 	
 	// Construct response message from the last user message
 	var lastUserMessage string
-	for i := len(messages) - 1; i >= 0; i-- {
-		if messages[i].Role == "user" {
-			lastUserMessage = messages[i].Content
+	for i := len(req.Messages) - 1; i >= 0; i-- {
+		if req.Messages[i].Role == "user" {
+			lastUserMessage = req.Messages[i].Content
 			break
 		}
 	}
@@ -70,11 +68,11 @@ func (c *ollamaClientAdapter) Chat(ctx context.Context, model string, messages [
 	response := &types.AIResponse{
 		Text:             responseMessage.Content,
 		FinishReason:     "stop",
-		SelectedModel:    model,
+		SelectedModel:    req.Model,
 		SelectedProvider: string(types.ProviderOllama),
-		Model:            model,
+		Model:            req.Model,
 		Provider:         string(types.ProviderOllama),
-		Messages:         append(messages, responseMessage),
+		Messages:         append(req.Messages, responseMessage),
 		Usage: types.AIUsage{
 			PromptTokens:     100, // Mocked token count
 			CompletionTokens: 20,
@@ -87,7 +85,7 @@ func (c *ollamaClientAdapter) Chat(ctx context.Context, model string, messages [
 }
 
 // StreamChat streams a chat response token by token
-func (c *ollamaClientAdapter) StreamChat(ctx context.Context, model string, messages []types.Message, opts types.ChatOptions, callback func(chunk string) error) (*types.AIResponse, error) {
+func (c *ollamaClientAdapter) StreamChat(ctx context.Context, req types.AIRequest, callback func(chunk string) error) (*types.AIResponse, error) {
 	start := time.Now()
 	
 	// Simulate streaming by breaking response into chunks
@@ -116,11 +114,11 @@ func (c *ollamaClientAdapter) StreamChat(ctx context.Context, model string, mess
 	response := &types.AIResponse{
 		Text:             mockResponse,
 		FinishReason:     "stop",
-		SelectedModel:    model,
+		SelectedModel:    req.Model,
 		SelectedProvider: string(types.ProviderOllama),
-		Model:            model,
+		Model:            req.Model,
 		Provider:         string(types.ProviderOllama),
-		Messages:         append(messages, responseMessage),
+		Messages:         append(req.Messages, responseMessage),
 		Usage: types.AIUsage{
 			PromptTokens:     100, // Mocked token count
 			CompletionTokens: 20,
@@ -206,15 +204,15 @@ func (c *ollamaClientAdapter) CheckModelAvailability(ctx context.Context, model 
 	availableModels := map[string]bool{
 		"llama2":    true,
 		"codellama": true,
-		"phi3":      true,
 	}
 	return availableModels[model], nil
 }
 
 // InstallModel installs a model
-func (o *ollamaClientAdapter) InstallModel(ctx context.Context, model string) error {
-	// Mock implementation - in real code this would call the actual Ollama API
-	time.Sleep(100 * time.Millisecond) // Simulate API call latency
+func (c *ollamaClientAdapter) InstallModel(ctx context.Context, model string) error {
+	// Mock implementation - in real code this would call the actual Ollama client
+	// Simulate model installation time
+	time.Sleep(500 * time.Millisecond)
 	return nil
 }
 
@@ -232,21 +230,21 @@ func NewCloudClient(provider string) (types.CloudClient, error) {
 }
 
 // Complete generates a completion for the given prompt
-func (c *cloudClientAdapter) Complete(ctx context.Context, model string, prompt string, opts types.CompletionOptions) (*types.AIResponse, error) {
+func (c *cloudClientAdapter) Complete(ctx context.Context, req types.AIRequest) (*types.AIResponse, error) {
 	start := time.Now()
 	
 	// Mock implementation - in real code this would call the actual cloud API
 	response := &types.AIResponse{
-		Text:             "This is a mock response from " + c.provider + " Complete API for: " + prompt,
+		Text:             "This is a mock response from " + c.provider + " Complete API for: " + req.Prompt,
 		FinishReason:     "stop",
-		SelectedModel:    model,
+		SelectedModel:    req.Model,
 		SelectedProvider: c.provider,
-		Model:            model,
+		Model:            req.Model,
 		Provider:         c.provider,
 		Usage: types.AIUsage{
-			PromptTokens:     len(strings.Split(prompt, " ")),
+			PromptTokens:     len(strings.Split(req.Prompt, " ")),
 			CompletionTokens: 25,
-			TotalTokens:      len(strings.Split(prompt, " ")) + 25,
+			TotalTokens:      len(strings.Split(req.Prompt, " ")) + 25,
 		},
 		Latency: time.Since(start),
 	}
@@ -255,14 +253,14 @@ func (c *cloudClientAdapter) Complete(ctx context.Context, model string, prompt 
 }
 
 // Chat generates a response for the given chat messages
-func (c *cloudClientAdapter) Chat(ctx context.Context, model string, messages []types.Message, opts types.ChatOptions) (*types.AIResponse, error) {
+func (c *cloudClientAdapter) Chat(ctx context.Context, req types.AIRequest) (*types.AIResponse, error) {
 	start := time.Now()
 	
 	// Construct response message from the last user message
 	var lastUserMessage string
-	for i := len(messages) - 1; i >= 0; i-- {
-		if messages[i].Role == "user" {
-			lastUserMessage = messages[i].Content
+	for i := len(req.Messages) - 1; i >= 0; i-- {
+		if req.Messages[i].Role == "user" {
+			lastUserMessage = req.Messages[i].Content
 			break
 		}
 	}
@@ -276,11 +274,11 @@ func (c *cloudClientAdapter) Chat(ctx context.Context, model string, messages []
 	response := &types.AIResponse{
 		Text:             responseMessage.Content,
 		FinishReason:     "stop",
-		SelectedModel:    model,
+		SelectedModel:    req.Model,
 		SelectedProvider: c.provider,
-		Model:            model,
+		Model:            req.Model,
 		Provider:         c.provider,
-		Messages:         append(messages, responseMessage),
+		Messages:         append(req.Messages, responseMessage),
 		Usage: types.AIUsage{
 			PromptTokens:     150, // Mocked token count
 			CompletionTokens: 30,
@@ -293,7 +291,7 @@ func (c *cloudClientAdapter) Chat(ctx context.Context, model string, messages []
 }
 
 // StreamChat streams a chat response token by token
-func (c *cloudClientAdapter) StreamChat(ctx context.Context, model string, messages []types.Message, opts types.ChatOptions, callback func(chunk string) error) (*types.AIResponse, error) {
+func (c *cloudClientAdapter) StreamChat(ctx context.Context, req types.AIRequest, callback func(chunk string) error) (*types.AIResponse, error) {
 	start := time.Now()
 	
 	// Simulate streaming by breaking response into chunks
@@ -322,11 +320,11 @@ func (c *cloudClientAdapter) StreamChat(ctx context.Context, model string, messa
 	response := &types.AIResponse{
 		Text:             mockResponse,
 		FinishReason:     "stop",
-		SelectedModel:    model,
+		SelectedModel:    req.Model,
 		SelectedProvider: c.provider,
-		Model:            model,
+		Model:            req.Model,
 		Provider:         c.provider,
-		Messages:         append(messages, responseMessage),
+		Messages:         append(req.Messages, responseMessage),
 		Usage: types.AIUsage{
 			PromptTokens:     150, // Mocked token count
 			CompletionTokens: 30,
@@ -350,11 +348,11 @@ func (c *cloudClientAdapter) GetEmbedding(ctx context.Context, text string, mode
 }
 
 // ListModels lists available models
-func (c *cloudClientAdapter) ListModels(ctx context.Context) ([]types.ModelInfo, error) {
+func (c *cloudClientAdapter) ListModels(ctx context.Context, provider string) ([]types.ModelInfo, error) {
 	// Mock implementation - in real code this would call the actual cloud API
 	models := []types.ModelInfo{}
 	
-	switch c.provider {
+	switch provider {
 	case string(types.ProviderOpenAI):
 		models = append(models, types.ModelInfo{
 			Name:        "gpt-4",
@@ -386,7 +384,7 @@ func (c *cloudClientAdapter) ListModels(ctx context.Context) ([]types.ModelInfo,
 			Default:     false,
 		})
 	default:
-		return nil, fmt.Errorf("unsupported provider: %s", c.provider)
+		return nil, fmt.Errorf("unsupported provider: %s", provider)
 	}
 	
 	return models, nil

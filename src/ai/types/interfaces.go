@@ -32,13 +32,13 @@ type AIEngine interface {
 // OllamaClient is the interface for interacting with Ollama API
 type OllamaClient interface {
 	// Complete generates a completion for the given prompt
-	Complete(ctx context.Context, req AIRequest) (*AIResponse, error)
+	Complete(ctx context.Context, model string, prompt string, opts CompletionOptions) (*AIResponse, error)
 	
 	// Chat generates a response for the given chat messages
-	Chat(ctx context.Context, req AIRequest) (*AIResponse, error)
+	Chat(ctx context.Context, model string, messages []Message, opts ChatOptions) (*AIResponse, error)
 	
 	// StreamChat streams a chat response token by token
-	StreamChat(ctx context.Context, req AIRequest, callback func(chunk string) error) (*AIResponse, error)
+	StreamChat(ctx context.Context, model string, messages []Message, opts ChatOptions, callback func(chunk string) error) (*AIResponse, error)
 	
 	// GetEmbedding generates embeddings for the given text
 	GetEmbedding(ctx context.Context, text string, model string) ([]float32, error)
@@ -56,19 +56,19 @@ type OllamaClient interface {
 // CloudClient is the interface for interacting with cloud AI providers
 type CloudClient interface {
 	// Complete generates a completion for the given prompt
-	Complete(ctx context.Context, req AIRequest) (*AIResponse, error)
+	Complete(ctx context.Context, model string, prompt string, opts CompletionOptions) (*AIResponse, error)
 	
 	// Chat generates a response for the given chat messages
-	Chat(ctx context.Context, req AIRequest) (*AIResponse, error)
+	Chat(ctx context.Context, model string, messages []Message, opts ChatOptions) (*AIResponse, error)
 	
 	// StreamChat streams a chat response token by token
-	StreamChat(ctx context.Context, req AIRequest, callback func(chunk string) error) (*AIResponse, error)
+	StreamChat(ctx context.Context, model string, messages []Message, opts ChatOptions, callback func(chunk string) error) (*AIResponse, error)
 	
 	// GetEmbedding generates embeddings for the given text
 	GetEmbedding(ctx context.Context, text string, model string) ([]float32, error)
 	
 	// ListModels lists available models
-	ListModels(ctx context.Context, provider string) ([]ModelInfo, error)
+	ListModels(ctx context.Context) ([]ModelInfo, error)
 	
 	// CheckModelAvailability checks if a model is available
 	CheckModelAvailability(ctx context.Context, model string, provider string) (bool, error)
