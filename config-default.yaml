@@ -1,0 +1,58 @@
+# Crazy Dev Default Configuration
+
+# Core settings
+core:
+  # Context analysis settings
+  context:
+    maxFiles: 10000
+    maxFileSize: 1048576  # 1MB
+    ignoreDirs:
+      - .git
+      - node_modules
+      - vendor
+      - .venv
+    ignoreExts:
+      - .log
+      - .tmp
+  
+  # Response timeouts
+  ai_response_timeout: 30s
+  cloud_ai_timeout: 60s
+
+# AI engine settings
+ai:
+  # Local AI settings (Ollama)
+  local:
+    enabled: true
+    endpoint: "http://localhost:11434"
+    models:
+      - "llama3.2"
+      - "codellama"
+    fallback_to_cloud: true
+  
+  # Cloud AI settings
+  cloud:
+    provider: "openai"
+    rate_limit: 20
+    cache_ttl: 24h
+    models:
+      - "gpt-4"
+      - "claude-3-opus"
+
+# UI settings
+ui:
+  theme: "default"
+  animations: true
+  icons: true
+  colors:
+    primary: "#4285F4"
+    secondary: "#34A853"
+    accent: "#FBBC05"
+    error: "#EA4335"
+
+# Plugin settings
+plugins:
+  enabled: true
+  auto_update: true
+  registry: "https://registry.crazy-dev.io"
+  cache_dir: "~/.crazy-dev/plugins"
